@@ -516,3 +516,72 @@
     font-size: 14px;
   }
 }
+
+/* Connection screen and notices added for the GitHub-hosted app */
+.setup-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.setup-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  margin-top: 18px;
+}
+.setup-card h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+.setup-card p {
+  margin: 0 0 14px;
+  color: var(--sub);
+}
+.setup-card .form-grid {
+  margin-top: 10px;
+}
+.setup-status {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--sub);
+  min-height: 1.4em;
+}
+.setup-status.ok {
+  color: var(--green);
+}
+.setup-status.bad {
+  color: var(--amber);
+}
+.setup-steps {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--sub);
+}
+.setup-steps li {
+  margin-bottom: 6px;
+}
+.setup-steps code {
+  background: var(--soft);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.connected-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--sub);
+}
+.connected-strip b {
+  color: var(--ink);
+}
+.voice-notice.info {
+  border-color: var(--lime);
+}
+.recovery-detail {
+  font-size: 12px;
+  color: var(--sub);
+  margin-top: 6px;
+}

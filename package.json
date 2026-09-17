@@ -1,18 +1,23 @@
 {
-  "name": "fala-portuguese-hub",
+  "name": "fala",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
-    "build": "node build.mjs",
-    "start": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "db:generate": "drizzle-kit generate"
+    "test:browser": "node tests/browser/smoke.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "journal": "node scripts/render-journal.mjs",
+    "import": "node scripts/import-backup.mjs"
   },
   "devDependencies": {
-    "drizzle-kit": "0.31.10",
-    "drizzle-orm": "0.45.2",
+    "playwright": "^1.63.0",
     "prettier": "3.9.7"
+  },
+  "description": "Private Brazilian Portuguese voice tutor and notebook. Static app, GitHub as the database.",
+  "engines": {
+    "node": ">=22"
   }
 }

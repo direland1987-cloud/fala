@@ -389,3 +389,83 @@ export const VOICE_TOOLS = [
     parameters: { type: 'object', properties: {}, additionalProperties: false },
   },
 ];
+
+// ---- Added for the static app: pieces that used to live in the Worker ----
+export const NOTES_MODEL = SUMMARY_MODEL;
+export const MAX_LESSON_MINUTES = 55;
+export const summaryKeys = [
+  'title',
+  'focus',
+  'practised',
+  'mastered',
+  'mistakes',
+  'pronunciation',
+  'roleplay',
+  'notes',
+];
+export const nextKeys = [
+  'title',
+  'goal',
+  'duration',
+  'pattern',
+  'recap',
+  'warmup',
+  'newMaterial',
+  'roleplay',
+  'adapt',
+  'close',
+  'notes',
+];
+const stringSchema = (keys) => ({
+  type: 'object',
+  properties: Object.fromEntries(keys.map((k) => [k, { type: 'string' }])),
+  required: keys,
+  additionalProperties: false,
+});
+export const summarySchema = {
+  ...stringSchema(summaryKeys),
+  properties: { ...stringSchema(summaryKeys).properties, next: stringSchema(nextKeys) },
+  required: [...summaryKeys, 'next'],
+};
+export function validSummary(result) {
+  return (
+    !!result &&
+    summaryKeys.every((k) => typeof result[k] === 'string' && result[k].length < 12000) &&
+    nextKeys.every((k) => typeof result.next?.[k] === 'string' && result.next[k].length < 12000)
+  );
+}
+// The Realtime session configuration sent when the call is created. Field
+// names follow the source snapshot; verify them against the current OpenAI
+// Realtime documentation before the first live lesson.
+export function realtimeSessionConfig(notebook, minutes, model) {
+  return {
+    type: 'realtime',
+    model,
+    instructions: lessonInstructions(notebook, minutes),
+    output_modalities: ['audio'],
+    max_output_tokens: 1000,
+    audio: {
+      input: {
+        noise_reduction: { type: 'near_field' },
+        turn_detection: {
+          type: 'semantic_vad',
+          eagerness: 'low',
+          create_response: false,
+          interrupt_response: true,
+        },
+      },
+      output: { voice: 'marin' },
+    },
+    tools: VOICE_TOOLS,
+    tool_choice: 'auto',
+  };
+}
+export function validUsageEvent(e) {
+  return (
+    !!e &&
+    typeof e.id === 'string' &&
+    typeof e.model === 'string' &&
+    Number.isFinite(e.usd) &&
+    Number.isFinite(e.at)
+  );
+}

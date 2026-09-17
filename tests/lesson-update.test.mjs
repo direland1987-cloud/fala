@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { seed } from '../public/seed.js';
-import { applyPublishedUpdates } from '../public/migrations.js';
+import { seed } from '../baseline/seed.js';
+import { applyPublishedUpdates } from '../baseline/migrations.js';
 
 // Reconstructed pre-update snapshots; see tests/fixtures/reconstruct.mjs.
-const load = (name) => JSON.parse(fs.readFileSync(new URL('./fixtures/' + name, import.meta.url), 'utf8'));
+const load = (name) =>
+  JSON.parse(fs.readFileSync(new URL('./fixtures/' + name, import.meta.url), 'utf8'));
 const baseline = load('notebook-before-sep9.json');
 const september9 = load('notebook-before-sep11.json');
 

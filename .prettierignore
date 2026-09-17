@@ -1,5 +1,6 @@
 package-lock.json
-dist/
 node_modules/
 reference/
-drizzle/meta/
+data/
+JOURNAL.md
+tests/fixtures/*.json

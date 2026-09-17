@@ -9,11 +9,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { seed } from '../../public/seed.js';
+import { seed } from '../../baseline/seed.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const source = fs.readFileSync(path.join(here, '../../public/migrations.js'), 'utf8');
-const updates = new Function(source.replace(/^export function[\s\S]*$/m, '') + '\nreturn updates;')();
+const source = fs.readFileSync(path.join(here, '../../baseline/migrations.js'), 'utf8');
+const updates = new Function(
+  source.replace(/^export function[\s\S]*$/m, '') + '\nreturn updates;',
+)();
 
 function reverse(notebook, update) {
   const result = structuredClone(notebook);

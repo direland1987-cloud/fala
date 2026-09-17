@@ -1,7 +1,6 @@
-import { createVoiceHub } from './voice.js?v=20260916';
-import { seed } from './seed.js?v=20260911';
-import { applyPublishedUpdates } from './migrations.js?v=20260911';
-const KEY = 'fala-dan-v1';
+import { createVoiceHub } from './voice.js?v=20260917';
+import { validNotebook } from './lib/domain.js?v=20260917';
+const PUBLISHED_UPDATES = ['lesson-2026-09-09-v1', 'lesson-2026-09-11-v1'];
 const icons = {
   home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/>',
   book: '<path d="M12 5v16m0-16C8 2 3 3 3 3v16s5-1 9 2c4-3 9-2 9-2V3s-5-1-9 2"/>',
@@ -45,27 +44,9 @@ const esc = (s) =>
     /[&<>"']/g,
     (x) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[x],
   );
-let state = structuredClone(seed),
-  storageError = false;
-try {
-  const raw = localStorage.getItem(KEY);
-  if (raw) {
-    const parsed = JSON.parse(raw);
-    if (validState(parsed)) state = parsed;
-    else storageError = true;
-  }
-} catch {
-  storageError = true;
-}
-const mergedState = applyPublishedUpdates(state);
-if (mergedState !== state) {
-  state = mergedState;
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-  } catch {
-    storageError = true;
-  }
-}
+// The notebook arrives from the repository through voiceHub.boot(); until
+// then, and on a device that is not connected yet, state is null.
+let state = null;
 const tabs = [
   ['overview', 'Quick review', 'home'],
   ['voice', 'Voice lesson', 'headphones'],
@@ -76,6 +57,7 @@ const tabs = [
   ['sticky', 'Sticky points', 'flag'],
   ['next', 'Next lesson', 'arrow'],
   ['costs', 'API costs', 'clock'],
+  ['setup', 'Connection', 'lock'],
 ];
 const levels = ['Planned', 'New', 'Developing', 'Functional', 'Mastered', 'Automatic'];
 let view = tabs.some((x) => x[0] === location.hash.slice(1)) ? location.hash.slice(1) : 'overview',
@@ -85,46 +67,11 @@ let view = tabs.some((x) => x[0] === location.hash.slice(1)) ? location.hash.sli
   playSession = 0,
   voiceList = [];
 const $ = (s) => document.querySelector(s);
-function validState(s) {
-  return (
-    s &&
-    s.schema === 1 &&
-    ['phrases', 'lessons', 'issues', 'curriculum', 'patterns', 'reviews'].every(
-      (k) => Array.isArray(s[k]) && s[k].length < 5000,
-    ) &&
-    s.next &&
-    typeof s.next === 'object' &&
-    s.sources &&
-    typeof s.sources === 'object' &&
-    s.phrases.every(
-      (p) =>
-        p &&
-        typeof p.id === 'string' &&
-        typeof p.pt === 'string' &&
-        typeof p.en === 'string' &&
-        ['Planned', 'New', 'Developing', 'Functional', 'Mastered', 'Automatic'].includes(p.level),
-    ) &&
-    s.lessons.every(
-      (p) =>
-        p && typeof p.id === 'string' && typeof p.title === 'string' && typeof p.date === 'string',
-    ) &&
-    s.curriculum.every((p) => p && typeof p.id === 'string' && Array.isArray(p.topics)) &&
-    s.issues.every((p) => p && typeof p.id === 'string') &&
-    s.patterns.every((p) => p && typeof p.id === 'string') &&
-    ['goal', 'recap', 'warmup', 'newMaterial', 'roleplay', 'adapt', 'close'].every(
-      (k) => typeof s.next[k] === 'string',
-    )
-  );
-}
+const validState = validNotebook;
 function persist(message = 'Saving your notebook…') {
+  if (!state) return false;
   state.updatedAt = new Date().toISOString();
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-    storageError = false;
-  } catch {
-    storageError = true;
-  }
-  voiceHub.save();
+  void voiceHub.save();
   if (message) toast(message);
   return true;
 }
@@ -142,9 +89,10 @@ const prettyDate = (s) => {
     ? s
     : d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
 };
-const practiced = () => state.phrases.filter((p) => p.level !== 'Planned');
-const mastered = () => state.phrases.filter((p) => ['Mastered', 'Automatic'].includes(p.level));
-const activeIssues = () => state.issues.filter((p) => p.status === 'Review');
+const practiced = () => (state?.phrases || []).filter((p) => p.level !== 'Planned');
+const mastered = () =>
+  (state?.phrases || []).filter((p) => ['Mastered', 'Automatic'].includes(p.level));
+const activeIssues = () => (state?.issues || []).filter((p) => p.status === 'Review');
 const tag = (s, type = '') =>
   `<span class="tag ${type || (['Mastered', 'Automatic', 'Resolved'].includes(s) ? 'green' : s === 'Developing' || s === 'Reconstructed' ? 'amber' : s === 'Planned' ? 'neutral' : '')}">${esc(s)}</span>`;
 const btn = (label, action, icon = '', cls = '', id = '') =>
@@ -159,14 +107,20 @@ function nav(to) {
   $('#main').focus({ preventScroll: true });
 }
 function render() {
-  const title = tabs.find((t) => t[0] === view)?.[1] || 'Quick review';
+  const shown = voiceHub.ready && !voiceHub.connected ? 'setup' : view;
+  const title = tabs.find((t) => t[0] === shown)?.[1] || 'Quick review';
   $('#app').innerHTML =
     `<aside class="sidebar" id="sidebar" aria-label="Main navigation"><a class="logo" href="#overview" data-nav="overview"><span class="logo-mark">${I('message')}</span>fala.</a><div class="brand-caption">Your Portuguese, growing.</div><div class="eyebrow nav-heading">Your learning space</div><nav class="nav">${tabs.map(([id, label, ic]) => `<button data-nav="${id}" class="${view === id ? 'active' : ''}" ${view === id ? 'aria-current="page"' : ''}>${I(ic)}${label}${id === 'sticky' && activeIssues().length ? `<span class="nav-count">${activeIssues().length}</span>` : ''}</button>`).join('')}</nav><div class="sidebar-bottom"><div class="journey-box"><div class="journey-label"><span class="status-dot"></span>At your own pace</div><p>One conversation at a time.<br>Review, repeat, then build.</p></div><div class="user"><div class="avatar">D</div><div><b>Dan’s notebook</b><small>Brazilian Portuguese · Beginner</small></div></div></div></aside><div class="shell"><header class="topbar"><div class="crumb">MY PORTUGUESE <span>/</span><strong>${title}</strong></div><span class="mobile-logo">fala.</span><div class="top-actions"><span class="private">${I('lock')}<span>Private space</span></span><div class="avatar">D</div><button class="mobile-menu" data-action="menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">${I('menu')}</button></div></header><main id="main" tabindex="-1">${page()}${footer()}</main></div>`;
 }
 function footer() {
-  return `<footer class="footer"><span>${I('leaf')} Made for a little practice between conversations.</span><button class="btn text" data-action="data">${I('circleCheck')}<span data-sync-label>${voiceHub.syncLabel()}</span> · Backup & data</button></footer>`;
+  return `<footer class="footer"><span>${I('leaf')} Made for a little practice between conversations.</span><button class="btn text" data-action="data">${I('circleCheck')}<span data-sync-label>${voiceHub.syncLabel()}</span> · Backup & data</button><button class="btn text" data-nav="setup">${I('lock')}Connection</button></footer>`;
 }
 function page() {
+  if (!voiceHub.ready)
+    return `<div class="page-heading"><div><h1>Opening your notebook…</h1><p>Reading the keys saved on this device.</p></div></div>`;
+  if (view === 'setup' || !voiceHub.connected) return voiceHub.setupPage();
+  if (!state && view !== 'costs')
+    return `<div class="page-heading"><div><h1>Opening your notebook…</h1><p>${esc(voiceHub.syncLabel())}</p></div></div>${voiceHub.syncBanner()}`;
   switch (view) {
     case 'voice':
       return voiceHub.page();
@@ -362,7 +316,7 @@ function nextPage() {
       )
       .join(
         '',
-      )}</ol></section><aside class="next-aside"><div class="panel panel-body"><span class="eyebrow">The small win</span><h2>${esc(n.goal)}</h2><p>Sentence pattern: <strong lang="pt-BR">${esc(n.pattern)}</strong></p><span class="source-badge">${I('info')}Proposed plan · not yet taught</span></div><div class="plan-rule"><h3>Let recall set the pace.</h3><p>${esc(n.adapt)}</p></div><div class="panel panel-body"><h3>Keep the thread next time.</h3><p style="margin-top:10px">Start your lesson in Fala to load this plan automatically. Your time target can change as you speak.</p><p style="margin-top:10px">Lessons delivered inside Fala save practice checkpoints, journal notes and next priorities. Separate ChatGPT voice chats still need a handover.</p>${btn('Add a lesson log', 'add-lesson', 'plus', 'small')}</div></aside></div>${n.notes ? `<div class="source-strip">${I('info')}<p>${esc(n.notes)}</p></div>` : ''}`
+      )}</ol></section><aside class="next-aside"><div class="panel panel-body"><span class="eyebrow">The small win</span><h2>${esc(n.goal)}</h2><p>Sentence pattern: <strong lang="pt-BR">${esc(n.pattern)}</strong></p><span class="source-badge">${I('info')}Proposed plan · not yet taught</span></div><div class="plan-rule"><h3>Let recall set the pace.</h3><p>${esc(n.adapt)}</p></div><div class="panel panel-body"><h3>Keep the thread next time.</h3><p style="margin-top:10px">Start your lesson in Fala to load this plan automatically. Your time target can change as you speak.</p><p style="margin-top:10px">Lessons delivered inside Fala save practice checkpoints, journal notes and next priorities to your repository. A voice chat held elsewhere still needs a handover and a logged entry.</p>${btn('Add a lesson log', 'add-lesson', 'plus', 'small')}</div></aside></div>${n.notes ? `<div class="source-strip">${I('info')}<p>${esc(n.notes)}</p></div>` : ''}`
   );
 }
 const modal = $('#modal');
@@ -560,8 +514,8 @@ function issueDetail(id) {
 function sourceModal() {
   openModal(
     'A clear starting point.',
-    'Sources checked on 6 September 2026.',
-    `<p>${esc(state.sources.note)}</p><a class="source-doc" href="https://chatgpt.com/api/library/files/libfile_0fcdb7713bc8819190c48a51c6c3c0ae/download" target="_blank" rel="noopener">${I('book')}<span>Original living curriculum<small>Brazilian_Portuguese_Living_Curriculum(1).docx · 4 pages</small></span></a><a class="source-doc" href="https://chatgpt.com/api/library/files/libfile_672f8015b4688191ba740147b77f630b/download" target="_blank" rel="noopener">${I('journal')}<span>Original lesson journal<small>Brazilian_Portuguese_Lesson_Journal.docx · baseline template</small></span></a><div class="info-box" style="margin:20px 0 0"><strong>What was reconstructed?</strong><br>Two dated practice summaries, nine practised phrases and four initial pronunciation or comprehension notes. The 9 and 11 September entries and subsequent observations come from your supplied logs. These earlier summaries are not a verified count of completed lessons. The next lesson is a new proposal. No independent mastery is assumed.</div>`,
+    `Sources checked on ${esc(prettyDate(state.sources.checked))}.`,
+    `<p>${esc(state.sources.note)}</p><div class="source-doc">${I('book')}<span>Original living curriculum<small>${esc(state.sources.curriculum || 'Brazilian_Portuguese_Living_Curriculum(1).docx')} · keep your own copy; the original download link lived in ChatGPT and is not available here</small></span></div><div class="source-doc">${I('journal')}<span>Original lesson journal<small>${esc(state.sources.journal || 'Brazilian_Portuguese_Lesson_Journal.docx')} · baseline template, not updated automatically</small></span></div><div class="info-box" style="margin:20px 0 0"><strong>What was reconstructed?</strong><br>Two dated practice summaries, nine practised phrases and four initial pronunciation or comprehension notes. The 9 and 11 September entries and subsequent observations come from your supplied logs. These earlier summaries are not a verified count of completed lessons. The next lesson is a new proposal. No independent mastery is assumed.</div>`,
   );
 }
 function approachModal() {
@@ -585,7 +539,7 @@ function dataModal() {
   openModal(
     'Your notebook, kept close.',
     'Private saving and portable backups.',
-    `<p><strong>Your notebook syncs across devices.</strong> Voice lessons delivered here save practice checkpoints, a lesson log and the next priorities automatically. The save indicator confirms when changes reach your notebook.</p><p>If the connection drops, a local draft is retained. Conflicting edits are kept for review. Backups include your curriculum, phrase progress, lessons and next plan; API billing records stay with the hub.</p><div class="storage-buttons">${btn('Download backup', 'export', 'download', 'primary')}${btn('Restore a backup', 'import', 'upload')}${btn('Export lesson notes', 'export-notes', 'journal')}<button class="btn" data-voice="download-draft">Download preserved local copy</button></div><input type="file" id="import-file" accept="application/json,.json" hidden><div class="info-box"><strong>Voice in Fala and voice in ChatGPT</strong><br>Fala lessons update this notebook. A separate ChatGPT voice conversation still needs its lesson log brought here. Original Word documents are not changed automatically.</div>`,
+    `<p><strong>Your notebook lives in your private GitHub repository.</strong> Every save is a commit, so the full history is kept and any device with your token sees the same notes. Voice lessons save practice checkpoints, a lesson log and the next priorities automatically. The save indicator confirms when changes reach the repository.</p><p>If the connection drops, a local draft is retained. Conflicting edits are kept for review. Backups include your curriculum, phrase progress, lessons and next plan; API usage records stay in the repository’s data folder.</p><div class="storage-buttons">${btn('Download backup', 'export', 'download', 'primary')}${btn('Restore a backup', 'import', 'upload')}${btn('Export lesson notes', 'export-notes', 'journal')}<button class="btn" data-voice="download-draft">Download preserved local copy</button></div><input type="file" id="import-file" accept="application/json,.json" hidden><div class="info-box"><strong>Voice in Fala and voice in ChatGPT</strong><br>Fala lessons update this notebook. A separate ChatGPT voice conversation still needs its lesson log brought here. Original Word documents are not changed automatically.</div>`,
   );
 }
 function handoverText() {
@@ -819,6 +773,9 @@ function handleAction(action, id) {
     case 'go-sticky':
       nav('sticky');
       break;
+    case 'go-setup':
+      nav('setup');
+      break;
     case 'finish-next':
       closeModal();
       nav('next');
@@ -907,9 +864,17 @@ function handleAction(action, id) {
       break;
     case 'confirm-import':
       if (modal._restore) {
-        state = applyPublishedUpdates(modal._restore);
+        const restored = modal._restore;
         modal._restore = null;
-        persist('Restored notebook queued for syncing.');
+        const missing = PUBLISHED_UPDATES.filter(
+          (id) => !(restored.appliedUpdates || []).includes(id),
+        );
+        state = restored;
+        persist(
+          missing.length
+            ? 'Restored. This backup predates the published September updates; run npm run import to merge them.'
+            : 'Restored notebook queued for saving.',
+        );
         closeModal();
         render();
       }
@@ -1077,33 +1042,11 @@ window.addEventListener('hashchange', () => {
   }
 });
 window.addEventListener('pagehide', stopAudio);
-window.addEventListener('storage', (e) => {
-  if (e.key === KEY && e.newValue) {
-    try {
-      const updated = JSON.parse(e.newValue);
-      if (validState(updated)) {
-        if (modal.open) {
-          toast('Another tab updated the notebook. Close this dialog and reload before saving.');
-          return;
-        }
-        state = applyPublishedUpdates(updated);
-        render();
-        toast('Notebook refreshed from your other tab.');
-      }
-    } catch {}
-  }
-});
 const voiceHub = createVoiceHub({
   getState: () => state,
   setState: (next) => {
-    if (validState(next)) {
-      state = applyPublishedUpdates(next);
-      try {
-        localStorage.setItem(KEY, JSON.stringify(state));
-      } catch {
-        storageError = true;
-      }
-    }
+    if (next === null) state = null;
+    else if (validState(next)) state = next;
   },
   render,
   toast,

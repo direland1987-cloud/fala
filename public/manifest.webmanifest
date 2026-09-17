@@ -1,0 +1,12 @@
+{
+  "name": "Fala · Dan’s Portuguese",
+  "short_name": "Fala",
+  "description": "Private Brazilian Portuguese voice tutor and notebook.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f8f3",
+  "theme_color": "#f7f8f3",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
