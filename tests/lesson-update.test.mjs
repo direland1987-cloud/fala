@@ -1,17 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import vm from 'node:vm';
-import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
 import { seed } from '../public/seed.js';
 import { applyPublishedUpdates } from '../public/migrations.js';
-const baselineCode = execFileSync(
-  'git',
-  ['show', '2fb8453a35c2374e7384160785c9271514d9bb1b:public/seed.js'],
-  { encoding: 'utf8' },
-).replace('export const seed=', 'globalThis.seed=');
-const context = {};
-vm.runInNewContext(baselineCode, context);
-const baseline = JSON.parse(JSON.stringify(context.seed));
+
+// Reconstructed pre-update snapshots; see tests/fixtures/reconstruct.mjs.
+const load = (name) => JSON.parse(fs.readFileSync(new URL('./fixtures/' + name, import.meta.url), 'utf8'));
+const baseline = load('notebook-before-sep9.json');
+const september9 = load('notebook-before-sep11.json');
+
 test('existing notebook receives the logged lesson and accurate phrase levels', () => {
   const s = applyPublishedUpdates(baseline);
   assert.equal(s.lessons[0].date, '2026-09-11');
@@ -55,15 +52,6 @@ test('published lesson contains comprehension, role-play and next review priorit
   assert(seed.issues.some((i) => i.id === 'e-voce-20260909'));
   assert.equal(seed.patterns.find((p) => p.id === 'state').level, 'Developing');
 });
-
-const september9Context = {};
-vm.runInNewContext(
-  execFileSync('git', ['show', 'bd7af9d3dcc751605b283f99d0cc14347b9cad84:public/seed.js'], {
-    encoding: 'utf8',
-  }).replace('export const seed =', 'globalThis.seed ='),
-  september9Context,
-);
-const september9 = JSON.parse(JSON.stringify(september9Context.seed));
 test('September 9 notebooks receive September 11 once, preserving all prior logs', () => {
   const s = applyPublishedUpdates(september9);
   assert.equal(s.lessons[0].date, '2026-09-11');
@@ -87,4 +75,8 @@ test('newer local progress and personal notes survive the September 11 update', 
   assert.equal(s.phrases.find((p) => p.id === 'eu-sou').note, 'My own note');
   assert.equal(s.next.goal, 'My later lesson goal');
   assert.equal(s.lessons.filter((p) => p.date === '2026-09-11').length, 1);
+});
+test('reconstructed snapshots round-trip back to the bundled seed exactly', () => {
+  assert.deepEqual(applyPublishedUpdates(baseline), seed);
+  assert.deepEqual(applyPublishedUpdates(september9), seed);
 });

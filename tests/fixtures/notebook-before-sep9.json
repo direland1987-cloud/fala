@@ -1,0 +1,481 @@
+{
+  "schema": 1,
+  "updatedAt": null,
+  "phrases": [
+    {
+      "id": "oi",
+      "pt": "Oi",
+      "en": "Hi",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Repeated in the conversations. Check recall without a model.",
+      "cue": "A short, friendly greeting.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "bom-dia",
+      "pt": "Bom dia",
+      "en": "Good morning",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Practised repeatedly, including in a full introduction. Pronunciation was discussed.",
+      "cue": "Listen to the nasal sound in bom, then join it smoothly to dia.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "eu-sou",
+      "pt": "Eu sou Dan",
+      "en": "I’m Dan",
+      "category": "Introductions",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Several successful repetitions appear in the transcript. Spontaneous use is not yet verified.",
+      "cue": "Keep eu sou together as one short chunk. Check by listening, not transcript spelling.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "meu-nome",
+      "pt": "Meu nome é Dan",
+      "en": "My name is Dan",
+      "category": "Introductions",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Practised in the earlier conversation and again on 4 September.",
+      "cue": "Practise meu nome é as a whole phrase, then add your name.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "por-favor",
+      "pt": "Por favor",
+      "en": "Please",
+      "category": "Polite basics",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Earlier context records practice; Dan requested that this be included in the recap.",
+      "cue": "Give the final syllable of favor the emphasis.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "obrigado",
+      "pt": "Obrigado",
+      "en": "Thank you",
+      "category": "Polite basics",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Earlier context records practice and discussion of obrigado / obrigada. Dan uses obrigado.",
+      "cue": "Use obrigado for yourself, Dan. Stress the ga syllable.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "tchau",
+      "pt": "Tchau",
+      "en": "Bye",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Included in the earlier lesson context; independent recall still needs a check.",
+      "cue": "A short, friendly goodbye.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "boa-noite",
+      "pt": "Boa noite",
+      "en": "Good evening / good night",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-09-04",
+      "note": "Introduced and repeated in the afternoon conversation.",
+      "cue": "Listen slowly, repeat once, then use it as an evening greeting.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "como-esta",
+      "pt": "Como você está?",
+      "en": "How are you?",
+      "category": "Social responses",
+      "level": "Developing",
+      "first": "2026-09-04",
+      "note": "Introduced on 4 September. The transcript shows several attempts; meaning needed explaining.",
+      "cue": "Listen in three chunks: como / você / está. Stress the final syllables of você and está.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "estou-bem",
+      "pt": "Estou bem",
+      "en": "I’m well",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "Proposed for the next lesson only after the recap is secure.",
+      "cue": "Start with estou bem before introducing conversational reductions.",
+      "source": "New lesson proposal"
+    },
+    {
+      "id": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "A short follow-up to keep a conversation going.",
+      "cue": "Put the emphasis on the last syllable of você.",
+      "source": "New lesson proposal"
+    },
+    {
+      "id": "tudo-bem",
+      "pt": "Tudo bem?",
+      "en": "All good? / How’s it going?",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "An optional natural variation, once the first exchange is comfortable.",
+      "cue": "Use the question naturally in a greeting.",
+      "source": "New lesson proposal"
+    },
+    {
+      "id": "estou-cansado",
+      "pt": "Estou cansado",
+      "en": "I’m tired",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "Optional extension of the same sentence pattern. Dan uses cansado.",
+      "cue": "Keep estou and cansado connected.",
+      "source": "New lesson proposal"
+    },
+    {
+      "id": "estou-animado",
+      "pt": "Estou animado",
+      "en": "I’m excited",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "Optional extension if recall is strong. Dan uses animado.",
+      "cue": "Practise inside a short answer to como você está.",
+      "source": "New lesson proposal"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "sep4",
+      "date": "2026-09-04",
+      "title": "Greetings, introductions & “How are you?”",
+      "duration": "Multiple conversation excerpts",
+      "source": "Reconstructed",
+      "focus": "Revisit greetings and introductions; begin a social question.",
+      "practised": "Oi; Bom dia; Eu sou Dan; Meu nome é Dan; Boa noite; Como você está? Dan also asked to revisit Por favor and Obrigado.",
+      "mastered": "None verified. Repetition is visible; unprompted role-play success is not recorded.",
+      "mistakes": "Possible eu sou / “El Sou” confusion and hesitation with você, based on transcript text. These need an audio check; they are not confirmed pronunciation errors.",
+      "pronunciation": "Review eu sou, the chunks in Como você está?, and the rhythm of the full greeting.",
+      "roleplay": "No complete unguided role-play result is available.",
+      "next": "Retrieve greetings, name and polite basics without giving the answer. Check the meaning of Como você está? Then add Estou bem and E você? only if ready.",
+      "notes": "Compiled from the morning and afternoon excerpts, not counted as separate completed lessons. Dan repeatedly asked the coach to consult the curriculum and journal before introducing new material."
+    },
+    {
+      "id": "aug30",
+      "date": "2026-08-30",
+      "title": "First words & introducing yourself",
+      "duration": "Conversation excerpts · duration unverified",
+      "source": "Reconstructed",
+      "focus": "Everyday greetings, introducing yourself and polite basics.",
+      "practised": "Oi; Bom dia; Tchau; Eu sou Dan; Meu nome é Dan; Por favor; Obrigado.",
+      "mastered": "None formally recorded. Establish independent recall at the next recap.",
+      "mistakes": "No reliable recurring error assessment is available for this session.",
+      "pronunciation": "Bom dia pronunciation was discussed. Repetition, English meanings and more practice were requested.",
+      "roleplay": "No verified independent role-play result is available.",
+      "next": "Review the existing phrases before progressing. Introduce a short social exchange when recall is functional.",
+      "notes": "Reconstructed from the earlier conversation context. The original journal created on 30 August contains only a baseline template and no completed lesson log."
+    }
+  ],
+  "issues": [
+    {
+      "id": "eu-sou-check",
+      "title": "Keep “eu sou” together",
+      "type": "Pronunciation",
+      "phraseId": "eu-sou",
+      "status": "Review",
+      "evidence": "Transcript check needed",
+      "description": "The transcript repeatedly rendered early attempts as “El Sou” or similar. Speech recognition can be wrong; verify the sound in voice before treating this as an error.",
+      "cue": "Hear eu sou slowly, repeat the chunk, then introduce yourself without a model."
+    },
+    {
+      "id": "voce-check",
+      "title": "The rhythm of “você está”",
+      "type": "Pronunciation",
+      "phraseId": "como-esta",
+      "status": "Review",
+      "evidence": "Transcript check needed",
+      "description": "Several segmented attempts appear for Como você está? on 4 September. Fluency and pronunciation have not been independently assessed.",
+      "cue": "Practise como / você / está, then bring the three chunks together at natural speed."
+    },
+    {
+      "id": "meaning-first",
+      "title": "Know what the question means",
+      "type": "Comprehension",
+      "phraseId": "como-esta",
+      "status": "Review",
+      "evidence": "Dan’s explicit feedback",
+      "description": "Dan reported that he could repeat a phrase but did not know what had been said. Repetition alone should not count as understanding.",
+      "cue": "Give the English meaning once. Later ask for the meaning and a response without supplying either answer."
+    },
+    {
+      "id": "bom-dia-check",
+      "title": "A light check on “bom dia”",
+      "type": "Pronunciation",
+      "phraseId": "bom-dia",
+      "status": "Monitor",
+      "evidence": "Earlier discussion",
+      "description": "Pronunciation was a topic in the first conversation. There is no audio evidence here establishing a persistent error.",
+      "cue": "Listen for the nasal sound in bom, then return to Oi, bom dia, eu sou Dan."
+    }
+  ],
+  "curriculum": [
+    {
+      "id": "phase1",
+      "title": "Survival conversation",
+      "range": "Lessons 1–6",
+      "status": "In progress",
+      "topics": [
+        "Greetings, introductions and polite basics",
+        "How are you? / I’m good / and you?",
+        "Names, where you are from and where you live",
+        "I want / I need / I like / I don’t like",
+        "Simple yes/no questions and clarification",
+        "Please, thanks, sorry, excuse me, I don’t understand"
+      ],
+      "goal": "Handle a short greeting and simple everyday needs.",
+      "notes": "Current focus: greetings and introductions. Progress by recall, not the lesson number."
+    },
+    {
+      "id": "phase2",
+      "title": "Everyday social conversation",
+      "range": "Lessons 7–15",
+      "status": "Planned",
+      "topics": [
+        "Family, work, hobbies and routine",
+        "Likes, preferences and frequency",
+        "Making simple plans",
+        "Food, drinks, cafés and restaurants",
+        "Shopping and basic transactions",
+        "Time, days and simple scheduling",
+        "Describing people, places and things"
+      ],
+      "goal": "Keep a friendly everyday exchange going.",
+      "notes": ""
+    },
+    {
+      "id": "phase3",
+      "title": "Moving through real situations",
+      "range": "Lessons 16–25",
+      "status": "Planned",
+      "topics": [
+        "Directions and transport",
+        "Hotels, travel and getting around",
+        "Problems, requests and asking for help",
+        "Talking about what happened recently",
+        "Talking about future intentions",
+        "Phone and message style spoken language",
+        "Natural fillers, reactions and follow-up questions"
+      ],
+      "goal": "Navigate practical situations with confidence.",
+      "notes": ""
+    },
+    {
+      "id": "phase4",
+      "title": "Conversation expansion",
+      "range": "Lessons 26–40",
+      "status": "Planned",
+      "topics": [
+        "Longer back-and-forth conversations",
+        "Storytelling in simple past forms",
+        "Opinions and reasons",
+        "Comparisons and preferences",
+        "Invitations, accepting and declining",
+        "Brazilian expressions and conversational shortcuts",
+        "Listening at increasingly natural speed"
+      ],
+      "goal": "Share stories and opinions in longer conversations.",
+      "notes": ""
+    },
+    {
+      "id": "phase5",
+      "title": "Functional independence",
+      "range": "Lessons 41+",
+      "status": "Planned",
+      "topics": [
+        "Sustained everyday conversation",
+        "Repair strategies when vocabulary is missing",
+        "Natural rhythm, reductions and connected speech",
+        "Vocabulary chosen from real-life needs",
+        "Ongoing error correction based on the journal",
+        "Periodic review and spontaneous role-plays"
+      ],
+      "goal": "Speak independently and recover when a word is missing.",
+      "notes": ""
+    }
+  ],
+  "patterns": [
+    {
+      "id": "identity",
+      "pt": "Eu sou…",
+      "en": "I am…",
+      "use": "Introduce yourself or say where you are from.",
+      "example": "Eu sou Dan.",
+      "translation": "I’m Dan.",
+      "level": "Developing",
+      "note": "Practised in conversation. Confirm recall before adding new variations."
+    },
+    {
+      "id": "name",
+      "pt": "Meu nome é…",
+      "en": "My name is…",
+      "use": "Give your name.",
+      "example": "Meu nome é Dan.",
+      "translation": "My name is Dan.",
+      "level": "Developing",
+      "note": "Practised in conversation; independent recall is unverified."
+    },
+    {
+      "id": "how",
+      "pt": "Como você está?",
+      "en": "How are you?",
+      "use": "Ask someone how they feel.",
+      "example": "Oi! Como você está?",
+      "translation": "Hi! How are you?",
+      "level": "Developing",
+      "note": "Introduced on 4 September. Check meaning before eliciting an answer."
+    },
+    {
+      "id": "state",
+      "pt": "Eu estou… / Estou…",
+      "en": "I am…",
+      "use": "Describe your current state or location.",
+      "example": "Estou bem.",
+      "translation": "I’m well.",
+      "level": "Planned",
+      "note": "Next proposed pattern, after a secure recap."
+    },
+    {
+      "id": "have",
+      "pt": "Eu tenho…",
+      "en": "I have…",
+      "use": "Say what you have.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "like",
+      "pt": "Eu gosto de…",
+      "en": "I like…",
+      "use": "Talk about likes and interests.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "want",
+      "pt": "Eu quero…",
+      "en": "I want…",
+      "use": "Say what you want.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "need",
+      "pt": "Eu preciso de…",
+      "en": "I need…",
+      "use": "Ask for something you need.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "questions",
+      "pt": "Você tem / gosta / quer…?",
+      "en": "Do you have / like / want…?",
+      "use": "Turn familiar ideas into questions.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "where",
+      "pt": "Onde fica…?",
+      "en": "Where is…?",
+      "use": "Ask for a location.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "cost",
+      "pt": "Quanto custa…?",
+      "en": "How much does it cost?",
+      "use": "Ask about prices.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "going",
+      "pt": "Eu vou…",
+      "en": "I’m going / I will…",
+      "use": "Talk about your plans.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "past",
+      "pt": "Eu fui / eu fiz / eu comi…",
+      "en": "I went / I did / I ate…",
+      "use": "Talk about what happened.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "opinion",
+      "pt": "Acho que… / porque…",
+      "en": "I think… / because…",
+      "use": "Share an opinion and a reason.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    }
+  ],
+  "next": {
+    "title": "From “hello” to a real exchange",
+    "goal": "Greet someone, introduce yourself, ask how they are and respond naturally.",
+    "pattern": "Estou…",
+    "duration": "15–20 minutes",
+    "recap": "Retrieve Oi, Bom dia, Eu sou Dan / Meu nome é Dan, Por favor, Obrigado and Tchau one at a time. Include Boa noite and the meaning of Como você está? Give no model before the first attempt.",
+    "warmup": "Recheck eu sou and você está in voice. Use Bom dia inside a full greeting. Verify any suspected sound error by listening.",
+    "newMaterial": "Only after a secure recap: Estou bem; E você? Optional additions if comfortable: Tudo bem?; Estou cansado; Estou animado. One sentence pattern; up to five phrases, fewer if needed.",
+    "roleplay": "Meet someone in the morning. Greet them, give your name, ask how they are, reply to their question and say goodbye. No answer supplied before Dan responds.",
+    "adapt": "If recall is weak, repeat the existing material and reduce new content. If secure, add the proposed responses and practise at natural speed. Revisit open sticky points within the next 1–3 lessons.",
+    "close": "End with a spoken recap. Record what was actually practised, independent recall, repeated errors, pronunciation, role-play result and the next priority.",
+    "notes": "This is a new proposed plan based on the reconstructed 4 September entry; it has not been taught."
+  },
+  "reviews": [],
+  "sources": {
+    "checked": "2026-09-06",
+    "curriculum": "Brazilian_Portuguese_Living_Curriculum(1).docx",
+    "journal": "Brazilian_Portuguese_Lesson_Journal.docx",
+    "note": "The original curriculum and journal were found and read. The curriculum supplies the roadmap, phrase levels and teaching rules. The journal has a blank baseline, with no completed lesson records. The 30 August and 4 September entries, phrase history and sticky points were reconstructed from available conversation context. Exact session counts, independent mastery and audio pronunciation are not verified. Next-lesson content is newly proposed. Original documents are not automatically updated by this hub."
+  }
+}
