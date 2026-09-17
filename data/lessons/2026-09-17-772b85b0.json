@@ -1,0 +1,251 @@
+{
+  "id": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734",
+  "created": 1789614679829,
+  "started": 1789614682986,
+  "lastSeen": 1789614749451,
+  "ended": 1789614749451,
+  "minutes": 5,
+  "model": "gpt-realtime-2.1",
+  "status": "complete",
+  "previousPlan": {
+    "title": "Recall the responses, then let them flow",
+    "goal": "Recall “I’m well,” “And you?” and “I’m tired” independently, then use them in the full conversation.",
+    "pattern": "Estou… · independent retrieval",
+    "duration": "15–20 minutes",
+    "recap": "First ask for “I’m well,” “And you?” and “I’m tired” separately, one at a time, with no Portuguese model. Record whether each response was independent, prompted or corrected. Then briefly retrieve Oi, Bom dia, Eu sou Dan and the meaning/production of Como você está?.",
+    "warmup": "Listen to the first attempts before correcting. Recheck cansado if needed; it improved quickly last lesson. Estou bem was clear after modeling, so prioritise retrieval over unnecessary sound repetition. Eu sou Dan and Como você está? were clear and independently recalled on 11 September.",
+    "newMaterial": "Consolidate the three existing responses first. Only if all are independently recalled from meaning cues, introduce one new Estou… response such as Estou animado (“I’m excited”). Otherwise keep new material at zero. Estou animado remains Planned until actually taught.",
+    "roleplay": "Run the full opening and response exchange without supplying answers: Oi, bom dia. Eu sou Dan. Como você está? Reply with Estou bem, e você? or Estou cansado as appropriate. Alternate roles, repeat the exchange, then recheck individual responses outside the memorized sequence.",
+    "adapt": "A smooth memorized sequence does not establish isolated recall. If a response needs a model, briefly review it and test it later from a meaning cue. Keep Estou bem, E você? and Estou cansado Developing until independent retrieval is demonstrated. Do not award mastery for repetition.",
+    "close": "End with a spoken recap and dated lesson log. Record material practised, independent versus prompted recall, errors, pronunciation, comprehension, role-play result and next priority. Mark new material as taught only if it was actually introduced.",
+    "notes": "Prepared from Dan’s supplied 11 September 2026 lesson log. This next lesson is proposed and has not been completed. The previous lesson consolidated existing material; no new phrases were marked mastered."
+  },
+  "attempts": [
+    {
+      "phraseId": "estou-bem",
+      "pt": "Estou bem",
+      "en": "I’m well",
+      "heard": "estou bem",
+      "result": "independent",
+      "context": "isolated",
+      "pronunciation": "clear",
+      "note": "Independent recall from English cue; sounded clear and confident.",
+      "at": 1789614718138
+    },
+    {
+      "phraseId": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "heard": "I don't know. Can you tell me?",
+      "result": "not_recalled",
+      "context": "isolated",
+      "pronunciation": "uncertain",
+      "note": "Could not recall from cue; no Portuguese produced before prompting.",
+      "at": 1789614739939
+    }
+  ],
+  "transcript": [
+    {
+      "speaker": "Tutor",
+      "text": "Hi Dan! What does “Onde fica o banheiro?” mean in English?",
+      "at": 1789614685159
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Sorry, that was my mistake—let’s reset.\n\nHow do you say “I’m well” in Portuguese?\n\nTake a moment. Then say it when you’re ready.",
+      "at": 1789614698242
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Nice, let me note how that went for your practice log.",
+      "at": 1789614718135
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Great job, Dan—that was clear.\n\nNext one: how do you say “And you?” in Portuguese?\n\nPause and try to recall it before you say anything.",
+      "at": 1789614720821
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Okay, let me give you a gentle prompt for that one.",
+      "at": 1789614739937
+    },
+    {
+      "speaker": "Tutor",
+      "text": "It’s “E você?” \n\nSay it slowly once if you want, then we’ll test recall again soon.",
+      "at": 1789614741715
+    }
+  ],
+  "usage": [
+    {
+      "id": "resp_EOwotP7Gpr28F4voSHgxK",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.010488,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 0,
+        "audioOut": 87,
+        "cachedAudio": 0,
+        "textIn": 534,
+        "textOut": 116,
+        "cachedText": 0
+      },
+      "at": 1789614685162,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwp1uu1T8W08QSVoEm2W",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 0,
+        "audioOut": 0,
+        "cachedAudio": 0,
+        "textIn": 0,
+        "textOut": 0,
+        "cachedText": 0
+      },
+      "at": 1789614692259,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwp3Htl9siOIhdA0JogS",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0235512,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 26,
+        "audioOut": 198,
+        "cachedAudio": 0,
+        "textIn": 4013,
+        "textOut": 345,
+        "cachedText": 3968
+      },
+      "at": 1789614698248,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwpOrGkGtpjOW5CvOqMM",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.015263200000000001,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 43,
+        "audioOut": 76,
+        "cachedAudio": 0,
+        "textIn": 4063,
+        "textOut": 294,
+        "cachedText": 3968
+      },
+      "at": 1789614718140,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwpS4ZsXqnI7nCay2Hay",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0178288,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 43,
+        "audioOut": 203,
+        "cachedAudio": 0,
+        "textIn": 4164,
+        "textOut": 55,
+        "cachedText": 4032
+      },
+      "at": 1789614720830,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwplSfBDXTN8daTgsy4q",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0137208,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 66,
+        "audioOut": 71,
+        "cachedAudio": 0,
+        "textIn": 4213,
+        "textOut": 197,
+        "cachedText": 4032
+      },
+      "at": 1789614739944,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EOwpopt4agqhAGjCvbjyl",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0103216,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 66,
+        "audioOut": 109,
+        "cachedAudio": 64,
+        "textIn": 4324,
+        "textOut": 39,
+        "cachedText": 4160
+      },
+      "at": 1789614741720,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "notes-resp_0242e8a3c08e6571016aab5a9e052887d09fbdc9873b307714",
+      "model": "gpt-5.6-luna",
+      "category": "notes",
+      "usd": 0.0008577999999999999,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 0,
+        "audioOut": 0,
+        "cachedAudio": 0,
+        "textIn": 845,
+        "textOut": 574,
+        "cachedText": 0
+      },
+      "at": 1789614756535,
+      "pricingVersion": "openai-2026-09-16"
+    }
+  ],
+  "toolOutputs": {
+    "call_WQqa8NchNrPQvCRh": {
+      "saved": true
+    },
+    "call_Cth6qukhyNLeEciv": {
+      "saved": true
+    }
+  },
+  "summary": {
+    "title": "Recall responses from meaning cues",
+    "focus": "Independent recall of “I’m well” and “And you?”",
+    "practised": "Estou bem — recalled independently from the English cue “I’m well”; E você? — attempted from “And you?” but not recalled.",
+    "mastered": "Estou bem was independently recalled and sounded clear and confident. No other progress can be marked as mastered from these checkpoints.",
+    "mistakes": "E você? was not recalled. Dan said “I don't know. Can you tell me?” and produced no Portuguese before prompting.",
+    "pronunciation": "Estou bem was clear and confident. Pronunciation of E você? remains uncertain because it was not produced.",
+    "roleplay": "No role-play result was supplied. The full exchange was not assessed in these checkpoints.",
+    "notes": "Repetition or prompting has not been treated as mastery. Estou bem is secure in this isolated attempt; E você? remains developing.",
+    "next": {
+      "title": "Secure the missing response before adding anything",
+      "goal": "Recall E você? independently from the separate English meaning cue “And you?”, then recheck Estou bem from “I’m well.” Do not introduce new material until both are securely recalled.",
+      "duration": "15–20 minutes",
+      "pattern": "Separate meaning cues · independent retrieval",
+      "recap": "Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.",
+      "warmup": "Begin with the English cue “And you?” and wait for independent recall. Then use “I’m well” as a separate cue. Avoid supplying the Portuguese phrase before the attempt.",
+      "newMaterial": "None until both existing responses are independently recalled from meaning cues. No new phrase was taught in the supplied checkpoints.",
+      "roleplay": "Only after isolated recall is secure, attempt the existing opening exchange and note whether responses are independent or dependent on sequence or prompting. No role-play content is assumed to have been completed.",
+      "adapt": "If E você? is not recalled, briefly prompt or review it, then test it again later from the English cue. Keep it developing until independently retrieved. If Estou bem remains clear, do not over-practise its pronunciation.",
+      "close": "Log the result for each cue separately: independent, prompted, repeated or uncertain. Record only observed pronunciation and role-play evidence.",
+      "notes": "Next lesson should start with English meaning cues and no Portuguese model. No new material until recall is secure."
+    }
+  },
+  "summaryStatus": "saved",
+  "usageIncomplete": true,
+  "error": null
+}

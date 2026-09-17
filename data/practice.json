@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "sessionId": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734",
+    "date": "2026-09-17",
+    "phraseId": "estou-bem",
+    "pt": "Estou bem",
+    "en": "I’m well",
+    "heard": "estou bem",
+    "result": "independent",
+    "context": "isolated",
+    "pronunciation": "clear",
+    "note": "Independent recall from English cue; sounded clear and confident.",
+    "at": 1789614718138
+  },
+  {
+    "sessionId": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734",
+    "date": "2026-09-17",
+    "phraseId": "e-voce",
+    "pt": "E você?",
+    "en": "And you?",
+    "heard": "I don't know. Can you tell me?",
+    "result": "not_recalled",
+    "context": "isolated",
+    "pronunciation": "uncertain",
+    "note": "Could not recall from cue; no Portuguese produced before prompting.",
+    "at": 1789614739939
+  }
+]

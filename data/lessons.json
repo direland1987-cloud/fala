@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734",
+    "date": "2026-09-17",
+    "started": 1789614682986,
+    "ended": 1789614749451,
+    "lastSeen": 1789614749451,
+    "minutes": 5,
+    "model": "gpt-realtime-2.1",
+    "status": "complete",
+    "summaryStatus": "saved",
+    "usageIncomplete": true,
+    "checkpoints": 2,
+    "usd": 0.09203140000000001,
+    "title": "Recall responses from meaning cues",
+    "file": "data/lessons/2026-09-17-772b85b0.json"
+  }
+]
