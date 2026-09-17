@@ -2,25 +2,25 @@
 
 Rendered automatically from `data/notebook.json`. Edit in the Fala app, not here.
 
-## Next lesson · Recall the responses, then let them flow
+## Next lesson · Secure the missing response before adding anything
 
-**Goal:** Recall “I’m well,” “And you?” and “I’m tired” independently, then use them in the full conversation.
+**Goal:** Recall E você? independently from the separate English meaning cue “And you?”, then recheck Estou bem from “I’m well.” Do not introduce new material until both are securely recalled.
 
-**Pattern:** Estou… · independent retrieval
+**Pattern:** Separate meaning cues · independent retrieval
 
-**Retrieve first:** First ask for “I’m well,” “And you?” and “I’m tired” separately, one at a time, with no Portuguese model. Record whether each response was independent, prompted or corrected. Then briefly retrieve Oi, Bom dia, Eu sou Dan and the meaning/production of Como você está?.
+**Retrieve first:** Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.
 
-**Warm-up:** Listen to the first attempts before correcting. Recheck cansado if needed; it improved quickly last lesson. Estou bem was clear after modeling, so prioritise retrieval over unnecessary sound repetition. Eu sou Dan and Como você está? were clear and independently recalled on 11 September.
+**Warm-up:** Begin with the English cue “And you?” and wait for independent recall. Then use “I’m well” as a separate cue. Avoid supplying the Portuguese phrase before the attempt.
 
-**Only if ready:** Consolidate the three existing responses first. Only if all are independently recalled from meaning cues, introduce one new Estou… response such as Estou animado (“I’m excited”). Otherwise keep new material at zero. Estou animado remains Planned until actually taught.
+**Only if ready:** None until both existing responses are independently recalled from meaning cues. No new phrase was taught in the supplied checkpoints.
 
-**Role-play:** Run the full opening and response exchange without supplying answers: Oi, bom dia. Eu sou Dan. Como você está? Reply with Estou bem, e você? or Estou cansado as appropriate. Alternate roles, repeat the exchange, then recheck individual responses outside the memorized sequence.
+**Role-play:** Only after isolated recall is secure, attempt the existing opening exchange and note whether responses are independent or dependent on sequence or prompting. No role-play content is assumed to have been completed.
 
-**Adapt:** A smooth memorized sequence does not establish isolated recall. If a response needs a model, briefly review it and test it later from a meaning cue. Keep Estou bem, E você? and Estou cansado Developing until independent retrieval is demonstrated. Do not award mastery for repetition.
+**Adapt:** If E você? is not recalled, briefly prompt or review it, then test it again later from the English cue. Keep it developing until independently retrieved. If Estou bem remains clear, do not over-practise its pronunciation.
 
-**Close:** End with a spoken recap and dated lesson log. Record material practised, independent versus prompted recall, errors, pronunciation, comprehension, role-play result and next priority. Mark new material as taught only if it was actually introduced.
+**Close:** Log the result for each cue separately: independent, prompted, repeated or uncertain. Record only observed pronunciation and role-play evidence.
 
-**Notes:** Prepared from Dan’s supplied 11 September 2026 lesson log. This next lesson is proposed and has not been completed. The previous lesson consolidated existing material; no new phrases were marked mastered.
+**Notes:** Next lesson should start with English meaning cues and no Portuguese model. No new material until recall is secure.
 
 ## Living curriculum
 
@@ -35,7 +35,8 @@ Lessons 1–6 · Handle a short greeting and simple everyday needs.
 - Simple yes/no questions and clarification
 - Please, thanks, sorry, excuse me, I don’t understand
 
-11 September: full greeting-and-response exchange practised twice, with no new material. Oi, Bom dia, Eu sou Dan, and meaning/production of Como você está? recalled independently. Estou bem, E você? and Estou cansado remain Developing. Next: test the three responses separately from meaning cues, then repeat the exchange; add one response only if recall is secure.
+2026-09-17: Independent recall of “I’m well” and “And you?”
+Next: Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.
 
 ### Everyday social conversation · Planned
 
@@ -85,6 +86,26 @@ Lessons 41+ · Speak independently and recover when a word is missing.
 - Periodic review and spontaneous role-plays
 
 ## Lesson journal
+
+### 17 September 2026 — Recall responses from meaning cues [Logged]
+
+_1 minutes · voice lesson_
+
+**Focus:** Independent recall of “I’m well” and “And you?”
+
+**Practised:** Estou bem — recalled independently from the English cue “I’m well”; E você? — attempted from “And you?” but not recalled.
+
+**Mastered independently:** No new phrases confirmed mastered. Independent recall and repetition are recorded separately.
+
+**Recurring mistakes:** E você? was not recalled. Dan said “I don't know. Can you tell me?” and produced no Portuguese before prompting.
+
+**Pronunciation:** Estou bem was clear and confident. Pronunciation of E você? remains uncertain because it was not produced.
+
+**Role-play:** No role-play result was supplied. The full exchange was not assessed in these checkpoints.
+
+**Next priority:** Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.
+
+**Notes:** Repetition or prompting has not been treated as mastery. Estou bem is secure in this isolated attempt; E você? remains developing.
 
 ### 11 September 2026 — Consolidating the full conversation loop [Logged]
 
@@ -191,8 +212,8 @@ _Conversation excerpts · duration unverified_
 | Tchau | Bye | Developing |  | Included in the earlier lesson context; independent recall still needs a check. |
 | Boa noite | Good evening / good night | Developing |  | Introduced and repeated in the afternoon conversation. |
 | Como você está? | How are you? | Functional | 2026-09-11 | On 11 September, both the meaning (“How are you?”) and Portuguese production were recalled independently. Pronunciation was smooth. |
-| Estou bem | I’m well | Developing | 2026-09-11 | 11 September: initially needed a model from an English cue. Later used Estou bem, e você? naturally in the exchange. Test recall separately from the memorized sequence. |
-| E você? | And you? | Developing | 2026-09-11 | 11 September: initially needed prompting/modeling. Later used in Estou bem, e você?. Independent retrieval from “And you?” still needs checking. |
+| Estou bem | I’m well | Functional | 2026-09-17 | 2026-09-17: Independent recall from English cue; sounded clear and confident. |
+| E você? | And you? | Developing | 2026-09-17 | 2026-09-17: Could not recall from cue; no Portuguese produced before prompting. |
 | Tudo bem? | All good? / How’s it going? | Planned |  | An optional natural variation, once the first exchange is comfortable. |
 | Estou cansado | I’m tired | Developing | 2026-09-11 | 11 September: independent attempt initially sounded like “contrado”; corrected quickly. Later used Estou cansado correctly in the exchange. Independent meaning-cue recall still needs testing. |
 | Estou animado | I’m excited | Planned |  | Optional extension if recall is strong. Dan uses animado. |
@@ -207,16 +228,16 @@ _Conversation excerpts · duration unverified_
   Practice: Revisit meaning in spaced review. Prioritise independent recall of the three responses next.
 - **A light check on “bom dia”** [Monitor; Earlier discussion]: Pronunciation was a topic in the first conversation. There is no audio evidence here establishing a persistent error.
   Practice: Listen for the nasal sound in bom, then return to Oi, bom dia, eu sou Dan.
-- **Keep “bem” in Estou bem** [Review; Supplied lesson log · 11 September]: 11 September: Estou bem was not independently recalled from an English cue and needed a model. It was clear once modeled and later used naturally in the full exchange.
+- **Keep “bem” in Estou bem** [Monitor; Independently recalled 2026-09-17; recheck next lesson.]: 11 September: Estou bem was not independently recalled from an English cue and needed a model. It was clear once modeled and later used naturally in the full exchange.
   Practice: Test “I’m well” separately, with no model. Revisit later if help was needed, then combine it with E você?.
 - **Pronunciation and recall of “cansado”** [Review; Supplied lesson log · 11 September]: 11 September: the independent attempt sounded like “contrado,” then improved immediately after correction. Estou cansado was subsequently used correctly in the exchange.
   Practice: Test “I’m tired” from its meaning before any model. Check cansado briefly if needed, then run the full exchange.
-- **Remember the return question** [Review; Supplied lesson log · 11 September]: 11 September: E você? remained difficult to retrieve independently and initially needed prompting/modeling. Later it flowed in Estou bem, e você?.
-  Practice: Ask for “And you?” separately from the memorized sequence. Give no model before the first attempt.
+- **E você?** [Review; Voice lesson 2026-09-17]: not_recalled: Could not recall from cue; no Portuguese produced before prompting.
+  Practice: Retrieve “And you?” with no model, then use it in a conversation.
 
 ## Voice lessons recorded by Fala
 
-None yet.
+- 2026-09-17 · Recall responses from meaning cues · 2 checkpoints · US$0.09 · complete
 
 ## Sources
 
