@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "drizzle-kit": "0.31.10",
-    "drizzle-orm": "0.45.2"
+    "drizzle-orm": "0.45.2",
+    "prettier": "3.9.7"
   }
 }

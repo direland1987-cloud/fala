@@ -1,18 +1,90 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
-import {execFileSync} from 'node:child_process';
-import {seed} from '../public/seed.js';
-import {applyPublishedUpdates} from '../public/migrations.js';
-const baselineCode=execFileSync('git',['show','2fb8453a35c2374e7384160785c9271514d9bb1b:public/seed.js'],{encoding:'utf8'}).replace('export const seed=','globalThis.seed=');
-const context={};vm.runInNewContext(baselineCode,context);const baseline=JSON.parse(JSON.stringify(context.seed));
-test('existing notebook receives the logged lesson and accurate phrase levels',()=>{const s=applyPublishedUpdates(baseline);assert.equal(s.lessons[0].date,'2026-09-11');assert.equal(s.phrases.find(p=>p.id==='oi').level,'Functional');for(const id of ['estou-bem','e-voce','estou-cansado']){const p=s.phrases.find(p=>p.id===id);assert.equal(p.level,'Developing');assert.equal(p.first,'2026-09-09');}assert(s.next.newMaterial.includes('Consolidate'));assert.equal(s.phrases.filter(p=>p.level==='Mastered').length,0);});
-test('user notes and independently edited content survive the update',()=>{const local=structuredClone(baseline);local.phrases[0].note='My own note';local.lessons.push({id:'personal',date:'2026-09-08',title:'Personal practice'});local.curriculum[0].notes='My plan note';const s=applyPublishedUpdates(local);assert.equal(s.phrases[0].note,'My own note');assert.equal(s.curriculum[0].notes,'My plan note');assert(s.lessons.some(l=>l.id==='personal'));assert.equal(s.phrases[0].level,'Functional');});
-test('newer lesson plan is preserved and applying twice is idempotent',()=>{const local=structuredClone(baseline);local.lessons.push({id:'newer',date:'2026-09-12',title:'A newer lesson'});local.next.goal='Keep my newer plan';const once=applyPublishedUpdates(local),twice=applyPublishedUpdates(once);assert.equal(once.next.goal,'Keep my newer plan');assert.deepEqual(once,twice);assert.equal(twice.lessons.filter(l=>l.id==='lesson-2026-09-09').length,1);assert.equal(applyPublishedUpdates(seed),seed);});
-test('published lesson contains comprehension, role-play and next review priorities',()=>{const l=seed.lessons.find(l=>l.date==='2026-09-09');assert.equal(l.source,'Logged');assert(l.notes.includes('Meaning / comprehension'));assert(l.roleplay.includes('prompting'));assert(l.next.includes('no model first'));assert(seed.issues.some(i=>i.id==='e-voce-20260909'));assert.equal(seed.patterns.find(p=>p.id==='state').level,'Developing');});
+import { execFileSync } from 'node:child_process';
+import { seed } from '../public/seed.js';
+import { applyPublishedUpdates } from '../public/migrations.js';
+const baselineCode = execFileSync(
+  'git',
+  ['show', '2fb8453a35c2374e7384160785c9271514d9bb1b:public/seed.js'],
+  { encoding: 'utf8' },
+).replace('export const seed=', 'globalThis.seed=');
+const context = {};
+vm.runInNewContext(baselineCode, context);
+const baseline = JSON.parse(JSON.stringify(context.seed));
+test('existing notebook receives the logged lesson and accurate phrase levels', () => {
+  const s = applyPublishedUpdates(baseline);
+  assert.equal(s.lessons[0].date, '2026-09-11');
+  assert.equal(s.phrases.find((p) => p.id === 'oi').level, 'Functional');
+  for (const id of ['estou-bem', 'e-voce', 'estou-cansado']) {
+    const p = s.phrases.find((p) => p.id === id);
+    assert.equal(p.level, 'Developing');
+    assert.equal(p.first, '2026-09-09');
+  }
+  assert(s.next.newMaterial.includes('Consolidate'));
+  assert.equal(s.phrases.filter((p) => p.level === 'Mastered').length, 0);
+});
+test('user notes and independently edited content survive the update', () => {
+  const local = structuredClone(baseline);
+  local.phrases[0].note = 'My own note';
+  local.lessons.push({ id: 'personal', date: '2026-09-08', title: 'Personal practice' });
+  local.curriculum[0].notes = 'My plan note';
+  const s = applyPublishedUpdates(local);
+  assert.equal(s.phrases[0].note, 'My own note');
+  assert.equal(s.curriculum[0].notes, 'My plan note');
+  assert(s.lessons.some((l) => l.id === 'personal'));
+  assert.equal(s.phrases[0].level, 'Functional');
+});
+test('newer lesson plan is preserved and applying twice is idempotent', () => {
+  const local = structuredClone(baseline);
+  local.lessons.push({ id: 'newer', date: '2026-09-12', title: 'A newer lesson' });
+  local.next.goal = 'Keep my newer plan';
+  const once = applyPublishedUpdates(local),
+    twice = applyPublishedUpdates(once);
+  assert.equal(once.next.goal, 'Keep my newer plan');
+  assert.deepEqual(once, twice);
+  assert.equal(twice.lessons.filter((l) => l.id === 'lesson-2026-09-09').length, 1);
+  assert.equal(applyPublishedUpdates(seed), seed);
+});
+test('published lesson contains comprehension, role-play and next review priorities', () => {
+  const l = seed.lessons.find((l) => l.date === '2026-09-09');
+  assert.equal(l.source, 'Logged');
+  assert(l.notes.includes('Meaning / comprehension'));
+  assert(l.roleplay.includes('prompting'));
+  assert(l.next.includes('no model first'));
+  assert(seed.issues.some((i) => i.id === 'e-voce-20260909'));
+  assert.equal(seed.patterns.find((p) => p.id === 'state').level, 'Developing');
+});
 
-const september9Context={};
-vm.runInNewContext(execFileSync('git',['show','bd7af9d3dcc751605b283f99d0cc14347b9cad84:public/seed.js'],{encoding:'utf8'}).replace('export const seed =','globalThis.seed ='),september9Context);
-const september9=JSON.parse(JSON.stringify(september9Context.seed));
-test('September 9 notebooks receive September 11 once, preserving all prior logs',()=>{const s=applyPublishedUpdates(september9);assert.equal(s.lessons[0].date,'2026-09-11');assert.equal(s.lessons.length,4);for(const id of ['oi','bom-dia','eu-sou','como-esta'])assert.equal(s.phrases.find(p=>p.id===id).level,'Functional');for(const id of ['estou-bem','e-voce','estou-cansado'])assert.equal(s.phrases.find(p=>p.id===id).level,'Developing');assert.equal(s.phrases.find(p=>p.id==='estou-animado').level,'Planned');assert.equal(s.issues.find(p=>p.id==='meaning-first').status,'Monitor');assert(s.next.recap.startsWith('First ask for'));assert.equal(s.phrases.filter(p=>['Mastered','Automatic'].includes(p.level)).length,0);assert.deepEqual(applyPublishedUpdates(s),s);});
-test('newer local progress and personal notes survive the September 11 update',()=>{const local=structuredClone(september9);local.phrases.find(p=>p.id==='eu-sou').note='My own note';local.lessons.push({id:'newer',date:'2026-09-12',title:'Later lesson'});local.next.goal='My later lesson goal';const s=applyPublishedUpdates(local);assert.equal(s.phrases.find(p=>p.id==='eu-sou').note,'My own note');assert.equal(s.next.goal,'My later lesson goal');assert.equal(s.lessons.filter(p=>p.date==='2026-09-11').length,1);});
+const september9Context = {};
+vm.runInNewContext(
+  execFileSync('git', ['show', 'bd7af9d3dcc751605b283f99d0cc14347b9cad84:public/seed.js'], {
+    encoding: 'utf8',
+  }).replace('export const seed =', 'globalThis.seed ='),
+  september9Context,
+);
+const september9 = JSON.parse(JSON.stringify(september9Context.seed));
+test('September 9 notebooks receive September 11 once, preserving all prior logs', () => {
+  const s = applyPublishedUpdates(september9);
+  assert.equal(s.lessons[0].date, '2026-09-11');
+  assert.equal(s.lessons.length, 4);
+  for (const id of ['oi', 'bom-dia', 'eu-sou', 'como-esta'])
+    assert.equal(s.phrases.find((p) => p.id === id).level, 'Functional');
+  for (const id of ['estou-bem', 'e-voce', 'estou-cansado'])
+    assert.equal(s.phrases.find((p) => p.id === id).level, 'Developing');
+  assert.equal(s.phrases.find((p) => p.id === 'estou-animado').level, 'Planned');
+  assert.equal(s.issues.find((p) => p.id === 'meaning-first').status, 'Monitor');
+  assert(s.next.recap.startsWith('First ask for'));
+  assert.equal(s.phrases.filter((p) => ['Mastered', 'Automatic'].includes(p.level)).length, 0);
+  assert.deepEqual(applyPublishedUpdates(s), s);
+});
+test('newer local progress and personal notes survive the September 11 update', () => {
+  const local = structuredClone(september9);
+  local.phrases.find((p) => p.id === 'eu-sou').note = 'My own note';
+  local.lessons.push({ id: 'newer', date: '2026-09-12', title: 'Later lesson' });
+  local.next.goal = 'My later lesson goal';
+  const s = applyPublishedUpdates(local);
+  assert.equal(s.phrases.find((p) => p.id === 'eu-sou').note, 'My own note');
+  assert.equal(s.next.goal, 'My later lesson goal');
+  assert.equal(s.lessons.filter((p) => p.date === '2026-09-11').length, 1);
+});

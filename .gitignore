@@ -1,8 +1,8 @@
-node_modules/
-dist/
-.wrangler/
+.build/
+.dev.vars
 .env
 .env.local
-.dev.vars
 .sites-runtime/
-.build/
+.wrangler/
+dist/
+node_modules/
