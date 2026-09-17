@@ -1,6 +1,6 @@
 {
   "model": "gpt-realtime-2.1",
-  "minutes": 20,
+  "minutes": 5,
   "budgetAud": 60,
   "usdToAud": 1.4040999719180005,
   "fxDate": "2026-09-15"
