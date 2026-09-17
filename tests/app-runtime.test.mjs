@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {seed} from '../public/seed.js';
+import {applyPublishedUpdates} from '../public/migrations.js';
+test('hub boots with preserved lessons, front-page costs, and voice gated until setup',async()=>{
+  const elements=new Map(),saved=new Map();
+  const element=()=>({innerHTML:'',textContent:'',open:false,classList:{add(){},remove(){}},addEventListener(){},focus(){},showModal(){this.open=true},close(){this.open=false}});
+  const document={querySelector(s){if(s==='dialog[open]')return null;if(!elements.has(s))elements.set(s,element());return elements.get(s);},querySelectorAll(){return[]},addEventListener(){}};
+  const ctx=vm.createContext({seed,applyPublishedUpdates,structuredClone,console,Date,Intl,Map,Set,URL,Blob,AbortSignal,document,navigator:{},location:{hash:'',host:'fala.example',protocol:'https:'},window:{addEventListener(){},scrollTo(){}},setTimeout:()=>0,clearTimeout(){},localStorage:{getItem:k=>saved.get(k),setItem:(k,v)=>saved.set(k,v),removeItem:k=>saved.delete(k)},fetch:async()=>({ok:true,json:async()=>({state:seed,revision:1,configured:false,usd:0,aud:0,minutes:0,lessons:0,sessions:[],settings:{model:'gpt-realtime-2.1',minutes:20,budgetAud:60,usdToAud:1.4041,fxDate:'2026-09-15'}})})});
+  const voice=fs.readFileSync(new URL('../public/voice.js',import.meta.url),'utf8').replace('export function createVoiceHub','function createVoiceHub');
+  vm.runInContext('globalThis.createVoiceHub=(()=>{'+voice+';return createVoiceHub;})();',ctx);
+  const app=fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,'');
+  vm.runInContext(app+'\nglobalThis.goto=nav;globalThis.currentNotebook=()=>state;',ctx);
+  await new Promise(r=>setImmediate(r));
+  assert.ok(elements.get('#app').innerHTML.includes('API cost tracker'));
+  assert.ok(elements.get('#app').innerHTML.includes('Voice setup pending'));
+  ctx.goto('voice');assert.match(elements.get('#app').innerHTML,/data-voice="start" disabled/);
+  ctx.goto('costs');assert.ok(elements.get('#app').innerHTML.includes('No API lessons yet'));
+  ctx.goto('lessons');assert.equal(ctx.currentNotebook().lessons.length,seed.lessons.length);
+});

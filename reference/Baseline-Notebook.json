@@ -1,0 +1,559 @@
+{
+  "schema": 1,
+  "updatedAt": null,
+  "phrases": [
+    {
+      "id": "oi",
+      "pt": "Oi",
+      "en": "Hi",
+      "category": "Greetings",
+      "level": "Functional",
+      "first": "2026-08-30",
+      "note": "Recalled independently again on 11 September. Oi remains one of the strongest phrases.",
+      "cue": "A short, friendly greeting.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "bom-dia",
+      "pt": "Bom dia",
+      "en": "Good morning",
+      "category": "Greetings",
+      "level": "Functional",
+      "first": "2026-08-30",
+      "note": "Recalled independently again on 11 September. Bom dia remains one of the strongest phrases.",
+      "cue": "Listen to the nasal sound in bom, then join it smoothly to dia.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "eu-sou",
+      "pt": "Eu sou Dan",
+      "en": "I’m Dan",
+      "category": "Introductions",
+      "level": "Functional",
+      "first": "2026-08-30",
+      "note": "Recalled independently and pronounced clearly on 11 September. Used in the full opening sequence twice.",
+      "cue": "Retrieve Eu sou Dan without a model, then use it naturally inside the greeting.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "meu-nome",
+      "pt": "Meu nome é Dan",
+      "en": "My name is Dan",
+      "category": "Introductions",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Practised in the earlier conversation and again on 4 September.",
+      "cue": "Practise meu nome é as a whole phrase, then add your name.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "por-favor",
+      "pt": "Por favor",
+      "en": "Please",
+      "category": "Polite basics",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Earlier context records practice; Dan requested that this be included in the recap.",
+      "cue": "Give the final syllable of favor the emphasis.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "obrigado",
+      "pt": "Obrigado",
+      "en": "Thank you",
+      "category": "Polite basics",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Earlier context records practice and discussion of obrigado / obrigada. Dan uses obrigado.",
+      "cue": "Use obrigado for yourself, Dan. Stress the ga syllable.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "tchau",
+      "pt": "Tchau",
+      "en": "Bye",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-08-30",
+      "note": "Included in the earlier lesson context; independent recall still needs a check.",
+      "cue": "A short, friendly goodbye.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "boa-noite",
+      "pt": "Boa noite",
+      "en": "Good evening / good night",
+      "category": "Greetings",
+      "level": "Developing",
+      "first": "2026-09-04",
+      "note": "Introduced and repeated in the afternoon conversation.",
+      "cue": "Listen slowly, repeat once, then use it as an evening greeting.",
+      "source": "Conversation reconstruction"
+    },
+    {
+      "id": "como-esta",
+      "pt": "Como você está?",
+      "en": "How are you?",
+      "category": "Social responses",
+      "level": "Functional",
+      "first": "2026-09-04",
+      "note": "On 11 September, both the meaning (“How are you?”) and Portuguese production were recalled independently. Pronunciation was smooth.",
+      "cue": "Keep meaning and production connected. Revisit the question naturally during role-play.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "estou-bem",
+      "pt": "Estou bem",
+      "en": "I’m well",
+      "category": "Social responses",
+      "level": "Developing",
+      "first": "2026-09-09",
+      "note": "11 September: initially needed a model from an English cue. Later used Estou bem, e você? naturally in the exchange. Test recall separately from the memorized sequence.",
+      "cue": "Ask “How do you say I’m well?” without a model. If it is forgotten, review briefly and test later.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "category": "Social responses",
+      "level": "Developing",
+      "first": "2026-09-09",
+      "note": "11 September: initially needed prompting/modeling. Later used in Estou bem, e você?. Independent retrieval from “And you?” still needs checking.",
+      "cue": "Cue “And you?” independently of the full exchange, with no model first.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "tudo-bem",
+      "pt": "Tudo bem?",
+      "en": "All good? / How’s it going?",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "An optional natural variation, once the first exchange is comfortable.",
+      "cue": "Use the question naturally in a greeting.",
+      "source": "New lesson proposal"
+    },
+    {
+      "id": "estou-cansado",
+      "pt": "Estou cansado",
+      "en": "I’m tired",
+      "category": "Social responses",
+      "level": "Developing",
+      "first": "2026-09-09",
+      "note": "11 September: independent attempt initially sounded like “contrado”; corrected quickly. Later used Estou cansado correctly in the exchange. Independent meaning-cue recall still needs testing.",
+      "cue": "Ask for “I’m tired” without a model. Recheck cansado if needed, then return to the full conversation.",
+      "source": "Conversation history + supplied 9 and 11 September lesson logs",
+      "lastTested": "2026-09-11",
+      "testEvidence": "Dan-supplied 11 September lesson log"
+    },
+    {
+      "id": "estou-animado",
+      "pt": "Estou animado",
+      "en": "I’m excited",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "Optional extension if recall is strong. Dan uses animado.",
+      "cue": "Practise inside a short answer to como você está.",
+      "source": "New lesson proposal"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-2026-09-11",
+      "date": "2026-09-11",
+      "title": "Consolidating the full conversation loop",
+      "duration": "Voice lesson · duration not recorded",
+      "source": "Logged",
+      "focus": "Consolidating the full greeting-and-response conversation loop with retrieval first and no new material.",
+      "practised": "Oi; Bom dia; Eu sou Dan; Como você está?; Estou bem; E você?; Estou cansado. Full exchange practised twice.",
+      "mastered": "Oi, Bom dia, Eu sou Dan, the meaning of Como você está?, and production of Como você está? were recalled independently. Estou bem was not recalled independently at first and needed a model. E você? was also not recalled independently initially and needed prompting/modeling. Estou cansado was attempted independently but came out incorrectly before being corrected, then was produced successfully. In the later full exchanges, Dan responded naturally with Estou bem, e você? and Estou cansado without needing the full answer supplied. No new phrases are marked mastered.",
+      "mistakes": "Retrieval of Estou bem remains weak from an English cue. E você? was still difficult to retrieve independently. Estou cansado was initially produced incorrectly as something sounding like “contrado,” then corrected quickly.",
+      "pronunciation": "Como você está? was produced smoothly. Eu sou Dan was clear. Estou bem was clear once modeled. Estou cansado improved immediately after correction and was then used correctly in the exchange.",
+      "roleplay": "Dan successfully completed the full opening sequence: “Oi, bom dia. Eu sou Dan. Como você está?” In the first role-play he replied with “Estou bem, e você?” and later “Estou cansado.” He repeated the full exchange a second time with good flow. The conversation loop is becoming functional, but retrieval of individual response phrases still needs checking outside the memorized sequence.",
+      "next": "Start the next lesson by testing “I’m well,” “And you?” and “I’m tired” separately with no model. Then run the full exchange again. If those responses are independently recalled, begin adding one new Estou… response such as Estou animado.",
+      "notes": "Source: Dan’s supplied lesson log for 11 September 2026. This entry records the supplied observations; it is not a new audio assessment.\n\nComprehension: Dan independently remembered that Como você está? means “How are you?” This was stronger than the previous lesson.\n\nMastery: No new phrases marked mastered yet. Oi and Bom dia remain strongest. The full conversation loop is improving, but Estou bem, E você? and Estou cansado should remain Developing until they can be retrieved independently from meaning cues."
+    },
+    {
+      "id": "lesson-2026-09-09",
+      "date": "2026-09-09",
+      "title": "Greetings, introductions & responding with Estou…",
+      "duration": "Voice lesson · duration not recorded",
+      "source": "Logged",
+      "focus": "Greetings, introductions, asking how someone is, and responding with Estou…",
+      "practised": "Oi; Bom dia; Eu sou Dan; Como você está?; Estou bem; E você?; Estou cansado. Combined into a short morning conversation.",
+      "mastered": "Oi and Bom dia were recalled independently (Functional). Eu sou Dan needed prompting at first, then was produced correctly inside the full greeting. Como você está? could be pronounced after review, but its meaning was not recalled independently at first. Estou bem, E você? and Estou cansado were newly introduced, repeated and used with prompting; none is independently mastered.",
+      "mistakes": "Eu sou initially sounded like “El Sou” and needed several repetitions. Estou bem was briefly confused with Estou Dan; bem needed clarification. Cansado needed a pronunciation correction. E você? was repeatedly forgotten at first, then became more comfortable.",
+      "pronunciation": "Eu sou improved and was later clear inside Oi, bom dia. Eu sou Dan. Como você está? became smoother with repetition. Estou bem needed emphasis on bem. Cansado needed a brief sound correction, then improved.",
+      "roleplay": "Dan produced Oi, bom dia. Eu sou Dan. Como você está? He later used Estou bem, e você? and Estou cansado, e você? with prompting. In the final longer attempt, most of the conversation was produced, but Estou cansado still needed a recall prompt.",
+      "next": "Start with retrieval only, with no model first: Oi, Bom dia, Eu sou Dan, meaning and production of Como você está?, Estou bem, E você? and Estou cansado. Recheck eu sou, bem and cansado. Then run the full greeting-and-response exchange without supplying answers. Only add another Estou… response if recall is strong.",
+      "notes": "Source: the lesson handoff supplied by Dan for 9 September 2026. This is a supplied lesson log, not a reconstruction or a fresh audio assessment.\n\nMeaning / comprehension: Como você está? (“How are you?”) was not recalled at first; understood after explanation. Estou bem = “I’m well / I’m good”; E você? = “And you?”; Estou cansado = “I’m tired.”\n\nStrongest material: Oi, Bom dia and the full chunk Oi, bom dia. Eu sou Dan. are becoming functional. Estou bem, e você? showed good fluency after repetition, but needs retrieval testing.\n\nStill developing: meaning and spontaneous use of Como você está?; Estou bem; E você?; Estou cansado; fully independent Eu sou Dan without a prompt.\n\nRecommended focus: reinforce the full conversation loop until independent. Keep Estou cansado as a variation. Repetition alone does not count as mastery; do not mark the new responses mastered."
+    },
+    {
+      "id": "sep4",
+      "date": "2026-09-04",
+      "title": "Greetings, introductions & “How are you?”",
+      "duration": "Multiple conversation excerpts",
+      "source": "Reconstructed",
+      "focus": "Revisit greetings and introductions; begin a social question.",
+      "practised": "Oi; Bom dia; Eu sou Dan; Meu nome é Dan; Boa noite; Como você está? Dan also asked to revisit Por favor and Obrigado.",
+      "mastered": "None verified. Repetition is visible; unprompted role-play success is not recorded.",
+      "mistakes": "Possible eu sou / “El Sou” confusion and hesitation with você, based on transcript text. These need an audio check; they are not confirmed pronunciation errors.",
+      "pronunciation": "Review eu sou, the chunks in Como você está?, and the rhythm of the full greeting.",
+      "roleplay": "No complete unguided role-play result is available.",
+      "next": "Retrieve greetings, name and polite basics without giving the answer. Check the meaning of Como você está? Then add Estou bem and E você? only if ready.",
+      "notes": "Compiled from the morning and afternoon excerpts, not counted as separate completed lessons. Dan repeatedly asked the coach to consult the curriculum and journal before introducing new material."
+    },
+    {
+      "id": "aug30",
+      "date": "2026-08-30",
+      "title": "First words & introducing yourself",
+      "duration": "Conversation excerpts · duration unverified",
+      "source": "Reconstructed",
+      "focus": "Everyday greetings, introducing yourself and polite basics.",
+      "practised": "Oi; Bom dia; Tchau; Eu sou Dan; Meu nome é Dan; Por favor; Obrigado.",
+      "mastered": "None formally recorded. Establish independent recall at the next recap.",
+      "mistakes": "No reliable recurring error assessment is available for this session.",
+      "pronunciation": "Bom dia pronunciation was discussed. Repetition, English meanings and more practice were requested.",
+      "roleplay": "No verified independent role-play result is available.",
+      "next": "Review the existing phrases before progressing. Introduce a short social exchange when recall is functional.",
+      "notes": "Reconstructed from the earlier conversation context. The original journal created on 30 August contains only a baseline template and no completed lesson log."
+    }
+  ],
+  "issues": [
+    {
+      "id": "eu-sou-check",
+      "title": "Keep “eu sou” together",
+      "type": "Pronunciation",
+      "phraseId": "eu-sou",
+      "status": "Monitor",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "11 September: Eu sou Dan was recalled independently and pronounced clearly. This improved on the prompting needed in the 9 September lesson.",
+      "cue": "Keep Eu sou Dan in spaced role-play review; give extra sound practice only if the earlier difficulty returns."
+    },
+    {
+      "id": "voce-check",
+      "title": "The rhythm of “você está”",
+      "type": "Pronunciation",
+      "phraseId": "como-esta",
+      "status": "Monitor",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "11 September: Como você está? was produced smoothly and recalled independently. Continue using it naturally in conversation.",
+      "cue": "Use the question inside role-play, with an occasional independent meaning check."
+    },
+    {
+      "id": "meaning-first",
+      "title": "Know what the question means",
+      "type": "Comprehension",
+      "phraseId": "como-esta",
+      "status": "Monitor",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "Dan independently remembered that Como você está? means “How are you?” on 11 September. Comprehension was stronger than on 9 September.",
+      "cue": "Revisit meaning in spaced review. Prioritise independent recall of the three responses next."
+    },
+    {
+      "id": "bom-dia-check",
+      "title": "A light check on “bom dia”",
+      "type": "Pronunciation",
+      "phraseId": "bom-dia",
+      "status": "Monitor",
+      "evidence": "Earlier discussion",
+      "description": "Pronunciation was a topic in the first conversation. There is no audio evidence here establishing a persistent error.",
+      "cue": "Listen for the nasal sound in bom, then return to Oi, bom dia, eu sou Dan."
+    },
+    {
+      "id": "bem-20260909",
+      "title": "Keep “bem” in Estou bem",
+      "type": "Recurring mistake",
+      "phraseId": "estou-bem",
+      "status": "Review",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "11 September: Estou bem was not independently recalled from an English cue and needed a model. It was clear once modeled and later used naturally in the full exchange.",
+      "cue": "Test “I’m well” separately, with no model. Revisit later if help was needed, then combine it with E você?."
+    },
+    {
+      "id": "cansado-20260909",
+      "title": "Pronunciation and recall of “cansado”",
+      "type": "Pronunciation",
+      "phraseId": "estou-cansado",
+      "status": "Review",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "11 September: the independent attempt sounded like “contrado,” then improved immediately after correction. Estou cansado was subsequently used correctly in the exchange.",
+      "cue": "Test “I’m tired” from its meaning before any model. Check cansado briefly if needed, then run the full exchange."
+    },
+    {
+      "id": "e-voce-20260909",
+      "title": "Remember the return question",
+      "type": "Recall",
+      "phraseId": "e-voce",
+      "status": "Review",
+      "evidence": "Supplied lesson log · 11 September",
+      "description": "11 September: E você? remained difficult to retrieve independently and initially needed prompting/modeling. Later it flowed in Estou bem, e você?.",
+      "cue": "Ask for “And you?” separately from the memorized sequence. Give no model before the first attempt."
+    }
+  ],
+  "curriculum": [
+    {
+      "id": "phase1",
+      "title": "Survival conversation",
+      "range": "Lessons 1–6",
+      "status": "In progress",
+      "topics": [
+        "Greetings, introductions and polite basics",
+        "How are you? / I’m good / and you?",
+        "Names, where you are from and where you live",
+        "I want / I need / I like / I don’t like",
+        "Simple yes/no questions and clarification",
+        "Please, thanks, sorry, excuse me, I don’t understand"
+      ],
+      "goal": "Handle a short greeting and simple everyday needs.",
+      "notes": "11 September: full greeting-and-response exchange practised twice, with no new material. Oi, Bom dia, Eu sou Dan, and meaning/production of Como você está? recalled independently. Estou bem, E você? and Estou cansado remain Developing. Next: test the three responses separately from meaning cues, then repeat the exchange; add one response only if recall is secure."
+    },
+    {
+      "id": "phase2",
+      "title": "Everyday social conversation",
+      "range": "Lessons 7–15",
+      "status": "Planned",
+      "topics": [
+        "Family, work, hobbies and routine",
+        "Likes, preferences and frequency",
+        "Making simple plans",
+        "Food, drinks, cafés and restaurants",
+        "Shopping and basic transactions",
+        "Time, days and simple scheduling",
+        "Describing people, places and things"
+      ],
+      "goal": "Keep a friendly everyday exchange going.",
+      "notes": ""
+    },
+    {
+      "id": "phase3",
+      "title": "Moving through real situations",
+      "range": "Lessons 16–25",
+      "status": "Planned",
+      "topics": [
+        "Directions and transport",
+        "Hotels, travel and getting around",
+        "Problems, requests and asking for help",
+        "Talking about what happened recently",
+        "Talking about future intentions",
+        "Phone and message style spoken language",
+        "Natural fillers, reactions and follow-up questions"
+      ],
+      "goal": "Navigate practical situations with confidence.",
+      "notes": ""
+    },
+    {
+      "id": "phase4",
+      "title": "Conversation expansion",
+      "range": "Lessons 26–40",
+      "status": "Planned",
+      "topics": [
+        "Longer back-and-forth conversations",
+        "Storytelling in simple past forms",
+        "Opinions and reasons",
+        "Comparisons and preferences",
+        "Invitations, accepting and declining",
+        "Brazilian expressions and conversational shortcuts",
+        "Listening at increasingly natural speed"
+      ],
+      "goal": "Share stories and opinions in longer conversations.",
+      "notes": ""
+    },
+    {
+      "id": "phase5",
+      "title": "Functional independence",
+      "range": "Lessons 41+",
+      "status": "Planned",
+      "topics": [
+        "Sustained everyday conversation",
+        "Repair strategies when vocabulary is missing",
+        "Natural rhythm, reductions and connected speech",
+        "Vocabulary chosen from real-life needs",
+        "Ongoing error correction based on the journal",
+        "Periodic review and spontaneous role-plays"
+      ],
+      "goal": "Speak independently and recover when a word is missing.",
+      "notes": ""
+    }
+  ],
+  "patterns": [
+    {
+      "id": "identity",
+      "pt": "Eu sou…",
+      "en": "I am…",
+      "use": "Introduce yourself or say where you are from.",
+      "example": "Eu sou Dan.",
+      "translation": "I’m Dan.",
+      "level": "Functional",
+      "note": "11 September: Eu sou Dan was independently recalled, clear and used twice inside the full opening."
+    },
+    {
+      "id": "name",
+      "pt": "Meu nome é…",
+      "en": "My name is…",
+      "use": "Give your name.",
+      "example": "Meu nome é Dan.",
+      "translation": "My name is Dan.",
+      "level": "Developing",
+      "note": "Practised in conversation; independent recall is unverified."
+    },
+    {
+      "id": "how",
+      "pt": "Como você está?",
+      "en": "How are you?",
+      "use": "Ask someone how they feel.",
+      "example": "Oi! Como você está?",
+      "translation": "Hi! How are you?",
+      "level": "Functional",
+      "note": "11 September: meaning and production of Como você está? were independently recalled; pronunciation was smooth."
+    },
+    {
+      "id": "state",
+      "pt": "Eu estou… / Estou…",
+      "en": "I am…",
+      "use": "Describe your current state or location.",
+      "example": "Estou bem.",
+      "translation": "I’m well.",
+      "level": "Developing",
+      "note": "11 September: Estou bem and Estou cansado flowed later in the exchange, but isolated meaning-cue retrieval still needs checking. Keep Developing."
+    },
+    {
+      "id": "have",
+      "pt": "Eu tenho…",
+      "en": "I have…",
+      "use": "Say what you have.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "like",
+      "pt": "Eu gosto de…",
+      "en": "I like…",
+      "use": "Talk about likes and interests.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "want",
+      "pt": "Eu quero…",
+      "en": "I want…",
+      "use": "Say what you want.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "need",
+      "pt": "Eu preciso de…",
+      "en": "I need…",
+      "use": "Ask for something you need.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "questions",
+      "pt": "Você tem / gosta / quer…?",
+      "en": "Do you have / like / want…?",
+      "use": "Turn familiar ideas into questions.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "where",
+      "pt": "Onde fica…?",
+      "en": "Where is…?",
+      "use": "Ask for a location.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "cost",
+      "pt": "Quanto custa…?",
+      "en": "How much does it cost?",
+      "use": "Ask about prices.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "going",
+      "pt": "Eu vou…",
+      "en": "I’m going / I will…",
+      "use": "Talk about your plans.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "past",
+      "pt": "Eu fui / eu fiz / eu comi…",
+      "en": "I went / I did / I ate…",
+      "use": "Talk about what happened.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    },
+    {
+      "id": "opinion",
+      "pt": "Acho que… / porque…",
+      "en": "I think… / because…",
+      "use": "Share an opinion and a reason.",
+      "example": "",
+      "translation": "",
+      "level": "Planned",
+      "note": "From the original curriculum sequence."
+    }
+  ],
+  "next": {
+    "title": "Recall the responses, then let them flow",
+    "goal": "Recall “I’m well,” “And you?” and “I’m tired” independently, then use them in the full conversation.",
+    "pattern": "Estou… · independent retrieval",
+    "duration": "15–20 minutes",
+    "recap": "First ask for “I’m well,” “And you?” and “I’m tired” separately, one at a time, with no Portuguese model. Record whether each response was independent, prompted or corrected. Then briefly retrieve Oi, Bom dia, Eu sou Dan and the meaning/production of Como você está?.",
+    "warmup": "Listen to the first attempts before correcting. Recheck cansado if needed; it improved quickly last lesson. Estou bem was clear after modeling, so prioritise retrieval over unnecessary sound repetition. Eu sou Dan and Como você está? were clear and independently recalled on 11 September.",
+    "newMaterial": "Consolidate the three existing responses first. Only if all are independently recalled from meaning cues, introduce one new Estou… response such as Estou animado (“I’m excited”). Otherwise keep new material at zero. Estou animado remains Planned until actually taught.",
+    "roleplay": "Run the full opening and response exchange without supplying answers: Oi, bom dia. Eu sou Dan. Como você está? Reply with Estou bem, e você? or Estou cansado as appropriate. Alternate roles, repeat the exchange, then recheck individual responses outside the memorized sequence.",
+    "adapt": "A smooth memorized sequence does not establish isolated recall. If a response needs a model, briefly review it and test it later from a meaning cue. Keep Estou bem, E você? and Estou cansado Developing until independent retrieval is demonstrated. Do not award mastery for repetition.",
+    "close": "End with a spoken recap and dated lesson log. Record material practised, independent versus prompted recall, errors, pronunciation, comprehension, role-play result and next priority. Mark new material as taught only if it was actually introduced.",
+    "notes": "Prepared from Dan’s supplied 11 September 2026 lesson log. This next lesson is proposed and has not been completed. The previous lesson consolidated existing material; no new phrases were marked mastered."
+  },
+  "reviews": [],
+  "sources": {
+    "checked": "2026-09-14",
+    "curriculum": "Brazilian_Portuguese_Living_Curriculum(1).docx",
+    "journal": "Brazilian_Portuguese_Lesson_Journal.docx",
+    "note": "The original curriculum and journal were found and read. The curriculum supplies the roadmap, phrase levels and teaching rules. The journal has a blank baseline, with no completed lesson records. The 30 August and 4 September entries, phrase history and sticky points were reconstructed from available conversation context. Exact session counts, independent mastery and audio pronunciation are not verified. Next-lesson content is newly proposed. Original documents are not automatically updated by this hub. The 9 September 2026 entry is a lesson handoff supplied by Dan, not a reconstruction. Its reported recall and pronunciation observations have been incorporated; no new audio assessment was performed. The 11 September 2026 entry is also supplied by Dan. Independent recall improved for Eu sou Dan and the meaning/production of Como você está?; the three response phrases remain Developing. No new phrases were marked mastered."
+  },
+  "appliedUpdates": [
+    "lesson-2026-09-09-v1",
+    "lesson-2026-09-11-v1"
+  ]
+}
