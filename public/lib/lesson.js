@@ -32,6 +32,12 @@ const AUDIO_TAIL_MS = 15000;
 const BENIGN_ERRORS = ['response_cancel_not_active', 'conversation_already_has_active_response'];
 const GREETING =
   'Begin now. Briefly greet Dan, then ask ONE English meaning cue from the next plan. Do not give its Portuguese answer.';
+const CONTINUE = {
+  record_practice:
+    'Continue the lesson directly from where you were. Do not mention saving, noting or checking anything.',
+  set_lesson_time: 'Acknowledge the new time in a few words and continue the lesson.',
+  default: 'Continue the lesson directly.',
+};
 const TARGET_REACHED =
   'The target lesson time has been reached. Briefly ask Dan if he wants to finish and save, or continue. Do not end until he answers.';
 
@@ -68,12 +74,13 @@ export function createLessonController({
   let timer = null;
   let monthUsage = [];
   let busy = false;
-  let waiting = false;
   let finishRequested = false;
   let closing = false;
   let targetNotified = false;
   let endAfterAudio = false;
   let audioPlaying = false;
+  let audioInResponse = false;
+  let followUp = null;
   let finalizing = null;
 
   const emit = (type, payload = {}) => {
@@ -136,14 +143,9 @@ export function createLessonController({
       usageIncomplete: false,
       error: null,
     };
-    busy =
-      waiting =
-      finishRequested =
-      closing =
-      targetNotified =
-      endAfterAudio =
-      audioPlaying =
-        false;
+    busy = finishRequested = closing = targetNotified = endAfterAudio = audioPlaying = false;
+    audioInResponse = false;
+    followUp = null;
     save();
     emit('connecting', { id: record.id });
     let mic;
@@ -199,7 +201,7 @@ export function createLessonController({
           input: {
             turn_detection: {
               type: 'semantic_vad',
-              eagerness: 'low',
+              eagerness: 'medium',
               create_response: true,
               interrupt_response: true,
             },
@@ -285,8 +287,7 @@ export function createLessonController({
           output = { saved: true };
           save();
           emit('checkpoint', { attempt, ...stats() });
-        } else if (e.name === 'get_lesson_status') output = stats();
-        else if (e.name === 'set_lesson_time') output = setTime(Number(args.minutes), args.mode);
+        } else if (e.name === 'set_lesson_time') output = setTime(Number(args.minutes), args.mode);
         else if (e.name === 'finish_lesson') {
           finishRequested = true;
           output = { finishing: true };
@@ -301,10 +302,19 @@ export function createLessonController({
       type: 'conversation.item.create',
       item: { type: 'function_call_output', call_id: callId, output: JSON.stringify(output) },
     });
-    if (e.name !== 'finish_lesson') {
-      if (busy) waiting = true;
-      else conn.send({ type: 'response.create' });
-    } else if (!busy) requestFinish();
+    if (e.name === 'finish_lesson') {
+      if (!busy) requestFinish();
+      return;
+    }
+    // The model normally speaks and calls the tool in the same response. A
+    // second response is only needed when it called the tool without saying
+    // anything, otherwise every checkpoint would cost an extra spoken turn.
+    if (busy) followUp = e.name;
+    else
+      conn.send({
+        type: 'response.create',
+        response: { instructions: CONTINUE[e.name] || CONTINUE.default },
+      });
   }
 
   function handleEvent(e) {
@@ -312,6 +322,7 @@ export function createLessonController({
     switch (e.type) {
       case 'response.created':
         busy = true;
+        audioInResponse = false;
         return;
       case 'response.done': {
         busy = false;
@@ -327,6 +338,7 @@ export function createLessonController({
               usd: priced.usd,
               incomplete: priced.incomplete,
               breakdown: priced.breakdown,
+              raw: usage,
               at: now(),
               pricingVersion: PRICING_VERSION,
             });
@@ -337,13 +349,20 @@ export function createLessonController({
         if (closing) return;
         emit('metrics', stats());
         if (finishRequested) return requestFinish();
-        if (waiting) {
-          waiting = false;
-          conn.send({ type: 'response.create' });
+        if (followUp) {
+          const name = followUp;
+          followUp = null;
+          if (!(name === 'record_practice' && audioInResponse))
+            conn.send({
+              type: 'response.create',
+              response: { instructions: CONTINUE[name] || CONTINUE.default },
+            });
         }
         return;
       }
+      case 'response.output_audio.delta':
       case 'response.output_audio_transcript.delta':
+        audioInResponse = true;
         emit('tutor_speaking');
         return;
       case 'response.output_audio_transcript.done':

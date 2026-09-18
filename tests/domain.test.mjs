@@ -10,6 +10,8 @@ import {
   realtimeSessionConfig,
   validSummary,
   validateSettings,
+  lessonInstructions,
+  VOICE_TOOLS,
 } from '../public/lib/domain.js';
 import { attempt } from './helpers/fakes.mjs';
 
@@ -100,4 +102,19 @@ test('realtime session config carries the notebook, tools and a held auto-respon
   assert.throws(() =>
     validateSettings({ ...seed, model: 'gpt-5.6-luna', minutes: 20, budgetAud: 60, usdToAud: 1.4 }),
   );
+});
+test('lesson instructions separate taught from planned phrases and spell out the plan', () => {
+  const text = lessonInstructions(seed, 15);
+  const taught = text.slice(
+    text.indexOf('WHAT DAN HAS BEEN TAUGHT'),
+    text.indexOf('NOT YET TAUGHT'),
+  );
+  const planned = text.slice(text.indexOf('NOT YET TAUGHT'), text.indexOf('OPEN STICKY POINTS'));
+  assert.ok(taught.includes('Estou bem') && !taught.includes('Estou animado'));
+  assert.ok(planned.includes('Estou animado') && planned.includes('Tudo bem'));
+  assert.ok(text.includes('1. Retrieve first: ' + seed.next.recap));
+  assert.ok(text.includes('target 15 minutes'));
+  assert.ok(/After EVERY attempt/.test(text));
+  assert.ok(!/get_lesson_status/.test(text));
+  assert.ok(!VOICE_TOOLS.some((t) => t.name === 'get_lesson_status'));
 });

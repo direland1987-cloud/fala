@@ -356,3 +356,28 @@ test('time changes from the tutor and the controls update the target', async () 
   );
   assert.throws(() => h.controller.setTime(90, 'total'), /1–55/);
 });
+
+test('a checkpoint recorded in the same turn as speech does not trigger a second spoken turn', async () => {
+  const h = await harness();
+  await h.controller.start({ minutes: 20 });
+  const conn = h.realtime.last;
+  const before = conn.sent.length;
+  conn.emit({ type: 'response.created' });
+  conn.emit({ type: 'response.output_audio_transcript.delta', delta: 'Muito bem. ' });
+  conn.emit(toolCall('record_practice', attempt(), 'c1'));
+  conn.emit(usageEvent('r1'));
+  const sentAfter = conn.sent.slice(before).map((e) => e.type);
+  assert.deepEqual(
+    sentAfter,
+    ['conversation.item.create'],
+    'tool output only, no forced follow-up',
+  );
+  // A silent tool-only response still gets a follow-up so Dan is not left waiting.
+  conn.emit({ type: 'response.created' });
+  conn.emit(toolCall('record_practice', attempt({ result: 'prompted' }), 'c2'));
+  conn.emit(usageEvent('r2'));
+  const last = conn.sent.at(-1);
+  assert.equal(last.type, 'response.create');
+  assert.match(last.response.instructions, /Do not mention saving/);
+  assert.equal(h.local.read(KEYS.lesson).attempts.length, 2);
+});
