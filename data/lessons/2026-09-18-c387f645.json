@@ -1,0 +1,493 @@
+{
+  "id": "c387f645-4885-431b-a333-3a3e801a39e8",
+  "created": 1789710364221,
+  "started": 1789710369843,
+  "lastSeen": 1789710533543,
+  "ended": 1789710533543,
+  "minutes": 5,
+  "model": "gpt-realtime-2.1",
+  "status": "complete",
+  "previousPlan": {
+    "title": "Secure the missing response before adding anything",
+    "goal": "Recall E você? independently from the separate English meaning cue “And you?”, then recheck Estou bem from “I’m well.” Do not introduce new material until both are securely recalled.",
+    "pattern": "Separate meaning cues · independent retrieval",
+    "duration": "15–20 minutes",
+    "recap": "Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.",
+    "warmup": "Begin with the English cue “And you?” and wait for independent recall. Then use “I’m well” as a separate cue. Avoid supplying the Portuguese phrase before the attempt.",
+    "newMaterial": "None until both existing responses are independently recalled from meaning cues. No new phrase was taught in the supplied checkpoints.",
+    "roleplay": "Only after isolated recall is secure, attempt the existing opening exchange and note whether responses are independent or dependent on sequence or prompting. No role-play content is assumed to have been completed.",
+    "adapt": "If E você? is not recalled, briefly prompt or review it, then test it again later from the English cue. Keep it developing until independently retrieved. If Estou bem remains clear, do not over-practise its pronunciation.",
+    "close": "Log the result for each cue separately: independent, prompted, repeated or uncertain. Record only observed pronunciation and role-play evidence.",
+    "notes": "Next lesson should start with English meaning cues and no Portuguese model. No new material until recall is secure."
+  },
+  "attempts": [
+    {
+      "phraseId": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "heard": "E você",
+      "result": "independent",
+      "context": "isolated",
+      "pronunciation": "clear",
+      "note": "Independent recall from meaning cue; sounded correct overall. Keep the rising, friendly tone at the end.",
+      "at": 1789710411076
+    },
+    {
+      "phraseId": "estou-bem",
+      "pt": "Estou bem",
+      "en": "I’m well",
+      "heard": "Estou bem",
+      "result": "independent",
+      "context": "isolated",
+      "pronunciation": "clear",
+      "note": "Independent recall from meaning cue; pronunciation sounded clear and confident. No correction needed.",
+      "at": 1789710427361
+    },
+    {
+      "phraseId": "como-esta",
+      "pt": "Como você está?",
+      "en": "How are you?",
+      "heard": "Como você está?",
+      "result": "independent",
+      "context": "isolated",
+      "pronunciation": "clear",
+      "note": "Independent recall from meaning cue; natural and clear. No correction needed.",
+      "at": 1789710452579
+    },
+    {
+      "phraseId": "estou-bem",
+      "pt": "Estou bem",
+      "en": "How are you? (answer)",
+      "heard": "Estou bem",
+      "result": "repeated",
+      "context": "conversation",
+      "pronunciation": "clear",
+      "note": "Repeated right after a model example. Pronunciation sounded clear; no correction needed.",
+      "at": 1789710481535
+    },
+    {
+      "phraseId": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "heard": "El so? / uncertain",
+      "result": "unclear",
+      "context": "isolated",
+      "pronunciation": "uncertain",
+      "note": "Attempt was unclear and did not match the target phrase. Could not confirm accurate pronunciation. We’ll review and try again.",
+      "at": 1789710505953
+    },
+    {
+      "phraseId": "e-voce",
+      "pt": "E você?",
+      "en": "And you?",
+      "heard": "E você?",
+      "result": "repeated",
+      "context": "isolated",
+      "pronunciation": "clear",
+      "note": "This was produced after a model, so it counts as repeated. Pronunciation sounded clear this time. Keep the stress on você and a light rising tone.",
+      "at": 1789710519167
+    }
+  ],
+  "transcript": [
+    {
+      "speaker": "Tutor",
+      "text": "Hi Dan! What does “Como vai?” mean in English?",
+      "at": 1789710372705
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Nice, let’s stick with our plan for a moment.",
+      "at": 1789710391637
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Let’s do our planned warmup instead.\n\nAnd you?",
+      "at": 1789710391643
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Okay, let me think about how that landed in your pronunciation and recall.",
+      "at": 1789710411073
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Nice! That was independent recall and it sounded clear.\n\nNow, one more. What’s the Portuguese for “I’m well”?",
+      "at": 1789710413113
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Got it, let me quickly note how that recall and pronunciation came through.",
+      "at": 1789710427356
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Lovely. That was independent and clear again.\n\nDo you want to keep going for a bit, or finish here?",
+      "at": 1789710429205
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Alright, answer this in Portuguese: How are you?\n\nPause… take your time.",
+      "at": 1789710439012
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Okay, I’m going to register what I heard and then we’ll build from there.",
+      "at": 1789710452577
+    },
+    {
+      "speaker": "Tutor",
+      "text": "That sounded clear and natural. Nice work.\n\nNow, if I ask you “Como você está?”, answer with one of your responses. For example, “Estou bem.” Pause… take your time.",
+      "at": 1789710455521
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Okay, I’m going to note that attempt and then we’ll move forward from it.",
+      "at": 1789710481533
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Nice—clear and smooth.\n\nNow, without me modeling it, answer the English cue: And you? Pause and say it.",
+      "at": 1789710484205
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Alright, let me register what I heard and we’ll tidy it up together.",
+      "at": 1789710505946
+    },
+    {
+      "speaker": "Tutor",
+      "text": "I couldn’t clearly hear the target phrase there, so let’s clean it up. Say it like this, slowly: E você?\n\nNow a bit more naturally: E você?\n\nYour turn—pause and try to repeat it.",
+      "at": 1789710509061
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Nice, I’m going to note what I heard, and then we’ll keep it moving.",
+      "at": 1789710519161
+    },
+    {
+      "speaker": "Tutor",
+      "text": "That sounded clear.\n\nLet’s check if it’s truly retrievable next. I’ll give you the cue again with no model: And you? Pause and say it from memory.",
+      "at": 1789710521894
+    }
+  ],
+  "usage": [
+    {
+      "id": "resp_EPLiEwoh2TVK25zXJBF9K",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.012456,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 0,
+        "audioOut": 78,
+        "cachedAudio": 0,
+        "textIn": 534,
+        "textOut": 222,
+        "cachedText": 0
+      },
+      "at": 1789710372713,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLiWhycPDUF61GWb63wu",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.029328,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 35,
+        "audioOut": 129,
+        "cachedAudio": 0,
+        "textIn": 3782,
+        "textOut": 201,
+        "cachedText": 0
+      },
+      "at": 1789710391649,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLip1jixxWjKfIh45ejr",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.014260799999999999,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 49,
+        "audioOut": 88,
+        "cachedAudio": 0,
+        "textIn": 3828,
+        "textOut": 213,
+        "cachedText": 3712
+      },
+      "at": 1789710411081,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLitqy3Rxf3HQFYa4dWS",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0136864,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 49,
+        "audioOut": 139,
+        "cachedAudio": 0,
+        "textIn": 3940,
+        "textOut": 44,
+        "cachedText": 3776
+      },
+      "at": 1789710413115,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLj56pTAnBhtU8zVq1Ck",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0163632,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 66,
+        "audioOut": 83,
+        "cachedAudio": 64,
+        "textIn": 3980,
+        "textOut": 379,
+        "cachedText": 3904
+      },
+      "at": 1789710427367,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLj9xMurjMjBESkjkPet",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.010871200000000001,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 66,
+        "audioOut": 118,
+        "cachedAudio": 64,
+        "textIn": 4087,
+        "textOut": 39,
+        "cachedText": 3904
+      },
+      "at": 1789710429211,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLjHIzC0xD9DWEUxC0i9",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0158304,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 80,
+        "audioOut": 133,
+        "cachedAudio": 64,
+        "textIn": 4124,
+        "textOut": 200,
+        "cachedText": 4032
+      },
+      "at": 1789710439014,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLjU8NjBsYODvwY2HMj1",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.018718400000000003,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 104,
+        "audioOut": 82,
+        "cachedAudio": 64,
+        "textIn": 4156,
+        "textOut": 419,
+        "cachedText": 4032
+      },
+      "at": 1789710452586,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLjYF8EhLGvMQL9IRTg8",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.019393599999999997,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 104,
+        "audioOut": 227,
+        "cachedAudio": 64,
+        "textIn": 4268,
+        "textOut": 61,
+        "cachedText": 4160
+      },
+      "at": 1789710455528,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLjyutNwacBqb0w7JVhw",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.012784799999999999,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 133,
+        "audioOut": 96,
+        "cachedAudio": 128,
+        "textIn": 4323,
+        "textOut": 181,
+        "cachedText": 4224
+      },
+      "at": 1789710481541,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLk1uuw3El8m92Gj7Jbc",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.015220800000000001,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 133,
+        "audioOut": 178,
+        "cachedAudio": 128,
+        "textIn": 4436,
+        "textOut": 45,
+        "cachedText": 4224
+      },
+      "at": 1789710484208,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLkM3A5WyqeeS65n4NZr",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.014028,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 157,
+        "audioOut": 80,
+        "cachedAudio": 128,
+        "textIn": 4477,
+        "textOut": 237,
+        "cachedText": 4352
+      },
+      "at": 1789710505956,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLkQuCzDtpFWCv1KvvJd",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.020707200000000002,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 157,
+        "audioOut": 247,
+        "cachedAudio": 128,
+        "textIn": 4598,
+        "textOut": 69,
+        "cachedText": 4480
+      },
+      "at": 1789710509067,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLkaAzVK0637u5U3tlbJ",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.011604799999999998,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 172,
+        "audioOut": 77,
+        "cachedAudio": 128,
+        "textIn": 4644,
+        "textOut": 125,
+        "cachedText": 4544
+      },
+      "at": 1789710519173,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "resp_EPLkdE1NrJDdPoZYR5XMx",
+      "model": "gpt-realtime-2.1",
+      "category": "voice",
+      "usd": 0.0182288,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 172,
+        "audioOut": 198,
+        "cachedAudio": 128,
+        "textIn": 4772,
+        "textOut": 57,
+        "cachedText": 4544
+      },
+      "at": 1789710521900,
+      "pricingVersion": "openai-2026-09-16"
+    },
+    {
+      "id": "notes-resp_082f77b4946d9005016aacd0c61fd887d088598ff976cdca33",
+      "model": "gpt-5.6-luna",
+      "category": "notes",
+      "usd": 0.0011522,
+      "incomplete": false,
+      "breakdown": {
+        "audioIn": 0,
+        "audioOut": 0,
+        "cachedAudio": 0,
+        "textIn": 985,
+        "textOut": 796,
+        "cachedText": 0
+      },
+      "at": 1789710543336,
+      "pricingVersion": "openai-2026-09-16"
+    }
+  ],
+  "toolOutputs": {
+    "call_QbaL2CVwApzujSdB": {
+      "saved": true
+    },
+    "call_yYFBPGL29egMxuSt": {
+      "saved": true
+    },
+    "call_cC7P2wi5t9KgXRoQ": {
+      "saved": true
+    },
+    "call_wBuGrxy1L36oY9GZ": {
+      "saved": true
+    },
+    "call_dQfBZ7cBq0mkX8Ie": {
+      "saved": true
+    },
+    "call_F3LvsclPO2zXXj8e": {
+      "saved": true
+    }
+  },
+  "summary": {
+    "title": "Dan’s Brazilian Portuguese lesson log",
+    "focus": "Independent recall of “How are you?”, “I’m well” and “And you?” from separate English meaning cues.",
+    "practised": "Como você está? — independent from “How are you?”, clear and natural. Estou bem — independent from “I’m well”, clear and confident. E você? — independently recalled once from “And you?”, then later produced unclearly and repeated clearly after a model.",
+    "mastered": "Como você está? was independently recalled clearly. Estou bem was independently recalled clearly from “I’m well.” E você? is not yet secure because recall was inconsistent; one independent attempt was unclear and the clear later attempt followed a model.",
+    "mistakes": "E você? was unclear on a later isolated attempt: “El so? / uncertain”. The subsequent clear production was repeated after a model, not independent mastery. Estou bem in conversation was also repeated immediately after a model and does not add independent evidence.",
+    "pronunciation": "Como você está? sounded natural and clear. Estou bem sounded clear and confident, with no correction needed. E você? sounded clear on the independent successful attempt and on the repeated attempt, but the later unclear attempt means accurate pronunciation was not consistently confirmed. Keep stress on você and a light rising, friendly tone.",
+    "roleplay": "No completed role-play was recorded. In a conversation context, Estou bem was repeated after a model example; this was not independent sequence recall.",
+    "notes": "Repetition was not counted as mastery. The next lesson should begin with separate English meaning cues and no Portuguese model. Do not add new material until E você? and the existing responses are securely recalled.",
+    "next": {
+      "title": "Stabilise independent recall before new material",
+      "goal": "Secure E você? from the separate cue “And you?” and recheck Estou bem and Como você está? independently. Treat E você? as developing until it is recalled accurately and consistently without a model.",
+      "duration": "15–20 minutes",
+      "pattern": "Separate meaning cues · independent retrieval · delayed recheck",
+      "recap": "Test each phrase separately from its English meaning cue, with no Portuguese model: “How are you?” → Como você está?; “I’m well” → Estou bem; “And you?” → E você? Record each attempt as independent, prompted, repeated or uncertain.",
+      "warmup": "Begin with the English cue “And you?” and allow an unprompted attempt. Do not supply the Portuguese phrase first. Then test “I’m well” and “How are you?” separately. Avoid sequence-based support during the warmup.",
+      "newMaterial": "None. No new material until the existing responses, especially E você?, are securely recalled independently.",
+      "roleplay": "Only after each isolated response is secure, try the existing opening exchange without a model. Record whether each response is independent, prompted, repeated or uncertain. Do not assume the exchange has been mastered.",
+      "adapt": "If E você? is unclear or not recalled, give only a brief prompt or review, then test it again later from “And you?” Keep it developing if recall depends on a model or remains inconsistent. If Estou bem and Como você está? remain independently clear, move on rather than over-practising them.",
+      "close": "Retest E você? from “And you?” after a short delay, then log each phrase separately. Count only independent accurate recall as mastery; label model-based production as repeated.",
+      "notes": "Begin with English meaning cues and no Portuguese model. Preserve the observed pronunciation notes, but make no new pronunciation judgement unless it is heard again."
+    }
+  },
+  "summaryStatus": "saved",
+  "usageIncomplete": true,
+  "error": null
+}

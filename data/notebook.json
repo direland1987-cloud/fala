@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updatedAt": "2026-09-17T03:12:37.342Z",
+  "updatedAt": "2026-09-18T05:49:03.816Z",
   "phrases": [
     {
       "id": "oi",
@@ -103,11 +103,11 @@
       "category": "Social responses",
       "level": "Functional",
       "first": "2026-09-04",
-      "note": "On 11 September, both the meaning (“How are you?”) and Portuguese production were recalled independently. Pronunciation was smooth.",
+      "note": "2026-09-18: Independent recall from meaning cue; natural and clear. No correction needed.",
       "cue": "Keep meaning and production connected. Revisit the question naturally during role-play.",
       "source": "Conversation history + supplied 9 and 11 September lesson logs",
-      "lastTested": "2026-09-11",
-      "testEvidence": "Dan-supplied 11 September lesson log"
+      "lastTested": "2026-09-18",
+      "testEvidence": "Voice lesson 2026-09-18: independent / isolated"
     },
     {
       "id": "estou-bem",
@@ -116,11 +116,11 @@
       "category": "Social responses",
       "level": "Functional",
       "first": "2026-09-09",
-      "note": "2026-09-17: Independent recall from English cue; sounded clear and confident.",
+      "note": "2026-09-18: Independent recall from meaning cue; pronunciation sounded clear and confident. No correction needed. Repeated right after a model example. Pronunciation sounded clear; no correction needed.",
       "cue": "Ask “How do you say I’m well?” without a model. If it is forgotten, review briefly and test later.",
       "source": "Conversation history + supplied 9 and 11 September lesson logs",
-      "lastTested": "2026-09-17",
-      "testEvidence": "Voice lesson 2026-09-17: independent / isolated"
+      "lastTested": "2026-09-18",
+      "testEvidence": "Voice lesson 2026-09-18: independent / isolated; repeated / conversation"
     },
     {
       "id": "e-voce",
@@ -129,11 +129,11 @@
       "category": "Social responses",
       "level": "Developing",
       "first": "2026-09-09",
-      "note": "2026-09-17: Could not recall from cue; no Portuguese produced before prompting.",
+      "note": "2026-09-18: Independent recall from meaning cue; sounded correct overall. Keep the rising, friendly tone at the end. Attempt was unclear and did not match the target phrase. Could not confirm accurate pronunciation. We’ll review and try again. This was produced after a model, so it counts as repeated. Pronunciation sounded clear this time. Keep the stress on você and a light rising tone.",
       "cue": "Cue “And you?” independently of the full exchange, with no model first.",
       "source": "Conversation history + supplied 9 and 11 September lesson logs",
-      "lastTested": "2026-09-17",
-      "testEvidence": "Voice lesson 2026-09-17: not_recalled / isolated"
+      "lastTested": "2026-09-18",
+      "testEvidence": "Voice lesson 2026-09-18: independent / isolated; unclear / isolated; repeated / isolated"
     },
     {
       "id": "tudo-bem",
@@ -248,6 +248,23 @@
       "notes": "Repetition or prompting has not been treated as mastery. Estou bem is secure in this isolated attempt; E você? remains developing.",
       "voiceSessionId": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734",
       "automatic": true
+    },
+    {
+      "id": "voice-c387f645-4885-431b-a333-3a3e801a39e8",
+      "date": "2026-09-18",
+      "title": "Dan’s Brazilian Portuguese lesson log",
+      "duration": "3 minutes · voice lesson",
+      "source": "Logged",
+      "focus": "Independent recall of “How are you?”, “I’m well” and “And you?” from separate English meaning cues.",
+      "practised": "Como você está? — independent from “How are you?”, clear and natural. Estou bem — independent from “I’m well”, clear and confident. E você? — independently recalled once from “And you?”, then later produced unclearly and repeated clearly after a model.",
+      "mastered": "No new phrases confirmed mastered. Independent recall and repetition are recorded separately.",
+      "mistakes": "E você? was unclear on a later isolated attempt: “El so? / uncertain”. The subsequent clear production was repeated after a model, not independent mastery. Estou bem in conversation was also repeated immediately after a model and does not add independent evidence.",
+      "pronunciation": "Como você está? sounded natural and clear. Estou bem sounded clear and confident, with no correction needed. E você? sounded clear on the independent successful attempt and on the repeated attempt, but the later unclear attempt means accurate pronunciation was not consistently confirmed. Keep stress on você and a light rising, friendly tone.",
+      "roleplay": "No completed role-play was recorded. In a conversation context, Estou bem was repeated after a model example; this was not independent sequence recall.",
+      "next": "Test each phrase separately from its English meaning cue, with no Portuguese model: “How are you?” → Como você está?; “I’m well” → Estou bem; “And you?” → E você? Record each attempt as independent, prompted, repeated or uncertain.",
+      "notes": "Repetition was not counted as mastery. The next lesson should begin with separate English meaning cues and no Portuguese model. Do not add new material until E você? and the existing responses are securely recalled.",
+      "voiceSessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+      "automatic": true
     }
   ],
   "issues": [
@@ -267,7 +284,7 @@
       "type": "Pronunciation",
       "phraseId": "como-esta",
       "status": "Monitor",
-      "evidence": "Supplied lesson log · 11 September",
+      "evidence": "Independently recalled 2026-09-18; recheck next lesson.",
       "description": "11 September: Como você está? was produced smoothly and recalled independently. Continue using it naturally in conversation.",
       "cue": "Use the question inside role-play, with an occasional independent meaning check."
     },
@@ -277,7 +294,7 @@
       "type": "Comprehension",
       "phraseId": "como-esta",
       "status": "Monitor",
-      "evidence": "Supplied lesson log · 11 September",
+      "evidence": "Independently recalled 2026-09-18; recheck next lesson.",
       "description": "Dan independently remembered that Como você está? means “How are you?” on 11 September. Comprehension was stronger than on 9 September.",
       "cue": "Revisit meaning in spaced review. Prioritise independent recall of the three responses next."
     },
@@ -297,7 +314,7 @@
       "type": "Recurring mistake",
       "phraseId": "estou-bem",
       "status": "Monitor",
-      "evidence": "Independently recalled 2026-09-17; recheck next lesson.",
+      "evidence": "Independently recalled 2026-09-18; recheck next lesson.",
       "description": "11 September: Estou bem was not independently recalled from an English cue and needed a model. It was clear once modeled and later used naturally in the full exchange.",
       "cue": "Test “I’m well” separately, with no model. Revisit later if help was needed, then combine it with E você?."
     },
@@ -317,8 +334,8 @@
       "type": "Recall",
       "phraseId": "e-voce",
       "status": "Review",
-      "evidence": "Voice lesson 2026-09-17",
-      "description": "not_recalled: Could not recall from cue; no Portuguese produced before prompting.",
+      "evidence": "Voice lesson 2026-09-18",
+      "description": "independent: Independent recall from meaning cue; sounded correct overall. Keep the rising, friendly tone at the end.\nunclear: Attempt was unclear and did not match the target phrase. Could not confirm accurate pronunciation. We’ll review and try again.\nrepeated: This was produced after a model, so it counts as repeated. Pronunciation sounded clear this time. Keep the stress on você and a light rising tone.",
       "cue": "Retrieve “And you?” with no model, then use it in a conversation."
     }
   ],
@@ -337,7 +354,7 @@
         "Please, thanks, sorry, excuse me, I don’t understand"
       ],
       "goal": "Handle a short greeting and simple everyday needs.",
-      "notes": "2026-09-17: Independent recall of “I’m well” and “And you?”\nNext: Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery."
+      "notes": "2026-09-18: Independent recall of “How are you?”, “I’m well” and “And you?” from separate English meaning cues.\nNext: Test each phrase separately from its English meaning cue, with no Portuguese model: “How are you?” → Como você está?; “I’m well” → Estou bem; “And you?” → E você? Record each attempt as independent, prompted, repeated or uncertain."
     },
     {
       "id": "phase2",
@@ -550,17 +567,17 @@
     }
   ],
   "next": {
-    "title": "Secure the missing response before adding anything",
-    "goal": "Recall E você? independently from the separate English meaning cue “And you?”, then recheck Estou bem from “I’m well.” Do not introduce new material until both are securely recalled.",
-    "pattern": "Separate meaning cues · independent retrieval",
+    "title": "Stabilise independent recall before new material",
+    "goal": "Secure E você? from the separate cue “And you?” and recheck Estou bem and Como você está? independently. Treat E você? as developing until it is recalled accurately and consistently without a model.",
+    "pattern": "Separate meaning cues · independent retrieval · delayed recheck",
     "duration": "15–20 minutes",
-    "recap": "Ask for “I’m well” and “And you?” one at a time, with no Portuguese model. Record each as independent, prompted, repeated or uncertain. Do not count repetition as mastery.",
-    "warmup": "Begin with the English cue “And you?” and wait for independent recall. Then use “I’m well” as a separate cue. Avoid supplying the Portuguese phrase before the attempt.",
-    "newMaterial": "None until both existing responses are independently recalled from meaning cues. No new phrase was taught in the supplied checkpoints.",
-    "roleplay": "Only after isolated recall is secure, attempt the existing opening exchange and note whether responses are independent or dependent on sequence or prompting. No role-play content is assumed to have been completed.",
-    "adapt": "If E você? is not recalled, briefly prompt or review it, then test it again later from the English cue. Keep it developing until independently retrieved. If Estou bem remains clear, do not over-practise its pronunciation.",
-    "close": "Log the result for each cue separately: independent, prompted, repeated or uncertain. Record only observed pronunciation and role-play evidence.",
-    "notes": "Next lesson should start with English meaning cues and no Portuguese model. No new material until recall is secure."
+    "recap": "Test each phrase separately from its English meaning cue, with no Portuguese model: “How are you?” → Como você está?; “I’m well” → Estou bem; “And you?” → E você? Record each attempt as independent, prompted, repeated or uncertain.",
+    "warmup": "Begin with the English cue “And you?” and allow an unprompted attempt. Do not supply the Portuguese phrase first. Then test “I’m well” and “How are you?” separately. Avoid sequence-based support during the warmup.",
+    "newMaterial": "None. No new material until the existing responses, especially E você?, are securely recalled independently.",
+    "roleplay": "Only after each isolated response is secure, try the existing opening exchange without a model. Record whether each response is independent, prompted, repeated or uncertain. Do not assume the exchange has been mastered.",
+    "adapt": "If E você? is unclear or not recalled, give only a brief prompt or review, then test it again later from “And you?” Keep it developing if recall depends on a model or remains inconsistent. If Estou bem and Como você está? remain independently clear, move on rather than over-practising them.",
+    "close": "Retest E você? from “And you?” after a short delay, then log each phrase separately. Count only independent accurate recall as mastery; label model-based production as repeated.",
+    "notes": "Begin with English meaning cues and no Portuguese model. Preserve the observed pronunciation notes, but make no new pronunciation judgement unless it is heard again."
   },
   "reviews": [],
   "sources": {

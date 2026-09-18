@@ -24,5 +24,83 @@
     "pronunciation": "uncertain",
     "note": "Could not recall from cue; no Portuguese produced before prompting.",
     "at": 1789614739939
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "e-voce",
+    "pt": "E você?",
+    "en": "And you?",
+    "heard": "E você",
+    "result": "independent",
+    "context": "isolated",
+    "pronunciation": "clear",
+    "note": "Independent recall from meaning cue; sounded correct overall. Keep the rising, friendly tone at the end.",
+    "at": 1789710411076
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "estou-bem",
+    "pt": "Estou bem",
+    "en": "I’m well",
+    "heard": "Estou bem",
+    "result": "independent",
+    "context": "isolated",
+    "pronunciation": "clear",
+    "note": "Independent recall from meaning cue; pronunciation sounded clear and confident. No correction needed.",
+    "at": 1789710427361
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "como-esta",
+    "pt": "Como você está?",
+    "en": "How are you?",
+    "heard": "Como você está?",
+    "result": "independent",
+    "context": "isolated",
+    "pronunciation": "clear",
+    "note": "Independent recall from meaning cue; natural and clear. No correction needed.",
+    "at": 1789710452579
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "estou-bem",
+    "pt": "Estou bem",
+    "en": "How are you? (answer)",
+    "heard": "Estou bem",
+    "result": "repeated",
+    "context": "conversation",
+    "pronunciation": "clear",
+    "note": "Repeated right after a model example. Pronunciation sounded clear; no correction needed.",
+    "at": 1789710481535
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "e-voce",
+    "pt": "E você?",
+    "en": "And you?",
+    "heard": "El so? / uncertain",
+    "result": "unclear",
+    "context": "isolated",
+    "pronunciation": "uncertain",
+    "note": "Attempt was unclear and did not match the target phrase. Could not confirm accurate pronunciation. We’ll review and try again.",
+    "at": 1789710505953
+  },
+  {
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "phraseId": "e-voce",
+    "pt": "E você?",
+    "en": "And you?",
+    "heard": "E você?",
+    "result": "repeated",
+    "context": "isolated",
+    "pronunciation": "clear",
+    "note": "This was produced after a model, so it counts as repeated. Pronunciation sounded clear this time. Keep the stress on você and a light rising tone.",
+    "at": 1789710519167
   }
 ]

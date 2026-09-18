@@ -14,5 +14,21 @@
     "usd": 0.09203140000000001,
     "title": "Recall responses from meaning cues",
     "file": "data/lessons/2026-09-17-772b85b0.json"
+  },
+  {
+    "id": "c387f645-4885-431b-a333-3a3e801a39e8",
+    "date": "2026-09-18",
+    "started": 1789710369843,
+    "ended": 1789710533543,
+    "lastSeen": 1789710533543,
+    "minutes": 5,
+    "model": "gpt-realtime-2.1",
+    "status": "complete",
+    "summaryStatus": "saved",
+    "usageIncomplete": true,
+    "checkpoints": 6,
+    "usd": 0.24463459999999998,
+    "title": "Dan’s Brazilian Portuguese lesson log",
+    "file": "data/lessons/2026-09-18-c387f645.json"
   }
 ]

@@ -142,5 +142,293 @@
     "at": 1789614756535,
     "pricingVersion": "openai-2026-09-16",
     "sessionId": "772b85b0-d3a9-4a2f-8fc1-ee297c81b734"
+  },
+  {
+    "id": "resp_EPLiEwoh2TVK25zXJBF9K",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.012456,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 0,
+      "audioOut": 78,
+      "cachedAudio": 0,
+      "textIn": 534,
+      "textOut": 222,
+      "cachedText": 0
+    },
+    "at": 1789710372713,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLiWhycPDUF61GWb63wu",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.029328,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 35,
+      "audioOut": 129,
+      "cachedAudio": 0,
+      "textIn": 3782,
+      "textOut": 201,
+      "cachedText": 0
+    },
+    "at": 1789710391649,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLip1jixxWjKfIh45ejr",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.014260799999999999,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 49,
+      "audioOut": 88,
+      "cachedAudio": 0,
+      "textIn": 3828,
+      "textOut": 213,
+      "cachedText": 3712
+    },
+    "at": 1789710411081,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLitqy3Rxf3HQFYa4dWS",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.0136864,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 49,
+      "audioOut": 139,
+      "cachedAudio": 0,
+      "textIn": 3940,
+      "textOut": 44,
+      "cachedText": 3776
+    },
+    "at": 1789710413115,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLj56pTAnBhtU8zVq1Ck",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.0163632,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 66,
+      "audioOut": 83,
+      "cachedAudio": 64,
+      "textIn": 3980,
+      "textOut": 379,
+      "cachedText": 3904
+    },
+    "at": 1789710427367,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLj9xMurjMjBESkjkPet",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.010871200000000001,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 66,
+      "audioOut": 118,
+      "cachedAudio": 64,
+      "textIn": 4087,
+      "textOut": 39,
+      "cachedText": 3904
+    },
+    "at": 1789710429211,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLjHIzC0xD9DWEUxC0i9",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.0158304,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 80,
+      "audioOut": 133,
+      "cachedAudio": 64,
+      "textIn": 4124,
+      "textOut": 200,
+      "cachedText": 4032
+    },
+    "at": 1789710439014,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLjU8NjBsYODvwY2HMj1",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.018718400000000003,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 104,
+      "audioOut": 82,
+      "cachedAudio": 64,
+      "textIn": 4156,
+      "textOut": 419,
+      "cachedText": 4032
+    },
+    "at": 1789710452586,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLjYF8EhLGvMQL9IRTg8",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.019393599999999997,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 104,
+      "audioOut": 227,
+      "cachedAudio": 64,
+      "textIn": 4268,
+      "textOut": 61,
+      "cachedText": 4160
+    },
+    "at": 1789710455528,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLjyutNwacBqb0w7JVhw",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.012784799999999999,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 133,
+      "audioOut": 96,
+      "cachedAudio": 128,
+      "textIn": 4323,
+      "textOut": 181,
+      "cachedText": 4224
+    },
+    "at": 1789710481541,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLk1uuw3El8m92Gj7Jbc",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.015220800000000001,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 133,
+      "audioOut": 178,
+      "cachedAudio": 128,
+      "textIn": 4436,
+      "textOut": 45,
+      "cachedText": 4224
+    },
+    "at": 1789710484208,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLkM3A5WyqeeS65n4NZr",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.014028,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 157,
+      "audioOut": 80,
+      "cachedAudio": 128,
+      "textIn": 4477,
+      "textOut": 237,
+      "cachedText": 4352
+    },
+    "at": 1789710505956,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLkQuCzDtpFWCv1KvvJd",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.020707200000000002,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 157,
+      "audioOut": 247,
+      "cachedAudio": 128,
+      "textIn": 4598,
+      "textOut": 69,
+      "cachedText": 4480
+    },
+    "at": 1789710509067,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLkaAzVK0637u5U3tlbJ",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.011604799999999998,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 172,
+      "audioOut": 77,
+      "cachedAudio": 128,
+      "textIn": 4644,
+      "textOut": 125,
+      "cachedText": 4544
+    },
+    "at": 1789710519173,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "resp_EPLkdE1NrJDdPoZYR5XMx",
+    "model": "gpt-realtime-2.1",
+    "category": "voice",
+    "usd": 0.0182288,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 172,
+      "audioOut": 198,
+      "cachedAudio": 128,
+      "textIn": 4772,
+      "textOut": 57,
+      "cachedText": 4544
+    },
+    "at": 1789710521900,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
+  },
+  {
+    "id": "notes-resp_082f77b4946d9005016aacd0c61fd887d088598ff976cdca33",
+    "model": "gpt-5.6-luna",
+    "category": "notes",
+    "usd": 0.0011522,
+    "incomplete": false,
+    "breakdown": {
+      "audioIn": 0,
+      "audioOut": 0,
+      "cachedAudio": 0,
+      "textIn": 985,
+      "textOut": 796,
+      "cachedText": 0
+    },
+    "at": 1789710543336,
+    "pricingVersion": "openai-2026-09-16",
+    "sessionId": "c387f645-4885-431b-a333-3a3e801a39e8"
   }
 ]
