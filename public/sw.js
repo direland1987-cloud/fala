@@ -1,6 +1,6 @@
 // Keeps the app shell available offline so the notebook cached on this
 // device can be read without a connection. Network first, cache fallback.
-const VERSION = 'fala-shell-v1';
+const VERSION = 'fala-shell-v2';
 const SHELL = [
   '/',
   '/index.html',

@@ -319,6 +319,27 @@ test('a lesson with nothing in it is discarded rather than logged', async () => 
   assert.equal(JSON.parse(h.gh.files()[FILES.lessons]).length, 0);
 });
 
+test('a lesson cancelled before any practice keeps its cost but adds no journal entry', async () => {
+  const h = await harness();
+  await h.controller.start({ minutes: 20 });
+  const conn = h.realtime.last;
+  assert.match(conn.sent.at(-1).response.instructions, /How do you say '/);
+  conn.emit({ type: 'response.created' });
+  conn.emit(usageEvent('greeting'));
+  const result = await h.controller.finish();
+  assert.equal(result.discarded, true);
+  assert.equal(h.local.read(KEYS.lesson), null);
+  const index = JSON.parse(h.gh.files()[FILES.lessons]);
+  assert.equal(index.length, 1);
+  assert.equal(index[0].checkpoints, 0);
+  assert.equal(JSON.parse(h.gh.files()[FILES.usage]).length, 1);
+  assert.equal(
+    JSON.parse(h.gh.files()[FILES.notebook]).lessons.length,
+    seed.lessons.length,
+    'no journal entry',
+  );
+});
+
 test('microphone refusal and connection failure leave nothing behind', async () => {
   const denied = new Error('Permission denied');
   denied.name = 'NotAllowedError';

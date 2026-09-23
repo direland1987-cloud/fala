@@ -14,6 +14,7 @@ import {
   PRICING_VERSION,
   MAX_LESSON_MINUTES,
   NOTES_MODEL,
+  planCues,
 } from './domain.js';
 import { monthlyTotals } from './costs.js';
 import { KEYS } from './local.js';
@@ -30,8 +31,8 @@ export const FILES = {
 const TICK_MS = 15000;
 const AUDIO_TAIL_MS = 15000;
 const BENIGN_ERRORS = ['response_cancel_not_active', 'conversation_already_has_active_response'];
-const GREETING =
-  'Begin now. Briefly greet Dan, then ask ONE English meaning cue from the next plan. Do not give its Portuguese answer.';
+const greeting = (cue) =>
+  `Begin now. Greet Dan in one short sentence, then ask exactly this and nothing else: "How do you say '${cue}' in Portuguese?" Do not say the Portuguese. Then stop and wait.`;
 const CONTINUE = {
   record_practice:
     'Continue the lesson directly from where you were. Do not mention saving, noting or checking anything.',
@@ -209,7 +210,11 @@ export function createLessonController({
         },
       },
     });
-    conn.send({ type: 'response.create', response: { instructions: GREETING } });
+    const first = planCues(notebook)[0];
+    conn.send({
+      type: 'response.create',
+      response: { instructions: greeting(first ? first.en : 'Hi') },
+    });
     conn.setMicEnabled(true);
     timer = timers.setInterval(tick, TICK_MS);
     emit('started', { id: record.id, ...stats() });
@@ -444,11 +449,12 @@ export function createLessonController({
         if (rec.summaryStatus === 'saved') return { saved: true, alreadySaved: true, record: rec };
         if (!rec.attempts.length && !rec.usage.length) {
           // Nothing happened (for example the microphone was closed straight
-          // away). There is nothing worth a journal entry.
+          // away). There is nothing worth recording.
           local.remove(KEYS.lesson);
           emit('discarded', { id: rec.id });
           return { saved: false, discarded: true, record: rec };
         }
+        if (!rec.attempts.length) return await recordWithoutPractice(rec);
         const secrets = getSecrets();
         if (!rec.summary) {
           let summary = null;
@@ -583,6 +589,64 @@ export function createLessonController({
       }
     })();
     return finalizing;
+  }
+
+  // A lesson that was cancelled before any practice was assessed: the spend
+  // is real and goes into the ledger, but the journal and next plan are left
+  // untouched.
+  async function recordWithoutPractice(rec) {
+    const date = sydneyDate(new Date(rec.started));
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const [usage, lessons] = await Promise.all([
+        store.readJson(FILES.usage),
+        store.readJson(FILES.lessons),
+      ]);
+      const existingUsage = usage.data || [];
+      const newUsage = [
+        ...existingUsage,
+        ...rec.usage
+          .filter((u) => !existingUsage.some((x) => x.id === u.id))
+          .map((u) => ({ ...u, sessionId: rec.id })),
+      ];
+      const index = (lessons.data || []).filter((l) => l.id !== rec.id);
+      const entry = {
+        id: rec.id,
+        date,
+        started: rec.started,
+        ended: rec.ended,
+        lastSeen: rec.lastSeen,
+        minutes: rec.minutes,
+        model: rec.model,
+        status: rec.status,
+        summaryStatus: 'saved',
+        usageIncomplete: rec.usageIncomplete,
+        checkpoints: 0,
+        usd: usd(rec),
+        title: 'Cancelled before any practice',
+        file: lessonFileName(rec),
+      };
+      index.push(entry);
+      try {
+        const result = await store.commit({
+          message: `Voice lesson ${date}: cancelled before any practice`,
+          files: {
+            [FILES.usage]: pretty(newUsage),
+            [FILES.lessons]: pretty(index),
+            [lessonFileName(rec)]: pretty({ ...rec, summaryStatus: 'saved' }),
+          },
+          base: { [FILES.usage]: usage.sha, [FILES.lessons]: lessons.sha },
+        });
+        rec.summaryStatus = 'saved';
+        rec.commit = result.sha;
+        local.remove(KEYS.lesson);
+        emit('discarded', { id: rec.id, usd: usd(rec) });
+        return { saved: false, discarded: true, record: rec, shas: result.shas };
+      } catch (e) {
+        if (e instanceof ConflictError && attempt < 2) continue;
+        throw e;
+      }
+    }
+    throw new Error('The ledger kept changing while saving. Please retry.');
   }
 
   // Finishes a lesson left behind by a closed tab or a failed save.
