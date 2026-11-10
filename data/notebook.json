@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updatedAt": "2026-09-18T05:49:03.816Z",
+  "updatedAt": "2026-11-10T23:33:21.235Z",
   "phrases": [
     {
       "id": "oi",
@@ -169,6 +169,292 @@
       "note": "Optional extension if recall is strong. Dan uses animado.",
       "cue": "Practise inside a short answer to como você está.",
       "source": "New lesson proposal"
+    },
+    {
+      "id": "sim",
+      "pt": "Sim",
+      "en": "Yes",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "Nasal ending, like “seeng” without the g.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "nao",
+      "pt": "Não",
+      "en": "No",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "Nasal, close to “nowng”.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "boa-tarde",
+      "pt": "Boa tarde",
+      "en": "Good afternoon",
+      "category": "Greetings",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "TAR-jee: the final “de” sounds like “jee”.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "de-nada",
+      "pt": "De nada",
+      "en": "You’re welcome",
+      "category": "Polite basics",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "jee NAH-da.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "prazer",
+      "pt": "Prazer",
+      "en": "Nice to meet you",
+      "category": "Introductions",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "pra-ZEHR, stress on the end.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "desculpa",
+      "pt": "Desculpa",
+      "en": "Sorry",
+      "category": "Polite basics",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "jees-KOOL-pa.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "nao-entendi",
+      "pt": "Não entendi",
+      "en": "I didn’t understand",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "en-ten-JEE, stress on the end.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "pode-repetir",
+      "pt": "Pode repetir?",
+      "en": "Can you repeat that?",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "PAW-jee heh-peh-CHEER. The r at the start of “repetir” sounds like an h.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "mais-devagar",
+      "pt": "Mais devagar, por favor",
+      "en": "More slowly, please",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "jee-va-GAR.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "qual-seu-nome",
+      "pt": "Qual é o seu nome?",
+      "en": "What’s your name?",
+      "category": "Introductions",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "kwow EH oo SEH-oo NOH-mee.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "de-onde-voce-e",
+      "pt": "De onde você é?",
+      "en": "Where are you from?",
+      "category": "About me",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "jee OHN-jee voh-SEH eh.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "sou-da-australia",
+      "pt": "Eu sou da Austrália",
+      "en": "I’m from Australia",
+      "category": "About me",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "ow-STRAH-lee-a. Change the country if this is not right for you.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "onde-voce-mora",
+      "pt": "Onde você mora?",
+      "en": "Where do you live?",
+      "category": "About me",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "MAW-ra.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "moro-na-australia",
+      "pt": "Eu moro na Austrália",
+      "en": "I live in Australia",
+      "category": "About me",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "MAW-roo. Change the place if this is not right for you.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "quero-um-cafe",
+      "pt": "Eu quero um café",
+      "en": "I want a coffee",
+      "category": "Wants and likes",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "KEH-roo oong ka-FEH.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "gosto-de-cafe",
+      "pt": "Eu gosto de café",
+      "en": "I like coffee",
+      "category": "Wants and likes",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "GAWS-too jee ka-FEH.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "nao-gosto",
+      "pt": "Eu não gosto",
+      "en": "I don’t like it",
+      "category": "Wants and likes",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "nowng GAWS-too.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "preciso-de-ajuda",
+      "pt": "Eu preciso de ajuda",
+      "en": "I need help",
+      "category": "Wants and likes",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "preh-SEE-zoo jee a-ZHOO-da.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "voce-fala-ingles",
+      "pt": "Você fala inglês?",
+      "en": "Do you speak English?",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "FAH-la een-GLEHS.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "falo-um-pouco",
+      "pt": "Eu falo um pouco de português",
+      "en": "I speak a little Portuguese",
+      "category": "About me",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "POH-koo jee por-too-GEHS.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "estou-feliz",
+      "pt": "Estou feliz",
+      "en": "I’m happy",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "feh-LEES.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "estou-com-fome",
+      "pt": "Estou com fome",
+      "en": "I’m hungry",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "kohng FOH-mee. Literally “I am with hunger”.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "mais-ou-menos",
+      "pt": "Mais ou menos",
+      "en": "So-so",
+      "category": "Social responses",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "mah-eez oh MEH-noos.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "ate-logo",
+      "pt": "Até logo",
+      "en": "See you later",
+      "category": "Greetings",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "a-TEH LAW-goo.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "com-licenca",
+      "pt": "Com licença",
+      "en": "Excuse me",
+      "category": "Polite basics",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "kohng lee-SEN-sa.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
+    },
+    {
+      "id": "nao-sei",
+      "pt": "Eu não sei",
+      "en": "I don’t know",
+      "category": "Clarifying",
+      "level": "Planned",
+      "first": "",
+      "note": "",
+      "cue": "nowng SAY.",
+      "source": "Phase 1 phrase bank, added 10 November 2026. Edit or remove freely."
     }
   ],
   "lessons": [

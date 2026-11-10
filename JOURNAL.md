@@ -237,6 +237,32 @@ _Conversation excerpts · duration unverified_
 | Tudo bem? | All good? / How’s it going? | Planned |  | An optional natural variation, once the first exchange is comfortable. |
 | Estou cansado | I’m tired | Developing | 2026-09-11 | 11 September: independent attempt initially sounded like “contrado”; corrected quickly. Later used Estou cansado correctly in the exchange. Independent meaning-cue recall still needs testing. |
 | Estou animado | I’m excited | Planned |  | Optional extension if recall is strong. Dan uses animado. |
+| Sim | Yes | Planned |  |  |
+| Não | No | Planned |  |  |
+| Boa tarde | Good afternoon | Planned |  |  |
+| De nada | You’re welcome | Planned |  |  |
+| Prazer | Nice to meet you | Planned |  |  |
+| Desculpa | Sorry | Planned |  |  |
+| Não entendi | I didn’t understand | Planned |  |  |
+| Pode repetir? | Can you repeat that? | Planned |  |  |
+| Mais devagar, por favor | More slowly, please | Planned |  |  |
+| Qual é o seu nome? | What’s your name? | Planned |  |  |
+| De onde você é? | Where are you from? | Planned |  |  |
+| Eu sou da Austrália | I’m from Australia | Planned |  |  |
+| Onde você mora? | Where do you live? | Planned |  |  |
+| Eu moro na Austrália | I live in Australia | Planned |  |  |
+| Eu quero um café | I want a coffee | Planned |  |  |
+| Eu gosto de café | I like coffee | Planned |  |  |
+| Eu não gosto | I don’t like it | Planned |  |  |
+| Eu preciso de ajuda | I need help | Planned |  |  |
+| Você fala inglês? | Do you speak English? | Planned |  |  |
+| Eu falo um pouco de português | I speak a little Portuguese | Planned |  |  |
+| Estou feliz | I’m happy | Planned |  |  |
+| Estou com fome | I’m hungry | Planned |  |  |
+| Mais ou menos | So-so | Planned |  |  |
+| Até logo | See you later | Planned |  |  |
+| Com licença | Excuse me | Planned |  |  |
+| Eu não sei | I don’t know | Planned |  |  |
 
 ## Sticky points
 
@@ -257,10 +283,10 @@ unclear: Attempt was unclear and did not match the target phrase. Could not conf
 repeated: This was produced after a model, so it counts as repeated. Pronunciation sounded clear this time. Keep the stress on você and a light rising tone.
   Practice: Retrieve “And you?” with no model, then use it in a conversation.
 
-## Voice lessons recorded by Fala
+## Voice sessions recorded by Fala
 
-- 2026-09-17 · Recall responses from meaning cues · 2 checkpoints · US$0.09 · complete
-- 2026-09-18 · Dan’s Brazilian Portuguese lesson log · 6 checkpoints · US$0.24 · complete
+- 2026-09-17 · Lesson · 2 checkpoints · US$0.09 · complete
+- 2026-09-18 · Lesson · 6 checkpoints · US$0.24 · complete
 
 ## Sources
 
