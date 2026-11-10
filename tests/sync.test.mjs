@@ -128,4 +128,39 @@ test('settings are validated and committed', async () => {
   assert.equal(next.budgetAud, 40);
   assert.equal(JSON.parse(h.gh.files()[FILES.settings]).usdToAud, 1.5);
   await assert.rejects(h.sync.saveSettings({ budgetAud: 1 }), /A\$5/);
+  const pace = await h.sync.saveSettings({ pace: 'balanced', recap: true });
+  assert.equal(pace.pace, 'balanced');
+  assert.equal(JSON.parse(h.gh.files()[FILES.settings]).recap, true);
+});
+
+test('the practice record is loaded and session feedback is saved to the history', async () => {
+  const practice = [
+    {
+      sessionId: 's1',
+      date: '2026-11-08',
+      phraseId: 'oi',
+      pt: 'Oi',
+      result: 'independent',
+      context: 'isolated',
+      pronunciation: 'clear',
+      at: 1,
+    },
+  ];
+  const lessons = [
+    { id: 's1', date: '2026-11-08', started: 1, checkpoints: 1 },
+    { id: 's2', date: '2026-11-09', started: 2, checkpoints: 3 },
+  ];
+  const h = await harness({ [FILES.practice]: pretty(practice), [FILES.lessons]: pretty(lessons) });
+  await h.sync.load();
+  assert.equal(h.sync.practice.length, 1);
+  assert.equal(h.local.read(KEYS.meta).practice.data.length, 1, 'cached for offline use');
+  const feedback = { rating: 'issues', tags: ['too_slow'], note: 'Faster please', at: 5 };
+  const entry = await h.sync.saveFeedback('s2', feedback);
+  assert.deepEqual(entry.feedback, feedback);
+  const stored = JSON.parse(h.gh.files()[FILES.lessons]);
+  assert.deepEqual(stored.find((l) => l.id === 's2').feedback, feedback);
+  assert.equal(stored.find((l) => l.id === 's1').feedback, undefined);
+  assert.equal(h.sync.lessons.find((l) => l.id === 's2').feedback.note, 'Faster please');
+  assert.equal(h.gh.messages().at(-1), 'Session feedback');
+  await assert.rejects(h.sync.saveFeedback('missing', feedback), /not in the history/);
 });

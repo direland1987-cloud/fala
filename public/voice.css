@@ -585,3 +585,234 @@
   color: var(--sub);
   margin-top: 6px;
 }
+
+/* Session types, plan preview, progress and history (November 2026) */
+.mode-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.mode {
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mode strong {
+  font-size: 13px;
+}
+.mode span {
+  font-size: 11px;
+  color: var(--sub);
+  line-height: 1.35;
+}
+.mode.active {
+  border-color: var(--green);
+  background: var(--soft);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+.plan-list {
+  margin: 6px 0 12px;
+  padding-left: 20px;
+}
+.plan-list li {
+  margin-bottom: 3px;
+}
+.plan-list small,
+.voice-lesson-notes small {
+  color: var(--sub);
+}
+.plan-panel {
+  margin-bottom: 18px;
+}
+.earlier-plan {
+  margin-top: 8px;
+}
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 13px;
+}
+#tutor-notes,
+#fb-note {
+  width: 100%;
+  margin: 8px 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 11px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.session-result {
+  margin-top: 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+}
+.session-result h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.session-result p {
+  margin: 0 0 6px;
+  color: var(--sub);
+}
+.feedback-box {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.feedback-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 2px;
+}
+.chip {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 12px;
+}
+.chip.on {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.section-title {
+  font-size: 15px;
+  margin: 26px 0 10px;
+}
+.challenge-strip {
+  margin: 18px 0;
+}
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+}
+.challenge {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.challenge h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+}
+.challenge p {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--sub);
+}
+.challenge.done {
+  border-color: var(--green);
+  background: var(--soft);
+}
+.progress-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.progress-col h2 {
+  font-size: 15px;
+  margin: 0 0 2px;
+}
+.progress-col .count {
+  color: var(--sub);
+  font-weight: normal;
+}
+.progress-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.progress-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+.progress-list small,
+.progress-table small {
+  color: var(--sub);
+}
+.progress-table td small {
+  display: block;
+}
+.dots {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: auto;
+}
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c9cfc2;
+}
+.dot.ok {
+  background: var(--green);
+}
+.dot.mid {
+  background: #d9b36b;
+}
+.dot.bad {
+  background: #c9785f;
+}
+.history-list {
+  display: grid;
+  gap: 8px;
+}
+.history-item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.history-head {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  align-items: baseline;
+  background: none;
+  border: 0;
+  padding: 12px 14px;
+  text-align: left;
+}
+.history-head .date {
+  min-width: 52px;
+  color: var(--sub);
+  font-size: 12px;
+}
+.history-body {
+  padding: 0 14px 14px;
+}
+.said {
+  margin: 10px 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--sub);
+  max-height: 260px;
+  overflow: auto;
+}
+@media (max-width: 640px) {
+  .mode-picker {
+    grid-template-columns: 1fr;
+  }
+}

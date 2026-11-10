@@ -9,6 +9,14 @@ import { connectRealtime } from './lib/realtime.js';
 import { generateNotes } from './lib/notes.js';
 import { usageOverview } from './lib/costs.js';
 import { RATES, DEFAULT_SETTINGS, NOTES_MODEL } from './lib/domain.js';
+import { MODES } from './lib/plan.js';
+import { FEEDBACK_TAGS } from './lib/tutor.js';
+import {
+  progressPage as renderProgress,
+  planPreview,
+  challengeCards,
+  scoreLine,
+} from './progress.js';
 import { CONFIG } from './config.js';
 
 const esc = (s) =>
@@ -28,6 +36,21 @@ const modelName = (m) => (m?.endsWith('-mini') ? 'Realtime 2.1 Mini' : 'Realtime
 const button = (text, action, cls = '', attrs = '') =>
   `<button class="btn ${cls}" data-voice="${action}" ${attrs}>${text}</button>`;
 const VOICE_MODELS = Object.keys(RATES).filter((m) => m.startsWith('gpt-realtime-'));
+const STEP_LABEL = {
+  review: 'RECALL',
+  new: 'NEW PHRASE',
+  scene: 'CONVERSATION',
+  quiz: 'QUICK QUIZ',
+  result: 'YOUR SCORE',
+  wrap: 'KEEP GOING OR FINISH?',
+};
+const IDLE_LABEL = {
+  idle: 'READY WHEN YOU ARE',
+  connecting: 'CONNECTING',
+  finishing: 'SAVING YOUR SESSION',
+  complete: 'SESSION SAVED',
+  error: 'LET’S RECONNECT',
+};
 
 export function createVoiceHub({
   getState,
@@ -64,6 +87,14 @@ export function createVoiceHub({
   let audio = null;
   let wake = null;
   let timer = null;
+  let mode = 'lesson';
+  let step = null;
+  let liveScore = null;
+  let result = null; // the session just saved
+  let fb = { good: false, tags: new Set(), note: '', sent: false };
+  let openSession = null;
+  const said = {}; // tutor transcripts loaded on the history screen
+  let busyAction = '';
 
   const safeRender = () => {
     if (!document.querySelector('dialog[open]')) render();
@@ -132,6 +163,7 @@ export function createVoiceHub({
       getSecrets: () => secrets,
       getSettings: () => sync.settings,
       getNotebook: () => getState(),
+      getLessons: () => sync.lessons,
       connect: connectRealtime,
       notes: generateNotes,
       getMic,
@@ -156,14 +188,14 @@ export function createVoiceHub({
     recovering = true;
     safeRender();
     try {
-      const result = await lesson.recover();
-      if (result?.saved) {
-        sync.adopt({ notebook: result.notebook, shas: result.shas });
+      const recovered = await lesson.recover();
+      if (recovered?.saved) {
+        sync.adopt({ notebook: recovered.notebook, shas: recovered.shas });
         lastSaved = local.read(KEYS.lastLesson);
-        toast('Your last lesson was saved to the journal.');
-      } else if (result?.discarded) toast('An empty lesson from last time was cleared.');
+        toast('Your last session was saved.');
+      } else if (recovered?.discarded) toast('An empty session from last time was cleared.');
     } catch (e) {
-      toast('Your last lesson still needs its summary: ' + e.message);
+      toast('Your last session still needs saving: ' + e.message);
     } finally {
       recovering = false;
       info = overview();
@@ -187,7 +219,18 @@ export function createVoiceHub({
         sessionUSD = 0;
         checkpoints = 0;
         muted = false;
+        step = null;
+        liveScore = null;
+        result = null;
         safeRender();
+        break;
+      case 'step':
+        step = payload.name;
+        liveScore = payload.score || liveScore;
+        safeRender();
+        break;
+      case 'journal':
+        sync.adopt({ notebook: payload.notebook, shas: payload.shas });
         break;
       case 'audio':
         attachAudio(payload.stream);
@@ -196,7 +239,8 @@ export function createVoiceHub({
         phase = 'active';
         started = Date.now();
         target = payload.targetMinutes;
-        message = 'Take your time. You can interrupt or ask to repeat.';
+        step = payload.step;
+        message = 'Answer out loud. Say “hint”, “again” or “finish here” at any time.';
         clearInterval(timer);
         timer = setInterval(updateMetrics, 1000);
         navigator.wakeLock
@@ -210,14 +254,16 @@ export function createVoiceHub({
         checkpoints = payload.checkpoints;
         elapsed = payload.elapsedSeconds;
         target = payload.targetMinutes;
+        liveScore = payload.score || liveScore;
         updateMetrics();
         break;
       case 'checkpoint':
         checkpoints = payload.checkpoints;
         sessionUSD = payload.usd;
+        liveScore = payload.score || liveScore;
         transcript.push({
           speaker: payload.attempt.pt,
-          text: `${payload.attempt.result.replaceAll('_', ' ')} · ${payload.attempt.note || payload.attempt.en}`,
+          text: `${payload.attempt.result.replaceAll('_', ' ')}${payload.attempt.note ? ' · ' + payload.attempt.note : ''}`,
         });
         updateMetrics();
         updateTranscript();
@@ -244,11 +290,11 @@ export function createVoiceHub({
         setMessage('Your tutor is speaking…');
         break;
       case 'ready_to_finish':
-        setMessage('Wrapping up. Your lesson saves after the closing recap.');
+        setMessage('Wrapping up. Your session saves in a moment.');
         break;
       case 'finishing':
         phase = 'finishing';
-        message = 'Writing your lesson log and next priorities…';
+        message = 'Saving your session…';
         clearInterval(timer);
         timer = null;
         safeRender();
@@ -259,23 +305,28 @@ export function createVoiceHub({
         lastSaved = local.read(KEYS.lastLesson);
         checkpoints = payload.checkpoints;
         sessionUSD = payload.usd;
-        message = checkpoints
-          ? 'Lesson log saved. Your phrase progress, sticky points and next priorities are ready.'
-          : 'Session saved. No assessed practice was recorded, so your previous next-lesson plan is preserved.';
+        liveScore = payload.score;
+        result = {
+          id: payload.id,
+          mode: payload.mode,
+          score: payload.score,
+          summary: payload.record?.summary || null,
+        };
+        fb = { good: false, tags: new Set(), note: '', sent: false };
+        message = `${scoreLine(payload.score)}. Progress saved.`;
         cleanup();
         void sync.refresh();
         safeRender();
         break;
       case 'discarded':
         phase = 'idle';
-        message = 'Nothing was recorded, so no lesson was logged.';
+        message = 'Nothing was practised, so nothing was added to your progress.';
         cleanup();
         safeRender();
         break;
       case 'failure':
         phase = 'error';
-        message =
-          'Your checkpoints are retained on this device. Use “Retry summary” below to finish the journal update.';
+        message = 'Your checkpoints are kept on this device. Use “Retry saving” below.';
         cleanup();
         safeRender();
         break;
@@ -322,7 +373,7 @@ export function createVoiceHub({
     if (started && phase === 'active') elapsed = Math.floor((Date.now() - started) / 1000);
     const values = {
       'voice-time': clock(elapsed),
-      'voice-checkpoints': checkpoints,
+      'voice-score': liveScore?.asked ? `${liveScore.unaided}/${liveScore.asked}` : '—',
       'voice-cost': money(sessionUSD * fx()),
     };
     for (const [id, value] of Object.entries(values)) {
@@ -346,13 +397,13 @@ export function createVoiceHub({
     }
     if (sync.pendingSave) await sync.flush();
     if (sync.status !== 'saved') {
-      toast('Sync your notebook before starting a lesson.');
+      toast('Sync your notebook before starting a session.');
       return;
     }
     stopAudio();
     navigate('voice');
     try {
-      await lesson.start({ minutes: target, model });
+      await lesson.start({ minutes: target, model, mode });
     } catch (e) {
       toast(e.message);
     }
@@ -527,15 +578,15 @@ export function createVoiceHub({
       spend = info?.aud || 0;
     const last = info?.sessions.find((s) => s.status !== 'error');
     const display = info ? money(spend) : '—';
-    return `<section class="voice-dashboard" aria-label="Voice lessons and API costs"><div class="voice-launch"><div class="eyebrow">YOUR DAILY CONVERSATION</div><h1>Let’s speak Portuguese.</h1><p>Pick up your next priority. Finish early or keep going—your notes follow the lesson.</p><div class="voice-actions">${button(lesson?.active ? 'Return to your lesson' : 'Open voice lesson', 'open', 'primary')}${button('Quick phrase review', 'review')}</div><span class="voice-meta">${info?.configured ? 'Voice connected · automatic lesson notes' : 'Voice setup pending'} · ${esc(modelName(info?.settings.model || model))}</span></div><div class="cost-card"><div class="cost-heading"><h2>API cost tracker</h2>${button('Details', 'costs', 'text')}</div><div class="cost-value">${display}<span>AUD estimated this month</span></div><div class="cost-track" role="progressbar" aria-label="Monthly API budget" aria-valuemin="0" aria-valuemax="${budget}" aria-valuenow="${Math.min(budget, spend)}"><i style="width:${Math.min(100, (spend / budget) * 100)}%"></i></div><div class="cost-budget"><span>${money(budget)} monthly budget</span><span>${info ? money(Math.max(0, budget - spend)) : '—'} left</span></div><div class="cost-mini"><div><strong>${count}</strong><span>lessons</span></div><div><strong>${info ? Math.round(info.minutes) : '—'}</strong><span>minutes</span></div><div><strong>${last ? money(last.usd * fx()) : '—'}</strong><span>latest lesson</span></div></div><p class="cost-caption">${info?.incomplete ? 'Some usage is incomplete; this total may be understated.' : 'Calculated from API usage. Excludes tax and hosting.'}</p></div></section>${syncBanner()}${setupNotice()}${recoveries()}`;
+    return `<section class="voice-dashboard" aria-label="Voice lessons and API costs"><div class="voice-launch"><div class="eyebrow">YOUR DAILY CONVERSATION</div><h1>Let’s speak Portuguese.</h1><p>Short questions, straight answers. What you get right and wrong decides what comes next.</p><div class="voice-actions">${button(lesson?.active ? 'Return to your lesson' : 'Open voice lesson', 'open', 'primary')}${button('Quick phrase review', 'review')}</div><span class="voice-meta">${info?.configured ? 'Voice connected · progress tracked as you speak' : 'Voice setup pending'} · ${esc(modelName(info?.settings.model || model))}</span></div><div class="cost-card"><div class="cost-heading"><h2>API cost tracker</h2>${button('Details', 'costs', 'text')}</div><div class="cost-value">${display}<span>AUD estimated this month</span></div><div class="cost-track" role="progressbar" aria-label="Monthly API budget" aria-valuemin="0" aria-valuemax="${budget}" aria-valuenow="${Math.min(budget, spend)}"><i style="width:${Math.min(100, (spend / budget) * 100)}%"></i></div><div class="cost-budget"><span>${money(budget)} monthly budget</span><span>${info ? money(Math.max(0, budget - spend)) : '—'} left</span></div><div class="cost-mini"><div><strong>${count}</strong><span>lessons</span></div><div><strong>${info ? Math.round(info.minutes) : '—'}</strong><span>minutes</span></div><div><strong>${last ? money(last.usd * fx()) : '—'}</strong><span>latest lesson</span></div></div><p class="cost-caption">${info?.incomplete ? 'Some usage is incomplete; this total may be understated.' : 'Calculated from API usage. Excludes tax and hosting.'}</p></div></section>${syncBanner()}${setupNotice()}${recoveries()}${challengeStrip()}`;
   }
   function recoveries() {
     if (!lesson) return '';
     const rec = lesson.pending();
     if (!rec || lesson.active) return '';
     if (recovering)
-      return `<div class="voice-notice info"><div><strong>Finishing your last lesson</strong><p>Writing its notes from the saved checkpoints…</p></div></div>`;
-    return `<div class="voice-notice warning"><div><strong>Your last lesson needs a summary</strong><p>${esc(rec.error || 'Saved practice checkpoints are retained on this device. Finish this entry before starting another lesson.')}</p><p class="recovery-detail">${rec.attempts.length} saved checkpoints · started ${esc(new Date(rec.started).toLocaleString('en-AU'))}</p></div>${button('Retry summary', 'retry-summary')}</div>`;
+      return `<div class="voice-notice info"><div><strong>Saving your last session</strong><p>Working from the checkpoints kept on this device…</p></div></div>`;
+    return `<div class="voice-notice warning"><div><strong>Your last session still needs saving</strong><p>${esc(rec.error || 'Saved practice checkpoints are retained on this device. Finish this entry before starting another lesson.')}</p><p class="recovery-detail">${rec.attempts.length} saved checkpoints · started ${esc(new Date(rec.started).toLocaleString('en-AU'))}</p></div>${button('Retry saving', 'retry-summary')}</div>`;
   }
   function transcriptBody() {
     return transcript.length
@@ -545,13 +596,146 @@ export function createVoiceHub({
           .join('')}</ol>`
       : '';
   }
+  function resultPanel() {
+    if (phase !== 'complete' || !result) return '';
+    const s = result.summary;
+    const detail = s
+      ? `<p><strong>Went well:</strong> ${esc(s.mastered)}</p><p><strong>Keep practising:</strong> ${esc(s.mistakes)}</p>`
+      : '';
+    const chips = Object.entries(FEEDBACK_TAGS)
+      .map(
+        ([id, label]) =>
+          `<button class="chip ${fb.tags.has(id) ? 'on' : ''}" data-voice="fb-tag" data-tag="${id}" aria-pressed="${fb.tags.has(id)}">${label}</button>`,
+      )
+      .join('');
+    const feedback = fb.sent
+      ? '<p class="voice-small">Thanks. Your tutor will be told at the start of the next session.</p>'
+      : `<div class="feedback-box"><strong>How was that session?</strong><div class="feedback-tags"><button class="chip ${fb.good ? 'on' : ''}" data-voice="fb-good" aria-pressed="${fb.good}">Good</button>${chips}</div><input id="fb-note" type="text" maxlength="240" placeholder="Anything else? Optional." value="${esc(fb.note)}" aria-label="Feedback note">${button('Send feedback', 'fb-send', 'small')}</div>`;
+    return `<div class="session-result"><h3>${esc(scoreLine(result.score))}</h3>${detail}${feedback}</div>`;
+  }
   function page() {
     const active = ['connecting', 'active', 'finishing'].includes(phase);
     const state = getState();
-    const next = state?.next || { title: 'Your next conversation', recap: '' };
+    const settings = sync?.settings || DEFAULT_SETTINGS;
     const canStart =
       !!info?.configured && sync?.status === 'saved' && !lesson?.pending() && !recovering;
-    return `<div class="page-heading"><div><h1>Your voice lesson</h1><p>One question at a time. Your latest notes are loaded before the first question.</p></div></div>${syncBanner()}${setupNotice()}${recoveries()}<section class="voice-room" aria-label="Voice lesson"><div class="voice-controls"><div class="voice-fields"><label>Time available<select id="voice-duration" ${active ? 'disabled' : ''}>${[5, 10, 15, 20, 30, 45, 55].map((n) => `<option value="${n}" ${n === Math.round(target) ? 'selected' : ''}>${n} minutes</option>`).join('')}</select></label><label>Voice model<select id="voice-model" ${active ? 'disabled' : ''}>${VOICE_MODELS.map((m) => `<option value="${m}" ${model === m ? 'selected' : ''}>${modelName(m)}${m.endsWith('-mini') ? ' · lower cost' : ''}</option>`).join('')}</select></label></div><div class="voice-stage ${phase === 'active' ? 'is-active' : ''}"><div class="voice-mic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg></div><span class="eyebrow" id="voice-phase">${{ idle: 'READY WHEN YOU ARE', connecting: 'CONNECTING YOUR LESSON', active: muted ? 'MICROPHONE MUTED' : 'LISTEN · THINK · SPEAK', finishing: 'SAVING YOUR LESSON', complete: 'LESSON SAVED', error: 'LET’S RECONNECT' }[phase]}</span><h2 id="voice-time">${active ? clock(elapsed) : phase === 'complete' ? 'Até a próxima, Dan.' : 'A conversation, at your pace.'}</h2><p id="voice-message" role="status">${esc(message || (info?.configured ? 'Your microphone will turn on when you start.' : 'Voice is waiting for its OpenAI key.'))}</p><div class="voice-actions primary-controls">${active ? (phase === 'active' ? button(muted ? 'Unmute microphone' : 'Mute microphone', 'mute') + button('Finish & save', 'finish', 'primary') : button(phase === 'connecting' ? 'Cancel connection' : 'Close audio', 'finish')) : button(phase === 'complete' ? 'Start another lesson' : 'Start voice lesson', 'start', 'primary', canStart ? '' : 'disabled')}</div>${phase === 'active' ? `<div class="voice-actions">${button('+5 minutes', 'extend')}${button('Finish in 2 minutes', 'shorten')}</div>` : ''}<div class="voice-session-stats"><span><b id="voice-checkpoints">${checkpoints}</b> saved checkpoints</span><span><b id="voice-cost">${money(sessionUSD * fx())}</b> estimated this lesson</span></div><p class="voice-small" id="voice-target">${active ? `Target: ${Math.ceil(target)} minutes · say “keep going” or “finish here”.` : 'Start while parked. Keep this page open during the lesson.'}</p><div id="audio-unlock" hidden>${button('Tap to hear tutor', 'unlock-audio')}</div></div></div><aside class="voice-lesson-notes"><div class="eyebrow">FIRST PRIORITY</div><h2>${esc(next.title)}</h2><p>${esc(next.recap)}</p><div class="voice-rule"><strong>Recall comes first.</strong><p>Prompts and repetition are recorded separately. Independent use on separate days is needed for mastery.</p></div><div class="voice-rule"><strong>Use your voice to steer.</strong><p>“Slow down.”<br>“I’ve got five minutes left.”<br>“Let’s keep going.”<br>“Finish here.”</p></div><p class="voice-small">Audio goes directly from this device to OpenAI to deliver the lesson. Fala saves practice evidence and notes to your private repository, not audio recordings. Phone lock and Bluetooth behaviour depend on your device.</p></aside></section><section class="panel voice-transcript" id="voice-transcript" ${transcript.length ? '' : 'hidden'}>${transcriptBody()}</section>${costs(false)}`;
+    const modes = Object.entries(MODES)
+      .map(
+        ([id, m]) =>
+          `<button class="mode ${mode === id ? 'active' : ''}" data-voice="mode" data-mode="${id}" aria-pressed="${mode === id}" ${active ? 'disabled' : ''}><strong>${m.label}</strong><span>${m.blurb}</span></button>`,
+      )
+      .join('');
+    const option = (value, label, current) =>
+      `<option value="${value}" ${value === current ? 'selected' : ''}>${label}</option>`;
+    const label =
+      phase === 'active'
+        ? muted
+          ? 'MICROPHONE MUTED'
+          : STEP_LABEL[step] || 'LISTEN · THINK · SPEAK'
+        : IDLE_LABEL[phase];
+    const heading = active
+      ? clock(elapsed)
+      : phase === 'complete'
+        ? 'Até a próxima, Dan.'
+        : 'Out loud, at your pace.';
+    const controls = active
+      ? phase === 'active'
+        ? button(muted ? 'Unmute microphone' : 'Mute microphone', 'mute') +
+          button('Finish & save', 'finish', 'primary')
+        : button(phase === 'connecting' ? 'Cancel connection' : 'Close audio', 'finish')
+      : button(
+          phase === 'complete' ? 'Start another' : `Start ${MODES[mode].label.toLowerCase()}`,
+          'start',
+          'primary',
+          canStart ? '' : 'disabled',
+        );
+    const score = liveScore?.asked ? `${liveScore.unaided}/${liveScore.asked}` : '—';
+    const preview =
+      state && sync
+        ? planPreview(state, sync.practice, { mode, minutes: Math.round(target) })
+        : '<p class="subtle">Your plan appears once the notebook has loaded.</p>';
+    return `<div class="page-heading"><div><h1>Speak.</h1><p>Short questions, straight answers. What you get right and wrong is recorded as you go and decides what comes next.</p></div></div>${syncBanner()}${setupNotice()}${recoveries()}<section class="voice-room" aria-label="Voice session"><div class="voice-controls"><div class="mode-picker" role="group" aria-label="Session type">${modes}</div><div class="voice-fields"><label>Time available<select id="voice-duration" ${active ? 'disabled' : ''}>${[5, 10, 15, 20, 30, 45, 55].map((n) => option(n, `${n} minutes`, Math.round(target))).join('')}</select></label><label>Reply speed<select id="voice-pace" ${active ? 'disabled' : ''}>${option('quick', 'Quick', settings.pace)}${option('balanced', 'Balanced', settings.pace)}${option('patient', 'Patient · longer pauses', settings.pace)}</select></label></div><div class="voice-stage ${phase === 'active' ? 'is-active' : ''}"><div class="voice-mic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></svg></div><span class="eyebrow" id="voice-phase">${label}</span><h2 id="voice-time">${heading}</h2><p id="voice-message" role="status">${esc(message || (info?.configured ? 'Your microphone turns on when you start.' : 'Voice is waiting for its OpenAI key.'))}</p><div class="voice-actions primary-controls">${controls}</div>${phase === 'active' ? `<div class="voice-actions">${button('+5 minutes', 'extend')}${button('Finish in 2 minutes', 'shorten')}</div>` : ''}<div class="voice-session-stats"><span><b id="voice-score">${score}</b> without help</span><span><b id="voice-cost">${money(sessionUSD * fx())}</b> estimated</span></div><p class="voice-small" id="voice-target">${active ? `Target: ${Math.ceil(target)} minutes · say “keep going” or “finish here”.` : 'Start while parked. Keep this page open during the session.'}</p><div id="audio-unlock" hidden>${button('Tap to hear tutor', 'unlock-audio')}</div></div>${resultPanel()}<details class="usage-settings"><summary>More options</summary><div class="voice-fields"><label>Voice model<select id="voice-model" ${active ? 'disabled' : ''}>${VOICE_MODELS.map((m) => option(m, `${modelName(m)}${m.endsWith('-mini') ? ' · lower cost' : ''}`, model)).join('')}</select></label><label>Where is the phone?<select id="voice-mic" ${active ? 'disabled' : ''}>${option('near', 'Close to me', settings.mic)}${option('far', 'On the dash or speaker', settings.mic)}</select></label></div><label class="check"><input type="checkbox" id="voice-recap" ${settings.recap ? 'checked' : ''} ${active ? 'disabled' : ''}> Write a journal entry after each lesson</label><p class="voice-small">Off by default. Progress is tracked either way, and any session can be written up later from Progress &amp; history.</p></details></div><aside class="voice-lesson-notes"><div class="eyebrow">${active ? 'STEER WITH YOUR VOICE' : 'THIS SESSION WILL COVER'}</div>${active ? '<div class="voice-rule"><p>“Hint.”<br>“Again.”<br>“Slow down.”<br>“Skip.”<br>“Five minutes left.”<br>“Finish here.”</p></div>' : preview}<div class="voice-rule"><strong>Notes for your tutor</strong><textarea id="tutor-notes" rows="3" maxlength="400" placeholder="For example: I’m visiting São Paulo in March, so café and taxi phrases matter most." ${active ? 'disabled' : ''}>${esc(state?.tutorNotes || '')}</textarea>${button('Save note', 'save-tutor-notes', 'small', active ? 'disabled' : '')}</div><p class="voice-small">Audio goes directly from this device to OpenAI. Fala keeps what you got right and wrong, not recordings. The microphone stops if the phone locks.</p></aside></section><section class="panel voice-transcript" id="voice-transcript" ${transcript.length ? '' : 'hidden'}>${transcriptBody()}</section>`;
+  }
+  function progressPage() {
+    return renderProgress({
+      notebook: getState(),
+      practice: sync?.practice || [],
+      lessons: sync?.lessons || [],
+      fx: fx(),
+      open: openSession,
+      loaded: said,
+      busy: busyAction,
+    });
+  }
+  // Shown on the Next lesson screen: the plan the tutor will actually follow.
+  function planPanel() {
+    const state = getState();
+    if (!state || !sync) return '';
+    return `<section class="panel panel-body plan-panel"><div class="section-head"><h2>Your next lesson, from your practice record</h2>${button('Open voice', 'open', 'small')}</div>${planPreview(state, sync.practice, { mode: 'lesson', minutes: Math.round(target) })}<p class="voice-small">Worked out from every recorded attempt: phrases you missed and phrases not tested for longest come first. It updates itself after each session.</p></section>`;
+  }
+  function challengeStrip() {
+    const state = getState();
+    if (!state || !sync) return '';
+    return `<section class="challenge-strip"><div class="section-head"><h2>Challenges</h2>${button('Progress &amp; history', 'go-progress', 'text')}</div>${challengeCards(state, sync.practice, sync.lessons, Date.now(), 3)}</section>`;
+  }
+  async function sendFeedback(el) {
+    if (!result || !sync) return;
+    el.disabled = true;
+    const tags = [...fb.tags];
+    const feedback = {
+      rating: tags.length ? 'issues' : fb.good ? 'good' : 'none',
+      tags,
+      note: fb.note.trim(),
+      at: Date.now(),
+    };
+    await sync.saveFeedback(result.id, feedback);
+    fb.sent = true;
+    const tip = tags.includes('cut_off')
+      ? ' Tip: set Reply speed to Balanced.'
+      : tags.includes('too_slow') && sync.settings.pace !== 'quick'
+        ? ' Tip: set Reply speed to Quick.'
+        : '';
+    toast('Feedback saved.' + tip);
+    safeRender();
+  }
+  async function showSaid(id) {
+    const entry = sync?.lessons.find((l) => l.id === id);
+    if (!entry || !store) return;
+    busyAction = 'said:' + id;
+    safeRender();
+    try {
+      const file = await store.readJson(entry.file);
+      said[id] = (file.data?.transcript || [])
+        .filter((t) => t.text)
+        .map(({ speaker, text }) => ({ speaker, text }));
+    } finally {
+      busyAction = '';
+      safeRender();
+    }
+  }
+  async function writeUp(id) {
+    if (!lesson) return;
+    busyAction = 'write:' + id;
+    safeRender();
+    try {
+      await lesson.writeUp(id);
+      await sync.refresh();
+      toast('Journal entry written. It is in the Lesson journal.');
+    } finally {
+      busyAction = '';
+      safeRender();
+    }
+  }
+  async function saveTutorNotes() {
+    const state = getState();
+    const field = document.getElementById('tutor-notes');
+    if (!state || !field) return;
+    const next = structuredClone(state);
+    next.tutorNotes = field.value.trim().slice(0, 400);
+    next.updatedAt = new Date().toISOString();
+    setState(next);
+    await save();
+    toast('Your tutor will keep that in mind.');
   }
   function costs(full = true) {
     const s = info?.settings || DEFAULT_SETTINGS;
@@ -607,6 +791,28 @@ export function createVoiceHub({
         await audio?.play();
         document.getElementById('audio-unlock').hidden = true;
       } else if (action === 'retry-summary') await retrySummary(el);
+      else if (action === 'go-progress') navigate('progress');
+      else if (action === 'mode') {
+        if (lesson?.active || !MODES[el.dataset.mode]) return;
+        mode = el.dataset.mode;
+        safeRender();
+      } else if (action === 'fb-good') {
+        fb.good = !fb.good;
+        if (fb.good) fb.tags.clear();
+        safeRender();
+      } else if (action === 'fb-tag') {
+        const tag = el.dataset.tag;
+        if (fb.tags.has(tag)) fb.tags.delete(tag);
+        else fb.tags.add(tag);
+        fb.good = false;
+        safeRender();
+      } else if (action === 'fb-send') await sendFeedback(el);
+      else if (action === 'toggle-session') {
+        openSession = openSession === el.dataset.id ? null : el.dataset.id;
+        safeRender();
+      } else if (action === 'show-said') await showSaid(el.dataset.id);
+      else if (action === 'write-up') await writeUp(el.dataset.id);
+      else if (action === 'save-tutor-notes') await saveTutorNotes();
       else if (action === 'disconnect') await disconnect();
     } catch (err) {
       toast(err.message);
@@ -630,6 +836,19 @@ export function createVoiceHub({
         toast(err.message);
       }
     }
+    const setting = { 'voice-pace': 'pace', 'voice-mic': 'mic' }[e.target.id];
+    if (setting || e.target.id === 'voice-recap') {
+      try {
+        await sync?.saveSettings(
+          setting ? { [setting]: e.target.value } : { recap: e.target.checked },
+        );
+      } catch (err) {
+        toast(err.message);
+      }
+    }
+  });
+  document.addEventListener('input', (e) => {
+    if (e.target.id === 'fb-note') fb.note = e.target.value;
   });
   document.addEventListener('submit', async (e) => {
     if (e.target.id === 'setup-form') {
@@ -679,6 +898,8 @@ export function createVoiceHub({
     dashboard,
     page,
     costs,
+    progressPage,
+    planPanel,
     setupPage,
     syncLabel,
     syncBanner,

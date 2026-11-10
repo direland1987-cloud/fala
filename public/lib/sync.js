@@ -29,6 +29,7 @@ export function createSync({
   let settings = { data: { ...DEFAULT_SETTINGS }, sha: null };
   let usage = { data: [], sha: null };
   let lessons = { data: [], sha: null };
+  let practice = { data: [], sha: null };
   let status = store ? 'loading' : 'disconnected';
   let problem = '';
   let draft = local.read(KEYS.draft);
@@ -43,15 +44,17 @@ export function createSync({
   };
 
   async function loadMeta() {
-    const [st, us, ls] = await Promise.all([
+    const [st, us, ls, pr] = await Promise.all([
       store.readJson(FILES.settings),
       store.readJson(FILES.usage),
       store.readJson(FILES.lessons),
+      store.readJson(FILES.practice),
     ]);
+    practice = { data: Array.isArray(pr.data) ? pr.data : [], sha: pr.sha };
     settings = { data: { ...DEFAULT_SETTINGS, ...(st.data || {}) }, sha: st.sha };
     usage = { data: Array.isArray(us.data) ? us.data : [], sha: us.sha };
     lessons = { data: Array.isArray(ls.data) ? ls.data : [], sha: ls.sha };
-    local.write(KEYS.meta, { settings, usage, lessons });
+    local.write(KEYS.meta, { settings, usage, lessons, practice });
   }
 
   async function load() {
@@ -92,7 +95,10 @@ export function createSync({
     } catch (e) {
       const cached = local.read(KEYS.notebook);
       const meta = local.read(KEYS.meta);
-      if (meta) ({ settings, usage, lessons } = meta);
+      if (meta) {
+        ({ settings, usage, lessons } = meta);
+        practice = meta.practice || practice;
+      }
       if (cached?.state) {
         notebook = cached;
         status = 'offline';
@@ -227,9 +233,35 @@ export function createSync({
       base: { [FILES.settings]: settings.sha },
     });
     settings = { data: next, sha: result.shas[FILES.settings] };
-    local.write(KEYS.meta, { settings, usage, lessons });
+    local.write(KEYS.meta, { settings, usage, lessons, practice });
     notify();
     return next;
+  }
+
+  // Dan's verdict on a session: stored on its history entry and fed back to
+  // the tutor at the start of later sessions.
+  async function saveFeedback(id, feedback) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const fresh = await store.readJson(FILES.lessons);
+      const list = Array.isArray(fresh.data) ? fresh.data : [];
+      if (!list.some((l) => l.id === id)) throw new Error('That session is not in the history.');
+      const next = list.map((l) => (l.id === id ? { ...l, feedback } : l));
+      try {
+        const result = await store.commit({
+          message: 'Session feedback',
+          files: { [FILES.lessons]: pretty(next) },
+          base: { [FILES.lessons]: fresh.sha },
+        });
+        lessons = { data: next, sha: result.shas[FILES.lessons] };
+        local.write(KEYS.meta, { settings, usage, lessons, practice });
+        notify();
+        return next.find((l) => l.id === id);
+      } catch (e) {
+        if (e instanceof ConflictError && attempt < 2) continue;
+        throw e;
+      }
+    }
+    throw new Error('Could not save the feedback. Please try again.');
   }
 
   // After a lesson commit, adopt the committed notebook without another save.
@@ -253,6 +285,7 @@ export function createSync({
     retry,
     refresh,
     saveSettings,
+    saveFeedback,
     adopt,
     label: () => LABELS[status] || status,
     get status() {
@@ -272,6 +305,9 @@ export function createSync({
     },
     get lessons() {
       return lessons.data;
+    },
+    get practice() {
+      return practice.data;
     },
     get conflict() {
       return conflict;

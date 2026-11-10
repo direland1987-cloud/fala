@@ -1,37 +1,72 @@
 # Fala
 
-Dan’s private Brazilian Portuguese voice tutor and notebook.
+Dan’s private Brazilian Portuguese voice tutor.
 
-Fala is a static web app with no server of its own. The notebook, journal,
-curriculum, sticky points and API cost ledger live in **this private GitHub
-repository** under `data/`; every save is a commit, so the full history is
-kept and any device with your token sees the same notes. Voice lessons run
-**directly between your browser and OpenAI** over WebRTC. Your two secrets,
-the GitHub token and the OpenAI key, are stored encrypted on each device you
-use and never touch a server that belongs to anyone else.
+Fala is a static web app with no server of its own. Voice sessions run
+**directly between your browser and OpenAI** over WebRTC. Every attempt you
+make at a phrase is recorded as it happens, and that record, not a written
+plan, decides what the next session covers. The record, the phrase list and
+the API cost ledger live in **this private GitHub repository** under `data/`;
+every save is a commit, so the full history is kept and any device with your
+token sees the same state. Your two secrets, the GitHub token and the OpenAI
+key, are stored encrypted on each device and never touch anyone else’s server.
 
 ```
-phone / desktop browser ──WebRTC audio + events──▶ api.openai.com (Realtime, notes)
+phone / desktop browser ──WebRTC audio + events──▶ api.openai.com (Realtime)
         │
         └──commits (Git Data API)────────────────▶ api.github.com  (this repo, data/)
 ```
+
+## How a session works
+
+The app, not the tutor, decides what happens next.
+
+1. **Before the session** `public/lib/plan.js` reads the practice record and
+   ranks every taught phrase: missed most recently first, then longest
+   untested. Phrases marked Planned are never asked.
+2. **During the session** `public/lib/flow.js` hands the tutor one step at a
+   time. The tutor’s instructions (`public/lib/tutor.js`) are a short set of
+   standing rules, your phrase list, and the current step only.
+   - **Lesson**: recall cues → one new phrase, only if recall went well →
+     a short role-play → another round if there is time.
+   - **Quick quiz**: a shuffled list of “how do you say” and “what does it
+     mean” questions, no drilling, a score at the end.
+   - **Conversation challenge**: role-play in Portuguese with hints only when
+     you are stuck.
+3. **Every attempt** is recorded by phrase id as independent, prompted,
+   repeated, not recalled or unclear. A missed phrase comes back once more
+   after the others. If you go quiet the tutor repeats the cue, then offers
+   a hint, then waits.
+4. **Finishing** commits the attempts, updated phrase levels, sticky points
+   and costs in one go. A written journal entry is optional: switch it on
+   under _More options_, or write up any past session from _Progress &
+   history_.
+
+New material comes from the Planned phrases in the Phrasebook, in order.
+The Phase 1 phrase bank (`scripts/add-phrase-bank.mjs`) added 26 of them on
+10 November 2026; edit or delete any of them there.
 
 ## Repository layout
 
 | Path                                 | What it is                                                          |
 | ------------------------------------ | ------------------------------------------------------------------- |
 | `public/`                            | The app. Deployed as static files; holds no personal data.          |
-| `public/lib/domain.js`               | Teaching prompt, tools, mastery rules, pricing, validation.         |
-| `public/lib/lesson.js`               | The voice lesson controller (tools, checkpoints, finish, save).     |
+| `public/lib/plan.js`                 | Per-phrase track record, review queue, quiz, scoring, challenges.   |
+| `public/lib/flow.js`                 | The step machine for lesson, quiz and challenge sessions.           |
+| `public/lib/tutor.js`                | The tutor’s rules, per-step instructions, tools, session settings.  |
+| `public/lib/lesson.js`               | The live session controller: tools, checkpoints, silence, saving.   |
+| `public/lib/domain.js`               | Mastery rules, pricing, validation, the plain session summary.      |
+| `public/lib/notes.js`                | Optional written recap via the notes model.                         |
 | `public/lib/github.js`               | GitHub as the database: atomic commits with compare-and-swap.       |
 | `public/lib/vault.js`                | Device-encrypted storage for the two secrets.                       |
-| `data/notebook.json`                 | Curriculum, lesson journal, phrases, sticky points, next plan.      |
-| `data/lessons.json`, `data/lessons/` | Index and full record of every voice lesson Fala ran.               |
-| `data/practice.json`                 | Every practice checkpoint, used for the mastery rules.              |
+| `public/progress.js`                 | Progress, history, challenge and plan-preview screens.              |
+| `data/practice.json`                 | **The record**: every attempt, with result, context and date.       |
+| `data/lessons.json`, `data/lessons/` | Index of sessions (mode, score, feedback) and each full record.     |
+| `data/notebook.json`                 | Phrases and levels, curriculum, sticky points, written journal.     |
 | `data/usage.json`                    | One row per API response, priced at the time it happened.           |
-| `data/settings.json`                 | Model, duration, monthly budget, USD→AUD rate.                      |
+| `data/settings.json`                 | Model, duration, reply speed, phone position, budget, USD→AUD rate. |
 | `baseline/`                          | The bundled starting notebook and the published September updates.  |
-| `scripts/`                           | Import a backup, render `JOURNAL.md`.                               |
+| `scripts/`                           | Import a backup, add the phrase bank, render `JOURNAL.md`.          |
 | `JOURNAL.md`                         | Readable journal, regenerated by a workflow after each data commit. |
 | `reference/`                         | The 17 September 2026 handoff document and baseline export.         |
 
@@ -59,26 +94,30 @@ Repeat step 4 on each device. Keys never sync between devices.
 
 ## Daily use
 
-- **Start a lesson** while parked: Voice lesson → choose the time available →
-  _Start voice lesson_. The tutor reads your latest journal, open sticky
-  points and next plan before its first question, then asks one thing at a
-  time. Say “slow down”, “five minutes left”, “keep going” or “finish here”.
-- **Finishing** writes one journal entry, updates phrase levels and sticky
-  points from the recorded checkpoints, drafts the next plan and commits it
-  all in one go. Reloading on any device shows the result.
-- **If the tab dies mid-lesson**, the checkpoints are already on the device.
-  The next time you open Fala it finishes the entry for you (or offers _Retry
-  summary_ if GitHub or OpenAI could not be reached).
-- **Edit anything** in the hub as before. Edits are committed a moment after
-  you stop typing; the footer shows _Notebook synced_. A conflicting edit from
-  another device is kept as a draft and you choose which to keep.
+- **Speak** → pick Lesson, Quick quiz or Conversation challenge → choose the
+  time available → Start. The panel on the right shows exactly what the
+  session will cover. Say “hint”, “again”, “slow down”, “skip”, “five
+  minutes left” or “finish here” at any time.
+- **Reply speed** sets how soon the tutor answers once you stop speaking.
+  Quick is the default. Choose Balanced or Patient if it cuts in.
+- **After a session** you get the score and one tap of feedback (too slow,
+  too chatty, went off track, accepted wrong answers, cut me off). The
+  tutor is told at the start of the next session.
+- **Notes for your tutor** on the Speak screen is free text the tutor keeps
+  in mind every session.
+- **Progress & history** shows what is working, what is nearly there and
+  what is not sticking, the last five tries at every phrase, a few
+  challenges worked out from the record, and every session with what was
+  asked and what the tutor said.
+- **If the tab dies mid-session**, the checkpoints are already on the device.
+  The next time you open Fala it saves them (or offers _Retry saving_).
 - **Costs** are on the front page and under API costs. Usage is taken from
   the API’s own token counts and priced with the rates in `domain.js`, dated
   16 September 2026; check them against OpenAI’s pricing page when they change.
 
 ## Carrying your notes over
 
-`data/notebook.json` currently holds the **bundled baseline**: the curriculum,
+`data/notebook.json` started from the **bundled baseline**: the curriculum,
 the reconstructed 30 August and 4 September summaries, and the 9 and
 11 September lesson logs you supplied. It is not a live export of the
 previous site. If you made edits there afterwards:
@@ -100,29 +139,31 @@ is not a claim that the old site had no spending.
 
 ```
 npm ci
-npm test            # unit tests: rules, pricing, GitHub store, vault, sync, full lesson flow
-npm run test:browser # headless Chromium smoke test of the setup and hub screens
-npm run dev         # serves public/ on http://localhost:3000 (no API mocking)
+npm test             # unit tests: plan, flow, tutor instructions, controller, rules, pricing, store, vault, sync
+npm run test:browser # headless Chromium: every screen, plus a whole simulated session through the real UI
+npm run dev          # serves public/ on http://localhost:3000 (no API mocking)
 npm run format
-npm run journal     # regenerate JOURNAL.md from data/
+npm run journal      # regenerate JOURNAL.md from data/
 ```
 
-`public/lib/domain.js` is shared by the browser and the tests and must stay
-dependency-free.
+Set `FALA_SHOTS=/some/folder` when running the browser test to keep
+screenshots of the main screens at desktop and phone width.
 
 ## What is and is not verified
 
-- Verified here: lesson rules, pricing maths, GitHub commit and conflict
-  handling, the full lesson event flow against a fake Realtime channel, crash
-  recovery, budget guard, notebook sync and the setup and hub screens in a
-  headless browser.
-- **Not yet verified**: a real microphone-to-OpenAI lesson. The Realtime
-  session fields, the model IDs (`gpt-realtime-2.1`, `gpt-realtime-2.1-mini`,
-  `gpt-5.6-luna`) and the prices come from the September 2026 handoff and
-  must be confirmed on the first live lesson. The Connection screen checks
-  which of those models your project can see.
+- Verified here: the plan and step logic, the tutor’s instructions and
+  tools, the live controller against a fake Realtime channel (turn flow,
+  silence prompts, step changes, time, budget, recovery, saving), GitHub
+  commit and conflict handling, and every screen in a headless browser,
+  including a complete simulated session.
+- **Not verified**: how the real voice model behaves with these
+  instructions. Two real lessons ran on 17 and 18 September 2026 with the
+  earlier instructions; nothing has run against this version. The first
+  real session is the test. The model IDs (`gpt-realtime-2.1`,
+  `gpt-realtime-2.1-mini`, `gpt-5.6-luna`) and prices come from the
+  September 2026 handoff.
 - Phone limits: the microphone stops when the screen locks. Keep the phone
-  mounted with the screen on; Fala requests a wake lock while a lesson runs.
+  mounted with the screen on; Fala requests a wake lock while a session runs.
 
 ## Security notes
 

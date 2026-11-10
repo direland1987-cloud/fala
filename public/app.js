@@ -1,5 +1,5 @@
-import { createVoiceHub } from './voice.js?v=20260917';
-import { validNotebook } from './lib/domain.js?v=20260917';
+import { createVoiceHub } from './voice.js?v=20261110';
+import { validNotebook } from './lib/domain.js?v=20261110';
 const PUBLISHED_UPDATES = ['lesson-2026-09-09-v1', 'lesson-2026-09-11-v1'];
 const icons = {
   home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/>',
@@ -49,7 +49,8 @@ const esc = (s) =>
 let state = null;
 const tabs = [
   ['overview', 'Quick review', 'home'],
-  ['voice', 'Voice lesson', 'headphones'],
+  ['voice', 'Speak', 'headphones'],
+  ['progress', 'Progress & history', 'history'],
   ['curriculum', 'Living curriculum', 'book'],
   ['lessons', 'Lesson journal', 'journal'],
   ['vocabulary', 'Phrasebook', 'cards'],
@@ -126,6 +127,8 @@ function page() {
       return voiceHub.page();
     case 'costs':
       return voiceHub.costs();
+    case 'progress':
+      return voiceHub.progressPage();
     case 'curriculum':
       return curriculumPage();
     case 'lessons':
@@ -216,7 +219,7 @@ function lessonsPage() {
   return (
     heading(
       'The conversation continues.',
-      'What you practised, what felt natural, and what to bring into the next lesson.',
+      'Written entries only. Every voice session is listed under Progress & history, where any of them can be written up and added here.',
       btn('Add lesson log', 'add-lesson', 'plus', 'primary'),
     ) +
     `<div class="toolbar">${filterButtons(['All', 'Logged', 'Reconstructed'])}${searchInput('Search your lesson notes…')}</div><div id="filtered">${lessonResults()}</div>`
@@ -303,7 +306,7 @@ function nextPage() {
         btn('Start voice lesson', 'go-voice', 'headphones', 'primary') +
         btn('External chat handover', 'handover', 'copy'),
     ) +
-    `<div class="next-grid"><section class="panel"><ol class="plan-steps">${[
+    `${voiceHub.planPanel()}<details class="usage-settings earlier-plan"><summary>Earlier written plan and notes</summary><p class="voice-small">Kept for reference. Lessons now follow the list above, which is rebuilt from your practice record after every session.</p><div class="next-grid"><section class="panel"><ol class="plan-steps">${[
       ['2–3 min', 'Retrieve before repeating', n.recap],
       ['1–2 min', 'Warm up the sticky sounds', n.warmup],
       ['5–7 min', 'One pattern, a few useful responses', n.newMaterial],
@@ -316,7 +319,7 @@ function nextPage() {
       )
       .join(
         '',
-      )}</ol></section><aside class="next-aside"><div class="panel panel-body"><span class="eyebrow">The small win</span><h2>${esc(n.goal)}</h2><p>Sentence pattern: <strong lang="pt-BR">${esc(n.pattern)}</strong></p><span class="source-badge">${I('info')}Proposed plan · not yet taught</span></div><div class="plan-rule"><h3>Let recall set the pace.</h3><p>${esc(n.adapt)}</p></div><div class="panel panel-body"><h3>Keep the thread next time.</h3><p style="margin-top:10px">Start your lesson in Fala to load this plan automatically. Your time target can change as you speak.</p><p style="margin-top:10px">Lessons delivered inside Fala save practice checkpoints, journal notes and next priorities to your repository. A voice chat held elsewhere still needs a handover and a logged entry.</p>${btn('Add a lesson log', 'add-lesson', 'plus', 'small')}</div></aside></div>${n.notes ? `<div class="source-strip">${I('info')}<p>${esc(n.notes)}</p></div>` : ''}`
+      )}</ol></section><aside class="next-aside"><div class="panel panel-body"><span class="eyebrow">The small win</span><h2>${esc(n.goal)}</h2><p>Sentence pattern: <strong lang="pt-BR">${esc(n.pattern)}</strong></p><span class="source-badge">${I('info')}Proposed plan · not yet taught</span></div><div class="plan-rule"><h3>Let recall set the pace.</h3><p>${esc(n.adapt)}</p></div><div class="panel panel-body"><h3>Keep the thread next time.</h3><p style="margin-top:10px">Start your lesson in Fala to load this plan automatically. Your time target can change as you speak.</p><p style="margin-top:10px">Lessons delivered inside Fala save practice checkpoints, journal notes and next priorities to your repository. A voice chat held elsewhere still needs a handover and a logged entry.</p>${btn('Add a lesson log', 'add-lesson', 'plus', 'small')}</div></aside></div>${n.notes ? `<div class="source-strip">${I('info')}<p>${esc(n.notes)}</p></div>` : ''}</details>`
   );
 }
 const modal = $('#modal');

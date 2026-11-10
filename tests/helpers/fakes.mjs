@@ -80,17 +80,41 @@ export function fakeRealtime({ failWith = null } = {}) {
   };
 }
 export const fakeMic = () => ({ getAudioTracks: () => [], getTracks: () => [] });
+// A stored attempt, as it sits in data/practice.json.
 export const attempt = (overrides = {}) => ({
   phraseId: 'estou-bem',
   pt: 'Estou bem',
   en: 'I’m well',
-  heard: 'Estou bem',
+  heard: '',
   result: 'independent',
   context: 'isolated',
   pronunciation: 'clear',
-  note: 'Correct from a meaning cue, without a model.',
+  note: '',
   ...overrides,
 });
+// What the tutor sends to record_practice.
+export const said = (id, result = 'independent', extra = {}) => ({
+  id,
+  result,
+  context: 'isolated',
+  pronunciation: 'clear',
+  ...extra,
+});
+// Practice rows for a phrase on given dates, used to build a track record.
+export const history = (phraseId, pt, rows) =>
+  rows.map(([date, result, context = 'isolated'], i) => ({
+    sessionId: `s-${date}`,
+    date,
+    phraseId,
+    pt,
+    en: '',
+    heard: '',
+    result,
+    context,
+    pronunciation: 'clear',
+    note: '',
+    at: Date.parse(date + 'T00:00:00Z') + i * 1000,
+  }));
 export const until = async (fn, label = 'condition') => {
   for (let i = 0; i < 200; i++) {
     if (fn()) return;

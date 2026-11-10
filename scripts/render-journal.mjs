@@ -13,6 +13,14 @@ const pretty = (s) => {
     : d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 };
 const line = (k, v) => `**${k}:** ${v || 'Not recorded.'}`;
+const kind = (mode) =>
+  ({ quiz: 'Quick quiz', challenge: 'Conversation challenge' })[mode] || 'Lesson';
+const sessionLine = (l) => {
+  const result = l.score?.asked
+    ? `${l.score.unaided} of ${l.score.asked} without help`
+    : `${l.checkpoints} checkpoints`;
+  return `- ${l.date} · ${kind(l.mode)} · ${result} · US$${(l.usd || 0).toFixed(2)} · ${l.status}`;
+};
 const lessons = [...nb.lessons].sort((a, b) => b.date.localeCompare(a.date));
 const n = nb.next;
 const out = `# Dan’s Brazilian Portuguese notebook
@@ -71,9 +79,9 @@ ${nb.phrases.map((p) => `| ${p.pt} | ${p.en} | ${p.level} | ${p.lastTested || ''
 
 ${nb.issues.map((i) => `- **${i.title}** [${i.status}; ${i.evidence}]: ${i.description}\n  Practice: ${i.cue}`).join('\n')}
 
-## Voice lessons recorded by Fala
+## Voice sessions recorded by Fala
 
-${index.length ? index.map((l) => `- ${l.date} · ${l.title} · ${l.checkpoints} checkpoints · US$${(l.usd || 0).toFixed(2)} · ${l.status}`).join('\n') : 'None yet.'}
+${index.length ? index.map(sessionLine).join('\n') : 'None yet.'}
 
 ## Sources
 

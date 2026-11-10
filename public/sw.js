@@ -1,6 +1,6 @@
 // Keeps the app shell available offline so the notebook cached on this
 // device can be read without a connection. Network first, cache fallback.
-const VERSION = 'fala-shell-v2';
+const VERSION = 'fala-shell-v3';
 const SHELL = [
   '/',
   '/index.html',
@@ -20,6 +20,10 @@ const SHELL = [
   '/lib/realtime.js',
   '/lib/lesson.js',
   '/lib/sync.js',
+  '/lib/tutor.js',
+  '/lib/flow.js',
+  '/lib/plan.js',
+  '/progress.js',
 ];
 self.addEventListener('install', (event) => {
   event.waitUntil(
