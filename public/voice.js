@@ -11,6 +11,7 @@ import { usageOverview } from './lib/costs.js';
 import { RATES, DEFAULT_SETTINGS, NOTES_MODEL } from './lib/domain.js';
 import { MODES } from './lib/plan.js';
 import { FEEDBACK_TAGS } from './lib/tutor.js';
+import { looksWrong, explainOpenAI } from './lib/keys.js';
 import {
   progressPage as renderProgress,
   planPreview,
@@ -455,10 +456,8 @@ export function createVoiceHub({
       headers: { Authorization: `Bearer ${key}` },
       signal: AbortSignal.timeout(12000),
     });
-    if (res.status === 401) throw new Error('OpenAI rejected that API key.');
-    if (!res.ok) throw new Error(`OpenAI returned ${res.status} while checking the key.`);
-    const data = await res.json();
-    return (data.data || []).map((m) => m.id);
+    const body = await res.json().catch(() => ({}));
+    return explainOpenAI(res.status, body);
   }
 
   async function connect(form) {
@@ -477,9 +476,18 @@ export function createVoiceHub({
       safeRender();
       return;
     }
+    const tokenProblem = looksWrong('github', values.githubToken);
+    if (tokenProblem) {
+      setupStatus = { text: tokenProblem, kind: 'bad' };
+      safeRender();
+      return;
+    }
     setupStatus = { text: 'Checking GitHub…', kind: '' };
     safeRender();
     const notes = [];
+    // A problem with the OpenAI key never blocks the notebook: the GitHub
+    // side is saved and the key is left for another try.
+    let keyProblem = looksWrong('openai', values.openaiKey);
     try {
       const probe = createGitHubStore({
         token: merged.githubToken,
@@ -497,25 +505,47 @@ export function createVoiceHub({
           ? `Notebook found with ${nb.data.lessons?.length || 0} lessons.`
           : 'No notebook yet; restore a backup after connecting.',
       );
-      if (merged.openaiKey) {
+      if (merged.openaiKey && !keyProblem) {
         setupStatus = { text: notes.join(' ') + ' Checking OpenAI…', kind: '' };
         safeRender();
+        let check;
         try {
-          const models = await checkOpenAI(merged.openaiKey);
-          const missing = [...VOICE_MODELS, NOTES_MODEL].filter((m) => !models.includes(m));
+          check = await checkOpenAI(merged.openaiKey);
+        } catch {
+          check = {
+            ok: true,
+            models: null,
+            note: 'OpenAI could not be reached to check the key; it was saved anyway.',
+          };
+        }
+        if (!check.ok) keyProblem = check.error;
+        else if (check.models) {
+          const missing = [...VOICE_MODELS, NOTES_MODEL].filter((m) => !check.models.includes(m));
           notes.push(
             missing.length
               ? `OpenAI key accepted, but these configured models are not listed for your project: ${missing.join(', ')}. Voice may fail until the model IDs are updated.`
               : 'OpenAI key accepted and the configured models are available.',
           );
-        } catch (e) {
-          if (/rejected/.test(e.message)) throw e;
-          notes.push('OpenAI could not be checked right now; the key was saved anyway.');
-        }
-      } else
+        } else notes.push(check.note);
+      } else if (!merged.openaiKey)
         notes.push('No OpenAI key yet: the notebook works, voice lessons wait until you add one.');
+      if (keyProblem) {
+        // Keep a key that was already working on this device, if there is one.
+        const previous = secrets?.openaiKey;
+        merged.openaiKey = previous && previous !== values.openaiKey ? previous : '';
+      }
       await vault.save(merged);
       secrets = merged;
+      if (keyProblem) {
+        setupStatus = {
+          text: `${notes.join(' ')} Your notebook is connected, but the OpenAI key was not saved. ${keyProblem}`,
+          kind: 'bad',
+        };
+        toast('Notebook connected. The OpenAI key needs another look.');
+        await boot();
+        navigate('setup');
+        return;
+      }
       setupStatus = { text: notes.join(' '), kind: 'ok' };
       toast('Connection saved on this device.');
       await boot();

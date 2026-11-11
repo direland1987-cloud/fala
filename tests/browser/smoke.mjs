@@ -86,6 +86,8 @@ const browser = await chromium.launch({
 });
 const errors = [];
 const step = (name) => console.log('•', name);
+const GOOD_KEY = 'sk-proj-' + 'goodKey0'.repeat(8);
+const DELETED_KEY = 'sk-proj-' + 'deleted0'.repeat(8);
 let voiceUp = false;
 // Set FALA_SHOTS to a folder to keep screenshots of the main screens.
 const shots = process.env.FALA_SHOTS;
@@ -108,6 +110,20 @@ try {
   });
   await context.route('https://api.openai.com/**', async (route) => {
     const url = route.request().url();
+    if (
+      url.endsWith('/v1/models') &&
+      route.request().headers().authorization === `Bearer ${DELETED_KEY}`
+    )
+      return route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          error: {
+            code: 'invalid_api_key',
+            message: `Incorrect API key provided: ${DELETED_KEY.slice(0, 12)}********wxyz. You can find your API key at https://platform.openai.com/account/api-keys.`,
+          },
+        }),
+      });
     if (url.endsWith('/v1/models'))
       return route.fulfill({
         status: 200,
@@ -178,7 +194,7 @@ try {
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
   page.on('console', (m) => {
     // the deliberate 502 and 503 from the fake OpenAI endpoints log resource errors
-    if (m.type() === 'error' && !/status of 50[23]/.test(m.text()))
+    if (m.type() === 'error' && !/status of (401|50[23])/.test(m.text()))
       errors.push('console: ' + m.text());
   });
   const synced = () =>
@@ -196,7 +212,28 @@ try {
   await page.fill('#setup-owner', 'dan');
   await page.fill('#setup-repo', 'fala');
   await page.fill('#setup-github', 'good-token');
-  await page.fill('#setup-openai', 'sk-test-123');
+
+  step('a shortened or deleted OpenAI key is explained and does not block the notebook');
+  const status = () => page.textContent('.setup-status');
+  const waitStatus = (re) =>
+    page.waitForFunction(
+      (source) =>
+        new RegExp(source).test(document.querySelector('.setup-status')?.textContent || ''),
+      re.source,
+      { timeout: 15000 },
+    );
+  await page.fill('#setup-openai', 'sk-...AbCd');
+  await page.click('#setup-form button[type=submit]');
+  await waitStatus(/shortened key from OpenAI’s key list/);
+  assert.match(await status(), /Notebook found with 4 lessons/);
+  assert.match(await status(), /Your notebook is connected, but the OpenAI key was not saved/);
+  assert.match(await page.textContent('.connected-strip'), /OpenAI key\s*not added/);
+  await page.fill('#setup-openai', DELETED_KEY);
+  await page.click('#setup-form button[type=submit]');
+  await waitStatus(/OpenAI does not recognise it/);
+  assert.match(await status(), /OpenAI said: “Incorrect API key provided: sk-…\. You can find/);
+  assert.ok(!(await status()).includes('wxyz'), 'no part of the key is shown');
+  await page.fill('#setup-openai', GOOD_KEY);
   await page.click('#setup-form button[type=submit]');
 
   step('notebook loads and the front page shows costs and challenges');
@@ -394,7 +431,11 @@ try {
   assert.equal(await page.locator('.history-item').count(), 2);
   const progressAfter = await main();
   assert.match(progressAfter, /5 of 7 recall tests without help/, 'the new attempts are counted');
-  assert.match(progressAfter, /Nearly there 5/);
+  assert.match(
+    progressAfter,
+    /Not sticking 0/,
+    'the missed phrase was recovered on its second try',
+  );
   await page.locator('.history-head').first().click();
   assert.match(
     await page.textContent('.history-body'),
@@ -419,7 +460,7 @@ try {
 
   step('forgetting keys returns to the connection screen');
   await page.click('[data-nav="setup"]');
-  assert.match(await main(), /App version\s*2026-11-10/);
+  assert.match(await main(), /App version\s*2026-11-11/);
   page.once('dialog', (d) => d.accept());
   await page.click('[data-voice="disconnect"]');
   await page.waitForSelector('#setup-form');

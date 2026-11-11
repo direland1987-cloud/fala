@@ -1,5 +1,5 @@
-import { createVoiceHub } from './voice.js?v=20261110';
-import { validNotebook } from './lib/domain.js?v=20261110';
+import { createVoiceHub } from './voice.js?v=20261111';
+import { validNotebook } from './lib/domain.js?v=20261111';
 const PUBLISHED_UPDATES = ['lesson-2026-09-09-v1', 'lesson-2026-09-11-v1'];
 const icons = {
   home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/>',

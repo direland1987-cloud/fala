@@ -3,5 +3,5 @@ export const CONFIG = {
   owner: 'direland1987-cloud',
   repo: 'fala',
   branch: 'main',
-  appVersion: '2026-11-10',
+  appVersion: '2026-11-11',
 };
